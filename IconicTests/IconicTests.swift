@@ -1,0 +1,43 @@
+//
+//  IconicTests.swift
+//  IconicTests
+//
+//  Created by Sam Johnson on 2/22/16.
+//  Copyright © 2016 Sam Johnson. All rights reserved.
+//
+
+import XCTest
+@testable import Iconic
+
+class IconicTests: XCTestCase {
+    
+    override func setUp() {
+        super.setUp()
+        // Put setup code here. This method is called before the invocation of each test method in the class.
+    }
+    
+    override func tearDown() {
+        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
+    }
+    
+    func testExample() {
+        // This is an example of a functional test case.
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+    func testPerformanceExample() {
+        // This is an example of a performance test case.
+        self.measureBlock {
+            // Put the code you want to measure the time of here.
+        }
+    }
+    
+    func testEventInitializer() {
+        let testPass = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
+        XCTAssertNotNil(testPass)
+        let testFail = Event(eventName: "", eventLoc: "IMU", eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
+        XCTAssertNil(testFail)
+    }
+    
+}
