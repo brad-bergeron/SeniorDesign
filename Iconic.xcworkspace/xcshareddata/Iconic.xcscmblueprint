@@ -1,14 +1,16 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "8CCFDF63957E0641544C497F5E2913FFE7593002",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "3E60B1EB4B38F2926075E3585655290452821F9E",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "3E60B1EB4B38F2926075E3585655290452821F9E" : 0,
     "04101981B66E318109934C9516F88D824BB96459" : 0,
     "8CCFDF63957E0641544C497F5E2913FFE7593002" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "CDB586DD-08BC-42E9-8559-6BB6693B73DA",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "3E60B1EB4B38F2926075E3585655290452821F9E" : "SeniorDesign\/",
     "04101981B66E318109934C9516F88D824BB96459" : "fmdb\/",
     "8CCFDF63957E0641544C497F5E2913FFE7593002" : "uiowaSeniorDesign\/"
   },
@@ -20,6 +22,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ccgus\/fmdb.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04101981B66E318109934C9516F88D824BB96459"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/brad-bergeron\/SeniorDesign",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "3E60B1EB4B38F2926075E3585655290452821F9E"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sjohns0828\/uiowaSeniorDesign.git",
