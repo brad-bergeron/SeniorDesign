@@ -21,6 +21,7 @@
 		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
+		8456C73D1CB5F37A0034F275 /* FileRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456C73C1CB5F37A0034F275 /* FileRead.swift */; };
 		845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FD72A1C8790B50047A57F /* EventInfo.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
 		846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC21C7C11A7006477E3 /* AppDelegate.swift */; };
@@ -67,6 +68,7 @@
 		7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		8456C73C1CB5F37A0034F275 /* FileRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRead.swift; sourceTree = "<group>"; };
 		845FD72A1C8790B50047A57F /* EventInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfo.swift; sourceTree = "<group>"; };
 		846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		846BB2C11C877556000BF5C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 		AD707FC11C7C11A7006477E3 /* Iconic */ = {
 			isa = PBXGroup;
 			children = (
+				8456C73C1CB5F37A0034F275 /* FileRead.swift */,
 				7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */,
 				7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */,
 				AD707FC41C7C11A7006477E3 /* ViewController.swift */,

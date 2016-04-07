@@ -24,11 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         pageController.currentPageIndicatorTintColor =  UIColor.blackColor()
         pageController.backgroundColor = UIColor.whiteColor()*/
 
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
+       /* let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
             identityPoolId:"us-east-1:489a20f2-7bf5-4c3b-b359-1298665cb62d")
         
         let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
         
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration*/
+        
+        let AccessKeyId = FileRead.readAccessKey()
+        let SecertKey = FileRead.readSecretKey()
+        
+        
+        let cp = AWSStaticCredentialsProvider(accessKey: AccessKeyId, secretKey: SecertKey)
+        
+        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2, credentialsProvider: cp)
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
         /*let dynamoDB = AWSDynamoDB.defaultDynamoDB()
@@ -51,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         }*/
         
         //code to get all the objects from the database
-        let cond = AWSDynamoDBCondition()
+        /*let cond = AWSDynamoDBCondition()
         let v1 = AWSDynamoDBAttributeValue()
         v1.S = "String"
         cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
@@ -75,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
                 print("Error: \(task.error)")
             }
             return nil
-        })
+        })*/
         
 
         
