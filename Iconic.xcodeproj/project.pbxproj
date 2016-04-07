@@ -21,7 +21,6 @@
 		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
-		8456C73D1CB5F37A0034F275 /* FileRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456C73C1CB5F37A0034F275 /* FileRead.swift */; };
 		845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FD72A1C8790B50047A57F /* EventInfo.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
 		846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC21C7C11A7006477E3 /* AppDelegate.swift */; };
@@ -31,7 +30,6 @@
 		84AF6AC11C87CCB7006D5687 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC01C87CCB7006D5687 /* Util.swift */; };
 		84AF6AC71C87D0EC006D5687 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC61C87D0EC006D5687 /* ModelManager.swift */; };
 		84AF6AC91C87D175006D5687 /* Events.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6AC81C87D16C006D5687 /* Events.sqlite */; };
-		84D4D85E1CA183FD00A0ED57 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 84D4D85D1CA183FD00A0ED57 /* .gitignore */; };
 		AD707FC51C7C11A7006477E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC41C7C11A7006477E3 /* ViewController.swift */; };
 		AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD707FC61C7C11A7006477E3 /* Main.storyboard */; };
 		AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC91C7C11A7006477E3 /* Iconic.xcdatamodeld */; };
@@ -80,7 +78,6 @@
 		84AF6AC81C87D16C006D5687 /* Events.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Events.sqlite; sourceTree = "<group>"; };
 		84B6EDF11CA37A6000435856 /* SingleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEvent.swift; sourceTree = "<group>"; };
 		84D468081C87566600CD5482 /* Iconic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Iconic-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		84D4D85D1CA183FD00A0ED57 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		986A5802E086E3742B4E0D26 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD707FBF1C7C11A7006477E3 /* Iconic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Iconic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD707FC21C7C11A7006477E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -139,7 +136,6 @@
 		AD707FB61C7C11A7006477E3 = {
 			isa = PBXGroup;
 			children = (
-				84D4D85D1CA183FD00A0ED57 /* .gitignore */,
 				849921E31C8F896400ECA681 /* Default-568h@2x.png */,
 				846BB2C11C877556000BF5C0 /* libsqlite3.dylib */,
 				846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */,
@@ -329,7 +325,6 @@
 				AD707FCD1C7C11A7006477E3 /* Assets.xcassets in Resources */,
 				84AF6AC91C87D175006D5687 /* Events.sqlite in Resources */,
 				AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */,
-				84D4D85E1CA183FD00A0ED57 /* .gitignore in Resources */,
 				849921E41C8F896400ECA681 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
