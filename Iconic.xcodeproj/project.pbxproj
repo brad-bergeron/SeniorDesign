@@ -21,17 +21,13 @@
 		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
+		8456C73D1CB5F37A0034F275 /* FileRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456C73C1CB5F37A0034F275 /* FileRead.swift */; };
 		845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FD72A1C8790B50047A57F /* EventInfo.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
 		846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC21C7C11A7006477E3 /* AppDelegate.swift */; };
 		846BB2C21C877556000BF5C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2C11C877556000BF5C0 /* libsqlite3.dylib */; };
 		84949DD31C91CA2A00027C2E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84949DD21C91CA2A00027C2E /* Constants.swift */; };
 		849921E41C8F896400ECA681 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849921E31C8F896400ECA681 /* Default-568h@2x.png */; };
-		84AEB1EE1CB31373001B6D5B /* CSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEB1ED1CB31373001B6D5B /* CSV.swift */; };
-		84AEB1F01CB318F9001B6D5B /* FieldSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEB1EF1CB318F9001B6D5B /* FieldSequence.swift */; };
-		84AEB1F21CB3193D001B6D5B /* HeaderSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEB1F11CB3193C001B6D5B /* HeaderSequence.swift */; };
-		84AEB1F41CB31B31001B6D5B /* RowSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEB1F31CB31B31001B6D5B /* RowSequence.swift */; };
-		84AEB1F61CB31B63001B6D5B /* String+Lines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AEB1F51CB31B63001B6D5B /* String+Lines.swift */; };
 		84AF6AC11C87CCB7006D5687 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC01C87CCB7006D5687 /* Util.swift */; };
 		84AF6AC71C87D0EC006D5687 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC61C87D0EC006D5687 /* ModelManager.swift */; };
 		84AF6AC91C87D175006D5687 /* Events.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6AC81C87D16C006D5687 /* Events.sqlite */; };
@@ -72,17 +68,13 @@
 		7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
+		8456C73C1CB5F37A0034F275 /* FileRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRead.swift; sourceTree = "<group>"; };
 		845FD72A1C8790B50047A57F /* EventInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfo.swift; sourceTree = "<group>"; };
 		846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		846BB2C11C877556000BF5C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
 		84949DD21C91CA2A00027C2E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		849921E31C8F896400ECA681 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		849921E71C8F8BD400ECA681 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84AEB1ED1CB31373001B6D5B /* CSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CSV.swift; sourceTree = "<group>"; };
-		84AEB1EF1CB318F9001B6D5B /* FieldSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldSequence.swift; sourceTree = "<group>"; };
-		84AEB1F11CB3193C001B6D5B /* HeaderSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderSequence.swift; sourceTree = "<group>"; };
-		84AEB1F31CB31B31001B6D5B /* RowSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowSequence.swift; sourceTree = "<group>"; };
-		84AEB1F51CB31B63001B6D5B /* String+Lines.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Lines.swift"; sourceTree = "<group>"; };
 		84AF6AC01C87CCB7006D5687 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		84AF6AC61C87D0EC006D5687 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
 		84AF6AC81C87D16C006D5687 /* Events.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Events.sqlite; sourceTree = "<group>"; };
@@ -173,6 +165,7 @@
 		AD707FC11C7C11A7006477E3 /* Iconic */ = {
 			isa = PBXGroup;
 			children = (
+				8456C73C1CB5F37A0034F275 /* FileRead.swift */,
 				7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */,
 				7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */,
 				AD707FC41C7C11A7006477E3 /* ViewController.swift */,
@@ -195,11 +188,6 @@
 				AD707FCE1C7C11A7006477E3 /* LaunchScreen.storyboard */,
 				AD707FC91C7C11A7006477E3 /* Iconic.xcdatamodeld */,
 				84D468081C87566600CD5482 /* Iconic-Bridging-Header.h */,
-				84AEB1ED1CB31373001B6D5B /* CSV.swift */,
-				84AEB1EF1CB318F9001B6D5B /* FieldSequence.swift */,
-				84AEB1F11CB3193C001B6D5B /* HeaderSequence.swift */,
-				84AEB1F31CB31B31001B6D5B /* RowSequence.swift */,
-				84AEB1F51CB31B63001B6D5B /* String+Lines.swift */,
 			);
 			path = Iconic;
 			sourceTree = "<group>";
@@ -424,18 +412,14 @@
 				7B5B5C2D1C9895F8001452B9 /* EventPageViewController.swift in Sources */,
 				7B3D41181C8B7ECC000CD2AF /* EventTableViewCell.swift in Sources */,
 				7B3D411A1C8BA41A000CD2AF /* EventTableViewController.swift in Sources */,
-				84AEB1F41CB31B31001B6D5B /* RowSequence.swift in Sources */,
 				845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */,
 				7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */,
-				84AEB1F01CB318F9001B6D5B /* FieldSequence.swift in Sources */,
+				8456C73D1CB5F37A0034F275 /* FileRead.swift in Sources */,
 				846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */,
 				AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */,
-				84AEB1EE1CB31373001B6D5B /* CSV.swift in Sources */,
 				84949DD31C91CA2A00027C2E /* Constants.swift in Sources */,
-				84AEB1F21CB3193D001B6D5B /* HeaderSequence.swift in Sources */,
 				84AF6AC71C87D0EC006D5687 /* ModelManager.swift in Sources */,
 				84AF6AC11C87CCB7006D5687 /* Util.swift in Sources */,
-				84AEB1F61CB31B63001B6D5B /* String+Lines.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

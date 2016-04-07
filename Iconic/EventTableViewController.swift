@@ -39,11 +39,41 @@ class EventTableViewController: UITableViewController {
     
     func loadEvents(){
         //let photo = UIImage(named: "KevinHart")!
-        for _ in 1...20 {
+        let cond = AWSDynamoDBCondition()
+        let v1 = AWSDynamoDBAttributeValue()
+        v1.S = "String"
+        cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
+        cond.attributeValueList = [ v1 ]
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
+        let queryExpression = AWSDynamoDBScanExpression()
+        queryExpression.limit = 20
+        //queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
+        //queryExpression.expressionAttributeValues = [":event_name": "D"]
+        
+        dynamoDBObjectMapper.scan(SingleEvent.self, expression: queryExpression).continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock: { (task:AWSTask!) -> AnyObject! in
+            
+            if task.result != nil {
+                let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
+                for item in paginatedOutput.items as! [SingleEvent] {
+                    print(item)
+                    let event = Event(eventName: item.Event_Name!, eventLoc: item.Event_Location!, eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: item.Event_Link!, eventDetails: "Stuff")
+                    self.events += [event]
+                    
+                }
+            }
+            
+            if ((task.error) != nil) {
+                print("Error: \(task.error)")
+            }
+            return nil
+        })
+
+        /*for _ in 1...20 {
         let event = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU2",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
          let event1 = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
         events += [event, event1]
-        }
+        }*/
     }
 
     override func didReceiveMemoryWarning() {
