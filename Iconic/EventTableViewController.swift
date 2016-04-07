@@ -39,7 +39,7 @@ class EventTableViewController: UITableViewController {
     
     func loadEvents(){
         //let photo = UIImage(named: "KevinHart")!
-        let cond = AWSDynamoDBCondition()
+        /*let cond = AWSDynamoDBCondition()
         let v1 = AWSDynamoDBAttributeValue()
         v1.S = "String"
         cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
@@ -67,13 +67,13 @@ class EventTableViewController: UITableViewController {
                 print("Error: \(task.error)")
             }
             return nil
-        })
+        })*/
 
-        /*for _ in 1...20 {
+        for _ in 1...20 {
         let event = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU2",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
          let event1 = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
         events += [event, event1]
-        }*/
+        }
     }
 
     override func didReceiveMemoryWarning() {

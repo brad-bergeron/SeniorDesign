@@ -31,14 +31,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration*/
         
-        let AccessKeyId = FileRead.readAccessKey()
-        let SecertKey = FileRead.readSecretKey()
+        //let AccessKeyId = FileRead.readAccessKey()
+        //let SecertKey = FileRead.readSecretKey()
         
         
-        let cp = AWSStaticCredentialsProvider(accessKey: AccessKeyId, secretKey: SecertKey)
+        //let cp = AWSStaticCredentialsProvider(accessKey: AccessKeyId, secretKey: SecertKey)
         
-        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2, credentialsProvider: cp)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+        //let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2, credentialsProvider: cp)
+        //AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
         /*let dynamoDB = AWSDynamoDB.defaultDynamoDB()
         let listTableInput = AWSDynamoDBListTablesInput()
