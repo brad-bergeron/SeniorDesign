@@ -11,8 +11,8 @@ import UIKit
 class FavoritesTableViewController: UITableViewController{
 
     // MARK: Event Properties
-    var favorites = [Event?]()
-    var sendEvent : Event?
+    var favorites = [SingleEvent?]()
+    var sendEvent : SingleEvent?
     var center : CGPoint?
     
     @IBOutlet weak var favoriteSearch: UISearchBar!
@@ -49,11 +49,42 @@ class FavoritesTableViewController: UITableViewController{
     func loadFavorites() {
      //load favorites
         
-        for _ in 1...20 {
-            let event = Event(eventName: "Some Event", eventLoc: "IMU",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
-            let event1 = Event(eventName: "Another Event", eventLoc: "IMU2",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
-            favorites += [event, event1]
-        }
+        let cond = AWSDynamoDBCondition()
+        let v1 = AWSDynamoDBAttributeValue()
+        v1.S = "String"
+        cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
+        cond.attributeValueList = [ v1 ]
+        
+        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
+        let queryExpression = AWSDynamoDBScanExpression()
+        queryExpression.limit = 20
+        queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
+        queryExpression.expressionAttributeValues = [":event_name": "D"]
+        
+        dynamoDBObjectMapper.scan(SingleEvent.self, expression: queryExpression).continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock: { (task:AWSTask!) -> AnyObject! in
+            
+            if task.result != nil {
+                let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
+                for item in paginatedOutput.items as! [SingleEvent] {
+                    
+                    self.favorites.append(item)
+                    
+                    
+                }
+                
+                
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+                
+            })
+            
+            if ((task.error) != nil) {
+                print("Error: \(task.error)")
+            }
+            return nil
+        })
         
     }
     
@@ -102,10 +133,10 @@ class FavoritesTableViewController: UITableViewController{
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FavoriteCell", forIndexPath: indexPath) as! FavoriteTableViewCell
-        cell.eventNameLabel.text = favorites[indexPath.row]!.eventName
+        cell.eventNameLabel.text = favorites[indexPath.row]!.Event_Name
         cell.eventDateLabel.text = "TODAY"
-        cell.eventCostLabel.text = String(format: "%.2f",favorites[indexPath.row]!.eventCost!)
-        cell.eventLocationLabel.text = favorites[indexPath.row]!.eventLoc
+        cell.eventCostLabel.text = String(format: "%.2f",favorites[indexPath.row]!.Event_Price!)
+        cell.eventLocationLabel.text = favorites[indexPath.row]!.Event_Location
         // Configure the cell...
 
         return cell

@@ -14,7 +14,7 @@ class FavoriteTableViewCell: UITableViewCell{
     
     @IBOutlet weak var eventCostLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
-    var event: Event!
+    var event: SingleEvent!
     var startCenter : CGPoint?
     var favorited : Bool?
 
