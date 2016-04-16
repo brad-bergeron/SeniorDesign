@@ -10,18 +10,19 @@ import Foundation
 
 class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Name : String?
-    //var Date : String?
+    var Event_Date : String?
     var Event_Type : String?
-    //var Filters: String?
+    var Event_Organization : String?
+    var Event_Filters: [String]?
     var Event_Price: String?
-    //var Time:String?
+    var Event_Time:String?
     var Event_Location:String?
     var Event_Link:String?
-    //var details/Des
+    var Event_Photo_Link : String?
     
     
     class func dynamoDBTableName() -> String! {
-        return "SD_TestTable"
+        return "Iconic_Events"
     }
     
     class func hashKeyAttribute() -> String! {
@@ -39,5 +40,6 @@ class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override func `self`() -> Self {
         return self
     }
+    
     
 }

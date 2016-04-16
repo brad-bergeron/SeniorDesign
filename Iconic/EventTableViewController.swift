@@ -8,11 +8,12 @@
 
 import UIKit
 
+
 class EventTableViewController: UITableViewController {
     
     // MARK: Event List
-    var events = [Event?]() //this will be pulled from the database
-    var sendEvent : Event?
+    var events = [SingleEvent]() //this will be pulled from the database
+    var sendEvent : SingleEvent?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,43 +38,50 @@ class EventTableViewController: UITableViewController {
         view.addGestureRecognizer(rightswipe)
     }
     
-    func loadEvents(){
+    func loadEvents() {
         //let photo = UIImage(named: "KevinHart")!
-        /*let cond = AWSDynamoDBCondition()
+        let cond = AWSDynamoDBCondition()
         let v1 = AWSDynamoDBAttributeValue()
         v1.S = "String"
         cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
         cond.attributeValueList = [ v1 ]
         
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
+        //let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
         let queryExpression = AWSDynamoDBScanExpression()
         queryExpression.limit = 20
         //queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
         //queryExpression.expressionAttributeValues = [":event_name": "D"]
         
-        dynamoDBObjectMapper.scan(SingleEvent.self, expression: queryExpression).continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock: { (task:AWSTask!) -> AnyObject! in
-            
+       
+        
+        self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
                 let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
                 for item in paginatedOutput.items as! [SingleEvent] {
-                    print(item)
-                    let event = Event(eventName: item.Event_Name!, eventLoc: item.Event_Location!, eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: item.Event_Link!, eventDetails: "Stuff")
-                    self.events += [event]
+                    self.events.append(item)
+                    
                     
                 }
+                
             }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.tableView.reloadData()
+            
+            })
+            
             
             if ((task.error) != nil) {
                 print("Error: \(task.error)")
             }
             return nil
-        })*/
-
-        for _ in 1...20 {
-        let event = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU2",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
-         let event1 = Event(eventName: "Comedy: Kevin Hart", eventLoc: "IMU",eventDate: NSDate(), eventPhoto: nil, eventCost: 25.00, eventLink: "www.comedycentral.com", eventDetails: "Stand up comedy performance at the IMU")
-        events += [event, event1]
-        }
+        })
+        
+    }
+    
+    func scan (expression : AWSDynamoDBScanExpression) -> AWSTask! {
+        let mapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
+        return mapper.scan(SingleEvent.self, expression: expression)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,6 +95,7 @@ class EventTableViewController: UITableViewController {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventPageViewController{
                 dvc.currentEvent = self.sendEvent
+                    
                 }
             }
         } else if segue.identifier == "LeftSwipe" {
@@ -116,6 +125,7 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //insert code to transition to event page
+        print(events)
         self.sendEvent = events[indexPath.row]
         //let dvc = EventPageViewController()
         //dvc.currentEvent = sendEvent
@@ -127,9 +137,9 @@ class EventTableViewController: UITableViewController {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
         cell.event = events[indexPath.row]
-        cell.eventNameLabel.text = cell.event?.eventName
+        cell.eventNameLabel.text = cell.event?.Event_Name
         cell.eventDateLabel.text = "Today"
-        cell.eventImage.image = cell.event?.eventPhoto
+        //cell.eventImage.image = cell.event?.eventPhoto
 
         // Configure the cell...
 

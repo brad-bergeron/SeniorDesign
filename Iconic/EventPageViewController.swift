@@ -24,7 +24,7 @@ class EventPageViewController: UIViewController {
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var eventDate: UILabel!
-    var currentEvent : Event!
+    var currentEvent : SingleEvent!
     
     // MARK: Actions
  
@@ -60,11 +60,11 @@ class EventPageViewController: UIViewController {
     }
     
     func loadEvent() -> Int{
-        eventName.titleLabel!.text = currentEvent.eventName
+        eventName.titleLabel!.text = currentEvent.Event_Name
         //eventImage.image = currentEvent?.eventPhoto!
         eventDate.text = "FILL IN LATER"
         eventTime.text = "FILL IN LATER"
-        eventLocation.text = currentEvent.eventLoc
+        eventLocation.text = currentEvent.Event_Location
         //eventCost.text = currentEvent?.eventCost!
         //add event details
         //add button for link to website*/
