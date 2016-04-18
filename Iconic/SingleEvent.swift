@@ -18,7 +18,7 @@ class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Time:String?
     var Event_Location:String?
     var Event_Link:String?
-    var Event_Photo_Link : String?
+    var Event_Picture_Link : String?
     
     
     class func dynamoDBTableName() -> String! {
