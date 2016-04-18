@@ -68,7 +68,7 @@ class FavoritesTableViewController: UITableViewController{
                 let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
                 for item in paginatedOutput.items as! [SingleEvent] {
                     
-                    self.favorites.append(item)
+                    //self.favorites.append(item)
                     
                     
                 }
@@ -142,6 +142,8 @@ class FavoritesTableViewController: UITableViewController{
         cell.eventDateLabel.text = "TODAY"
         cell.eventCostLabel.text = String(format: "%.2f",favorites[indexPath.row]!.Event_Price!)
         cell.eventLocationLabel.text = favorites[indexPath.row]!.Event_Location
+        //if(favorites[indexPath.row].
+          //  cell.eventImage.image
         // Configure the cell...
 
         return cell

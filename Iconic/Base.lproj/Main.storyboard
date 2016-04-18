@@ -441,6 +441,7 @@
                                     <outlet property="EventDateLabel" destination="DZK-M3-ALE" id="GFq-18-dbE"/>
                                     <outlet property="EventLocationLabel" destination="UqB-M0-S5a" id="mJQ-G4-EeW"/>
                                     <outlet property="EventNameLabel" destination="GFc-lc-6VJ" id="5rZ-qm-cEi"/>
+                                    <outlet property="eventImage" destination="Ee5-0u-hNQ" id="GOu-2W-fZq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -508,6 +509,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="QCI-6C-cWG"/>
+        <segue reference="HlW-aL-wXz"/>
     </inferredMetricsTieBreakers>
 </document>

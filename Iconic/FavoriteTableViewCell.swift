@@ -11,6 +11,7 @@ import UIKit
 class FavoriteTableViewCell: UITableViewCell{
     @IBOutlet weak var eventNameLabel: UILabel!
     @IBOutlet weak var eventDateLabel: UILabel!
+    @IBOutlet weak var eventImage: UIImageView!
     
     @IBOutlet weak var eventCostLabel: UILabel!
     @IBOutlet weak var eventLocationLabel: UILabel!
