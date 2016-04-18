@@ -142,7 +142,6 @@ class EventTableViewController: UITableViewController {
         cell.event = events[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         cell.eventDateLabel.text = "Today"
-        //downloadImage(NSURL(string: (cell.event?.Event_Picture_Link)!)!, cellForRowAtIndexPath: indexPath)
         
         let url = NSURL(string: (cell.event?.Event_Picture_Link)!)
         
@@ -152,11 +151,11 @@ class EventTableViewController: UITableViewController {
                 print(response?.suggestedFilename ?? "")
                 print("download Finished")
                 
+                self.events[indexPath.row].Event_Picture = UIImage(data: data)
                 cell.eventImage.image = UIImage(data: data)
             }
         }.resume()
         
-        //cell.eventImage.image = self.eventTempImage
         
         // Configure the cell...
         
