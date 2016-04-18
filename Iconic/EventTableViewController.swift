@@ -14,6 +14,8 @@ class EventTableViewController: UITableViewController {
     // MARK: Event List
     var events = [SingleEvent]() //this will be pulled from the database
     var sendEvent : SingleEvent?
+    var favorites = [SingleEvent]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +109,9 @@ class EventTableViewController: UITableViewController {
         } else if segue.identifier == "RightSwipe" {
             if let nav = segue.destinationViewController as? FavoritesTableViewController {
                     // do something with nav data
+                for fav in favorites {
+                        nav.favorites.append(fav)
+                }
             }
         }
     }
@@ -164,16 +169,31 @@ class EventTableViewController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "U are my favorite", handler: {action, indexpath in
+            let favoriteEvent : SingleEvent = self.events[indexPath.row]
+            self.favorites.append(favoriteEvent)
+            print("FAVORITE•ACTION")
+            print("ALSO something else")
+        });
+        favoriteAction.backgroundColor = UIColor.blackColor();
+        return [favoriteAction];
+    }
+    
+    func handleFavorite(sender: UITableViewRowAction){
+        if (sender.title == "Favorite"){
+                //Print something here
+        }
+    }
     
     
     
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+    
 
     /*
     // Override to support editing the table view.
@@ -184,8 +204,8 @@ class EventTableViewController: UITableViewController {
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
-    }
-    */
+    }*/
+    
 
     /*
     // Override to support rearranging the table view.

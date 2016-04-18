@@ -19,7 +19,8 @@ class FavoritesTableViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadFavorites()
+        //loadFavorites()
+        loadEvents()
         initSwipes()
         //self.searchDisplayController
        // favoriteSearch.searchResultsUpdater = self
@@ -85,6 +86,10 @@ class FavoritesTableViewController: UITableViewController{
             }
             return nil
         })
+        
+    }
+    
+    func loadEvents(){
         
     }
     
