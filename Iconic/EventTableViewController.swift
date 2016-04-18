@@ -52,7 +52,7 @@ class EventTableViewController: UITableViewController {
         let queryExpression = AWSDynamoDBScanExpression()
         queryExpression.limit = 20
         //queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
-        //queryExpression.expressionAttributeValues = [":event_name": "D"]
+        //queryExpression.expressionAttributeValues = [":event_name": "Train"]
         
        
         
@@ -61,6 +61,8 @@ class EventTableViewController: UITableViewController {
                 let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
                 for item in paginatedOutput.items as! [SingleEvent] {
                     self.events.append(item)
+                   //print(item)
+                    //self.downloadImage(NSURL(string: (item.Event_Picture_Link)!)!)
                     
                     
                 }
@@ -85,6 +87,7 @@ class EventTableViewController: UITableViewController {
         let mapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
         return mapper.scan(SingleEvent.self, expression: expression)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -130,7 +133,6 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //insert code to transition to event page
-        print(events)
         self.sendEvent = events[indexPath.row]
         //let dvc = EventPageViewController()
         //dvc.currentEvent = sendEvent
@@ -144,12 +146,59 @@ class EventTableViewController: UITableViewController {
         cell.event = events[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         cell.eventDateLabel.text = "Today"
-        //cell.eventImage.image = cell.event?.eventPhoto
+        //downloadImage(NSURL(string: (cell.event?.Event_Picture_Link)!)!, cellForRowAtIndexPath: indexPath)
+        
+        let url = NSURL(string: (cell.event?.Event_Picture_Link)!)
+        
+        
+        
+        NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+
+                guard let data = data where error == nil else { return }
+                print(response?.suggestedFilename ?? "")
+                print("download Finished")
+            
+                cell.eventImage.image = UIImage(data: data)
+            }
+
+        }.resume()
+        
+        //cell.eventImage.image = self.eventTempImage
 
         // Configure the cell...
 
         return cell
     }
+    
+    func getDataFromUrl( url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { ( data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    
+    func downloadImage(url: NSURL,  cellForRowAtIndexPath indexPath: NSIndexPath) {
+        getDataFromUrl(url) { (data, response, error) in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                guard let data = data where error == nil else { return }
+                print(response?.suggestedFilename ?? "")
+                print("download Finished")
+        
+                self.eventTempImage = UIImage(data: data)
+                
+            }
+            
+            /*dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
+                
+            }*/
+            
+        }
+        
+        
+    }
+    
+
     
     func handleSwipe(sender: UIScreenEdgePanGestureRecognizer) {
         if (sender.state == .Recognized) {
@@ -157,7 +206,7 @@ class EventTableViewController: UITableViewController {
                 performSegueWithIdentifier("RightSwipe", sender: self)
             } else if (sender.edges == .Left) {
                 performSegueWithIdentifier("LeftSwipe", sender: self)
-            
+ 
             }
         }
     }
