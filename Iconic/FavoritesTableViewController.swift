@@ -160,6 +160,14 @@ class FavoritesTableViewController: UITableViewController{
         }
         return false
     }
+    
+    func removeFavorite(event: SingleEvent) {
+        if(favorites.contains(event)){
+            if let index = self.favorites.indexOf(event){
+                self.favorites.removeAtIndex(index)
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.

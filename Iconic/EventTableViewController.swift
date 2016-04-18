@@ -244,13 +244,10 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if(favorites.contains(self.events[indexPath.row])){
-            let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: " Remove from Favorites ", handler: {action, indexpath in
+            let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = self.events[indexPath.row]
                 if(!FavoritesTableViewController().containsEvent(unfavoriteEvent)){
-                    if let index = self.favorites.indexOf(unfavoriteEvent){
-                        self.favorites.removeAtIndex(index)
-                        tableView.setEditing(false, animated: true)
-                    }
+                    FavoritesTableViewController().removeFavorite(unfavoriteEvent)
                 }
             });
             unfavoriteAction.backgroundColor = UIColor.redColor();

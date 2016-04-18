@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="j9i-V8-UcH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -187,7 +187,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="EventTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j9i-V8-UcH" customClass="EventTableViewController" customModule="Iconic" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="120" sectionHeaderHeight="38" sectionFooterHeight="38" id="PXX-L9-28S">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="b9c-5v-yTV">
@@ -278,7 +278,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="323" y="251"/>
+            <point key="canvasLocation" x="1135" y="251"/>
         </scene>
         <!--Favorite View Controller-->
         <scene sceneID="IiJ-LI-Btj">
@@ -289,7 +289,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search" id="GvZ-za-4fM">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -298,7 +298,7 @@
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="600" placeholderIntrinsicHeight="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteCell" rowHeight="200" id="glL-BZ-1mv" customClass="FavoriteTableViewCell" customModule="Iconic" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="600" height="200"/>
+                                <rect key="frame" x="0.0" y="136" width="600" height="200"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="glL-BZ-1mv" id="jRB-TU-QSM">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
@@ -468,7 +468,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1829" y="227"/>
+            <point key="canvasLocation" x="2641" y="227"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="jwC-hw-UrF">
@@ -506,6 +506,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FRv-fm-S80" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="323" y="1227"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="d0O-I5-RKp">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9pK-Y0-LVZ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AYD-Ml-5WV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="j9i-V8-UcH" kind="relationship" relationship="rootViewController" id="fxa-q3-qnO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="61u-9w-EWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="323" y="251"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
