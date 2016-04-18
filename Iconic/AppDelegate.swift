@@ -85,12 +85,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
             }
             return nil
         })*/
-        
-
-        
-        
-        
-
         return true
     }
 
