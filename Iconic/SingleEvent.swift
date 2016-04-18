@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Name : String?
@@ -19,6 +20,7 @@ class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Location:String?
     var Event_Link:String?
     var Event_Picture_Link : String?
+    var Event_Picture : UIImage?
     
     
     class func dynamoDBTableName() -> String! {

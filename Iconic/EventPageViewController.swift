@@ -65,32 +65,11 @@ class EventPageViewController: UIViewController {
         eventDate.text = "FILL IN LATER"
         eventTime.text = "FILL IN LATER"
         eventLocation.text = currentEvent.Event_Location
-        print(currentEvent.Event_Picture_Link)
-        downloadImage(NSURL(string: currentEvent.Event_Picture_Link!)!)
-        //eventCost.text = currentEvent?.eventCost!
+        eventImage.image = currentEvent.Event_Picture
+        eventCost.text = currentEvent.Event_Price
         //add event details
         //add button for link to website*/
         return 1;
-    }
-    
-    func downloadImage(url: NSURL) {
-        getDataFromUrl(url) { (data, response, error) in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let data = data where error == nil else {  print(error) ; return }
-                    print(response?.suggestedFilename ?? "")
-                    print("download Finished")
-                    //print(data)
-                    self.eventImage.image = UIImage(data: data)
-            }
-        }
-        
-        
-    }
-    
-    func getDataFromUrl( url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { ( data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
     }
     
     
