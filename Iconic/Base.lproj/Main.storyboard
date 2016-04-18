@@ -206,7 +206,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="90" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="I3b-HE-N9g">
+                                        <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="120" placeholderIntrinsicHeight="120" translatesAutoresizingMaskIntoConstraints="NO" id="I3b-HE-N9g">
                                             <rect key="frame" x="0.0" y="0.0" width="120" height="120"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="jJf-Tx-nYx"/>
@@ -253,6 +253,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Events" id="x8g-WT-C1D"/>
                     <connections>
+                        <outlet property="searchBar" destination="b9c-5v-yTV" id="r7r-Bn-vB4"/>
                         <outlet property="searchDisplayController" destination="NO9-RG-aMn" id="170-ys-eJh"/>
                         <segue destination="fOt-09-gee" kind="show" identifier="EventViewSegue" id="QCI-6C-cWG"/>
                         <segue destination="G6P-sF-v2M" kind="show" identifier="LeftSwipe" id="MIn-FF-gIA"/>
