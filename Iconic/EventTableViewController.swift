@@ -17,6 +17,7 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
     
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvents()
@@ -63,10 +64,7 @@ class EventTableViewController: UITableViewController {
                     self.events.append(item)
                     //print(item)
                     //self.downloadImage(NSURL(string: (item.Event_Picture_Link)!)!)
-                    
-                    
                 }
-                
             }
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -139,7 +137,6 @@ class EventTableViewController: UITableViewController {
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
@@ -150,11 +147,8 @@ class EventTableViewController: UITableViewController {
         
         let url = NSURL(string: (cell.event?.Event_Picture_Link)!)
         
-        
-        
         NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                
                 guard let data = data where error == nil else { return }
                 print(response?.suggestedFilename ?? "")
                 print("download Finished")
@@ -162,8 +156,7 @@ class EventTableViewController: UITableViewController {
                 self.events[indexPath.row].Event_Picture = UIImage(data: data)
                 cell.eventImage.image = UIImage(data: data)
             }
-            
-            }.resume()
+        }.resume()
         
         
         // Configure the cell...
@@ -185,7 +178,6 @@ class EventTableViewController: UITableViewController {
                 print("download Finished")
                 
                 self.eventTempImage = UIImage(data: data)
-                
             }
             
             /*dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -194,11 +186,7 @@ class EventTableViewController: UITableViewController {
              }*/
             
         }
-        
-        
     }
-    
-    
     
     func handleSwipe(sender: UIScreenEdgePanGestureRecognizer) {
         if (sender.state == .Recognized) {
@@ -217,9 +205,7 @@ class EventTableViewController: UITableViewController {
             
         }
     }
-    
-    
-    
+
     
     /*
      // Override to support conditional editing of the table view.
@@ -255,19 +241,30 @@ class EventTableViewController: UITableViewController {
      }
      */
     
+    //NEED TO SEGUE BETWEEN VIEWS
     
-    
-
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        var favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "U are my favorite", handler: {action, indexpath in
-            let favoriteEvent : SingleEvent = self.events[indexPath.row]
-            self.favorites.append(favoriteEvent)
-            print("FAVORITE•ACTION")
-            print("ALSO something else")
-        });
-        favoriteAction.backgroundColor = UIColor.blackColor();
-        return [favoriteAction];
+        if(favorites.contains(self.events[indexPath.row])){
+            let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
+                let unfavoriteEvent : SingleEvent = self.events[indexPath.row]
+                if(!FavoritesTableViewController().containsEvent(unfavoriteEvent)){
+                    FavoritesTableViewController().removeFavorite(unfavoriteEvent)
+                }
+            });
+            unfavoriteAction.backgroundColor = UIColor.redColor();
+            return [unfavoriteAction]
+        } else{
+        let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
+                let favoriteEvent : SingleEvent = self.events[indexPath.row]
+                if (!FavoritesTableViewController().containsEvent(favoriteEvent)){
+                    self.favorites.append(favoriteEvent)
+                    tableView.setEditing(false, animated: true)
+                }
+            });
+            favoriteAction.backgroundColor = UIColor.blackColor();
+            return [favoriteAction];
+        }
     }
     
     func handleFavorite(sender: UITableViewRowAction){
@@ -276,13 +273,9 @@ class EventTableViewController: UITableViewController {
         }
     }
     
-    
-    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    
-
 }

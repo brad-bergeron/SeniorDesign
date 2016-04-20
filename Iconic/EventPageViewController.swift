@@ -7,24 +7,27 @@
 //
 
 import UIKit
+import EventKit
 
-class EventPageViewController: UIViewController {
+
+class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Outlets
 
     @IBOutlet weak var eventName: UIButton!
     
-    
-    
     @IBOutlet weak var eventImage: UIImageView!
+    
     
     @IBOutlet weak var eventDetails: UITextView!
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var eventCost: UILabel!
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     var currentEvent : SingleEvent!
+    let eventStore = EKEventStore()
     
     // MARK: Actions
  
@@ -32,9 +35,50 @@ class EventPageViewController: UIViewController {
         //let viewControllers = self.navigationController!.viewControllers
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    @IBAction func externalLink(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Open Link in Safari", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Open", style: UIAlertActionStyle.Default, handler: {action in
+            UIApplication.sharedApplication().openURL(NSURL(string: self.currentEvent.Event_Link!)!)
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     @IBAction func favoriteStar(sender: UIButton) {
         //create favorite capability
+    }
+    
+    @IBAction func addCalendar(sender: UIButton) {
+        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+        switch (status) {
+        case EKAuthorizationStatus.NotDetermined:
+            requestAccessToCalendar()
+        case EKAuthorizationStatus.Authorized:
+            self.addToCalendar()
+        case EKAuthorizationStatus.Denied, EKAuthorizationStatus.Restricted:
+            print("Access Denied")
+            requestAccessToCalendar()
+            //self.needPermissionView.fadeIn()
+        }
+        
+    }
+    
+    func addToCalendar(){
+        let msg = "Event: " + currentEvent.Event_Name!
+        let alertController = UIAlertController(title: "Add Event to Calendar", message: msg, preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"Add", style: UIAlertActionStyle.Default, handler: {action in
+            //add later
+            self.addEvent()
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func requestAccessToCalendar(){
+        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {(granted: Bool, error: NSError?) in print(granted)})
     }
     
    /* @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
@@ -44,13 +88,52 @@ class EventPageViewController: UIViewController {
         
     }*/
     
+    func addEvent() {
+        let calEvent = EKEvent.init(eventStore: eventStore)
+        calEvent.title = self.currentEvent.Event_Name!
+        calEvent.location = self.currentEvent.Event_Location!
+        calEvent.URL = NSURL(string:self.currentEvent.Event_Link!)
+        calEvent.timeZone = NSTimeZone.localTimeZone()
+        calEvent.calendar = self.eventStore.defaultCalendarForNewEvents
+        //event.startDate = NSDate. Set after figuring how to use nsdate class
+        do{
+            try self.eventStore.saveEvent(calEvent, span: EKSpan.ThisEvent, commit: true)
+            let alertController = UIAlertController(title: "Success!", message: currentEvent.Event_Name! + "added to calendar.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+            alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } catch {
+            //add alert to error
+            let alertController = UIAlertController(title: "Error adding event", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+            alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvent()
-        self.eventDetails.scrollEnabled = false
-        self.scrollView.backgroundColor = UIColor.whiteColor()
-        self.scrollView.scrollEnabled = true
+        //checkAuthorization()
+        
+        let scrollViewBounds = scrollView.bounds
+
+        
+        var scrollViewInsets = UIEdgeInsetsZero
+        scrollViewInsets.top = scrollViewBounds.size.height/2.0;
+        scrollViewInsets.top -= contentView.bounds.size.height/2.0;
+        
+        scrollViewInsets.bottom = scrollViewBounds.size.height/2.0
+        scrollViewInsets.bottom -= contentView.bounds.size.height/2.0;
+        scrollViewInsets.bottom += 1
+        
+        scrollView.contentInset = scrollViewInsets
+        contentView.backgroundColor = UIColor.whiteColor()
+        scrollView.backgroundColor = contentView.backgroundColor
+        //self.eventDetails.scrollEnabled = false
+        //self.scrollView.backgroundColor = UIColor.whiteColor()
+        //self.scrollView.showsVerticalScrollIndicator = true
+        //self.scrollView.scrollEnabled = true
         // Do any additional setup after loading he view.
     }
 
@@ -60,7 +143,7 @@ class EventPageViewController: UIViewController {
     }
     
     func loadEvent() -> Int{
-        eventName.titleLabel!.text = currentEvent.Event_Name
+        eventName.setTitle(currentEvent.Event_Name, forState: .Normal)
         //eventImage.image = currentEvent?.eventPhoto!
         eventDate.text = "FILL IN LATER"
         eventTime.text = "FILL IN LATER"
@@ -72,7 +155,6 @@ class EventPageViewController: UIViewController {
         //add button for link to website*/
         return 1;
     }
-    
     
 
     /*

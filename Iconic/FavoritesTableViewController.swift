@@ -11,7 +11,7 @@ import UIKit
 class FavoritesTableViewController: UITableViewController{
 
     // MARK: Event Properties
-    var favorites = [SingleEvent?]()
+    var favorites = [SingleEvent]()
     var sendEvent : SingleEvent?
     var center : CGPoint?
     
@@ -138,10 +138,10 @@ class FavoritesTableViewController: UITableViewController{
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FavoriteCell", forIndexPath: indexPath) as! FavoriteTableViewCell
-        cell.eventNameLabel.text = favorites[indexPath.row]!.Event_Name
+        cell.eventNameLabel.text = favorites[indexPath.row].Event_Name
         cell.eventDateLabel.text = "TODAY"
-        cell.eventCostLabel.text = String(format: "%.2f",favorites[indexPath.row]!.Event_Price!)
-        cell.eventLocationLabel.text = favorites[indexPath.row]!.Event_Location
+        cell.eventCostLabel.text = String(format: "%.2f",favorites[indexPath.row].Event_Price!)
+        cell.eventLocationLabel.text = favorites[indexPath.row].Event_Location
         //if(favorites[indexPath.row].
           //  cell.eventImage.image
         // Configure the cell...
@@ -154,6 +154,20 @@ class FavoritesTableViewController: UITableViewController{
         self.performSegueWithIdentifier("FavoriteSegue", sender: self)
     }
     
+    func containsEvent(event: SingleEvent) -> Bool {
+        if(favorites.contains(event)){
+            return true
+        }
+        return false
+    }
+    
+    func removeFavorite(event: SingleEvent) {
+        if(favorites.contains(event)){
+            if let index = self.favorites.indexOf(event){
+                self.favorites.removeAtIndex(index)
+            }
+        }
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -189,7 +203,5 @@ class FavoritesTableViewController: UITableViewController{
         return true
     }
     */
-
-  
 
 }
