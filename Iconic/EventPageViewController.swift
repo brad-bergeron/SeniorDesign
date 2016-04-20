@@ -16,6 +16,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var eventImage: UIImageView!
     
+    
     @IBOutlet weak var eventDetails: UITextView!
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -31,7 +32,16 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //let viewControllers = self.navigationController!.viewControllers
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
+    @IBAction func externalLink(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Open Link in Safari", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Open", style: UIAlertActionStyle.Default, handler: {action in
+            UIApplication.sharedApplication().openURL(NSURL(string: self.currentEvent.Event_Link!)!)
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     @IBAction func favoriteStar(sender: UIButton) {
         //create favorite capability
     }
@@ -75,7 +85,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadEvent() -> Int{
-        eventName.titleLabel!.text = currentEvent.Event_Name
+        eventName.setTitle(currentEvent.Event_Name, forState: .Normal)
         //eventImage.image = currentEvent?.eventPhoto!
         eventDate.text = "FILL IN LATER"
         eventTime.text = "FILL IN LATER"

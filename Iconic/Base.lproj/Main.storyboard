@@ -432,12 +432,15 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-D4-t0s">
+                                            <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="94" placeholderIntrinsicHeight="51" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-D4-t0s">
                                                 <rect key="frame" x="254" y="44" width="94" height="51"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="51" id="CeL-aC-RsJ"/>
                                                 </constraints>
                                                 <state key="normal" title="EVENT NAME"/>
+                                                <connections>
+                                                    <action selector="externalLink:" destination="xwY-fU-c4C" eventType="touchUpInside" id="9A4-bQ-kpf"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mm.dd.yyyy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcx-Gj-JO8">
                                                 <rect key="frame" x="255" y="380" width="93" height="23"/>
@@ -545,7 +548,7 @@
                         <outlet property="eventDetails" destination="6pH-pT-ixY" id="kYa-91-dvH"/>
                         <outlet property="eventImage" destination="m54-8D-hw4" id="F7Q-zQ-5LP"/>
                         <outlet property="eventLocation" destination="8fY-G7-AvJ" id="u5t-TP-Hab"/>
-                        <outlet property="eventName" destination="gYz-D4-t0s" id="abT-wK-fdE"/>
+                        <outlet property="eventName" destination="gYz-D4-t0s" id="l64-Fg-2ib"/>
                         <outlet property="eventTime" destination="8DW-Vt-xkz" id="SXL-wW-miE"/>
                         <outlet property="scrollView" destination="O6D-qc-vdj" id="ltL-3L-1FR"/>
                     </connections>
