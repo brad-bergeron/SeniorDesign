@@ -8,18 +8,17 @@
 
 import UIKit
 
-class EventPageViewController: UIViewController {
+class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Outlets
 
     @IBOutlet weak var eventName: UIButton!
     
-    
-    
     @IBOutlet weak var eventImage: UIImageView!
     
     @IBOutlet weak var eventDetails: UITextView!
     @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var eventCost: UILabel!
     @IBOutlet weak var eventLocation: UILabel!
     @IBOutlet weak var eventTime: UILabel!
@@ -48,9 +47,25 @@ class EventPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvent()
-        self.eventDetails.scrollEnabled = false
-        self.scrollView.backgroundColor = UIColor.whiteColor()
-        self.scrollView.scrollEnabled = true
+        
+        let scrollViewBounds = scrollView.bounds
+
+        
+        var scrollViewInsets = UIEdgeInsetsZero
+        scrollViewInsets.top = scrollViewBounds.size.height/2.0;
+        scrollViewInsets.top -= contentView.bounds.size.height/2.0;
+        
+        scrollViewInsets.bottom = scrollViewBounds.size.height/2.0
+        scrollViewInsets.bottom -= contentView.bounds.size.height/2.0;
+        scrollViewInsets.bottom += 1
+        
+        scrollView.contentInset = scrollViewInsets
+        contentView.backgroundColor = UIColor.whiteColor()
+        scrollView.backgroundColor = contentView.backgroundColor
+        //self.eventDetails.scrollEnabled = false
+        //self.scrollView.backgroundColor = UIColor.whiteColor()
+        //self.scrollView.showsVerticalScrollIndicator = true
+        //self.scrollView.scrollEnabled = true
         // Do any additional setup after loading he view.
     }
 
@@ -71,7 +86,6 @@ class EventPageViewController: UIViewController {
         //add button for link to website*/
         return 1;
     }
-    
     
 
     /*
