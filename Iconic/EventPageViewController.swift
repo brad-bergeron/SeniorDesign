@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import EventKit
+
 
 class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
@@ -25,6 +27,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     var currentEvent : SingleEvent!
+    let eventStore = EKEventStore()
     
     // MARK: Actions
  
@@ -46,6 +49,38 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //create favorite capability
     }
     
+    @IBAction func addCalendar(sender: UIButton) {
+        let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
+        switch (status) {
+        case EKAuthorizationStatus.NotDetermined:
+            requestAccessToCalendar()
+        case EKAuthorizationStatus.Authorized:
+            self.addToCalendar()
+        case EKAuthorizationStatus.Denied, EKAuthorizationStatus.Restricted:
+            print("Access Denied")
+            requestAccessToCalendar()
+            //self.needPermissionView.fadeIn()
+        }
+        
+    }
+    
+    func addToCalendar(){
+        let msg = "Event: " + currentEvent.Event_Name!
+        let alertController = UIAlertController(title: "Add Event to Calendar", message: msg, preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"Add", style: UIAlertActionStyle.Default, handler: {action in
+            //add later
+            self.addEvent()
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func requestAccessToCalendar(){
+        eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {(granted: Bool, error: NSError?) in print(granted)})
+    }
+    
    /* @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
         if let sourceViewController = segue.sourceViewController as? EventPageViewController{
             //if anything needs to happen do here
@@ -53,10 +88,33 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         
     }*/
     
+    func addEvent() {
+        let calEvent = EKEvent.init(eventStore: eventStore)
+        calEvent.title = self.currentEvent.Event_Name!
+        calEvent.location = self.currentEvent.Event_Location!
+        calEvent.URL = NSURL(string:self.currentEvent.Event_Link!)
+        calEvent.timeZone = NSTimeZone.localTimeZone()
+        calEvent.calendar = self.eventStore.defaultCalendarForNewEvents
+        //event.startDate = NSDate. Set after figuring how to use nsdate class
+        do{
+            try self.eventStore.saveEvent(calEvent, span: EKSpan.ThisEvent, commit: true)
+            let alertController = UIAlertController(title: "Success!", message: currentEvent.Event_Name! + "added to calendar.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+            alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        } catch {
+            //add alert to error
+            let alertController = UIAlertController(title: "Error adding event", message: "\(error)", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+            alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvent()
+        //checkAuthorization()
         
         let scrollViewBounds = scrollView.bounds
 
