@@ -65,6 +65,7 @@ class EventPageViewController: UIViewController {
         eventDate.text = "FILL IN LATER"
         eventTime.text = "FILL IN LATER"
         eventLocation.text = currentEvent.Event_Location
+        eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
         //add event details

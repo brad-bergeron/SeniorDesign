@@ -146,6 +146,7 @@ class EventTableViewController: UITableViewController {
         cell.event = events[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         cell.eventDateLabel.text = "Today"
+        cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         
         let url = NSURL(string: (cell.event?.Event_Picture_Link)!)
         
