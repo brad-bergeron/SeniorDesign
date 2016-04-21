@@ -17,6 +17,7 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
     
+    @IBOutlet weak var searchBar: UISearchBar!
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvents()
