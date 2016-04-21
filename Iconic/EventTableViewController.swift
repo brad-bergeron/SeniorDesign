@@ -16,12 +16,22 @@ class EventTableViewController: UITableViewController {
     var sendEvent : SingleEvent?
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
+    var filteredEvents = [SingleEvent]()
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     @IBOutlet weak var searchBar: UISearchBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvents()
         initSwipes()
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -29,6 +39,8 @@ class EventTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+
     
     func initSwipes() {
         let leftswipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(EventTableViewController.handleSwipe(_:)))
@@ -51,22 +63,32 @@ class EventTableViewController: UITableViewController {
         
         //let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
         let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 20
+        //queryExpression.limit = 20
         //queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
         //queryExpression.expressionAttributeValues = [":event_name": "Train"]
         
         
-        
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
-                let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
-                for item in paginatedOutput.items as! [SingleEvent] {
-                    self.events.append(item)
-                    //print(item)
-                    //self.downloadImage(NSURL(string: (item.Event_Picture_Link)!)!)
-                }
+                    let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
+                    var count = 0
+                    for item in paginatedOutput.items as! [SingleEvent] {
+                        self.filteredEvents.append(item)
+                        self.events.append(item)
+                        if(count < self.filteredEvents.count){
+                            self.downloadImage(NSURL( string: self.events[count].Event_Picture_Link!)!, count: count) { (result) -> () in
+                                if(result==true){
+                                    self.tableView.reloadData()
+                                }
+                            }
+                            
+                        }
+                        count = count + 1
+                    }
             }
             
+            
+
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
                 
@@ -81,10 +103,42 @@ class EventTableViewController: UITableViewController {
         
     }
     
+    //Code for inline NSURL download, save just in case
+    // let url = NSURL(string: (self.events[count].Event_Picture_Link)!)
+    // NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
+    //dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    //guard let data = data where error == nil else { return }
+    //print(response?.suggestedFilename ?? "")
+    //print("download Finished")
+   
+    //self.filteredEvents[count].Event_Picture = UIImage(data: data)
+    //self.events[count].Event_Picture = UIImage(data: data)
+    
+    //}
+    // }.resume()
+
+    
     func scan (expression : AWSDynamoDBScanExpression) -> AWSTask! {
         let mapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
         return mapper.scan(SingleEvent.self, expression: expression)
     }
+    
+    func filterContentForSearchText(searchText: String, scope: String = "All"){
+        if(searchText.isEmpty){
+            filteredEvents = events;
+        } else {
+            filteredEvents = events.filter { SingleEvent in
+                return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
+            }
+        }
+
+        //dispatch_async(dispatch_get_main_queue(), {
+            self.tableView.reloadData()
+        //})
+        
+    }
+    
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -126,12 +180,14 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return events.count
+        
+        return filteredEvents.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //insert code to transition to event page
-        self.sendEvent = events[indexPath.row]
+
+        self.sendEvent = filteredEvents[indexPath.row]
         //let dvc = EventPageViewController()
         //dvc.currentEvent = sendEvent
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
@@ -140,22 +196,11 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
-        cell.event = events[indexPath.row]
+        cell.event = filteredEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         cell.eventDateLabel.text = "Today"
-        
-        let url = NSURL(string: (cell.event?.Event_Picture_Link)!)
-        
-        NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
-            dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                guard let data = data where error == nil else { return }
-                print(response?.suggestedFilename ?? "")
-                print("download Finished")
-                
-                self.events[indexPath.row].Event_Picture = UIImage(data: data)
-                cell.eventImage.image = UIImage(data: data)
-            }
-        }.resume()
+        cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.eventImage.image = cell.event?.Event_Picture
         
         
         // Configure the cell...
@@ -169,22 +214,24 @@ class EventTableViewController: UITableViewController {
             }.resume()
     }
     
-    func downloadImage(url: NSURL,  cellForRowAtIndexPath indexPath: NSIndexPath) {
+    func downloadImage(url: NSURL, count: Int, completion: (result: Bool) -> ()) {
         getDataFromUrl(url) { (data, response, error) in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 guard let data = data where error == nil else { return }
                 print(response?.suggestedFilename ?? "")
                 print("download Finished")
                 
-                self.eventTempImage = UIImage(data: data)
+                self.events[count].Event_Picture = UIImage(data: data)
+                self.filteredEvents[count].Event_Picture = UIImage(data: data)
+                completion(result: true)
             }
-            
-            /*dispatch_async(dispatch_get_main_queue()) { () -> Void in
-             self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.None)
-             
-             }*/
+
             
         }
+        
+
+        
+        
     }
     
     func handleSwipe(sender: UIScreenEdgePanGestureRecognizer) {
@@ -244,9 +291,9 @@ class EventTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if(favorites.contains(self.events[indexPath.row])){
+        if(favorites.contains(self.filteredEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
-                let unfavoriteEvent : SingleEvent = self.events[indexPath.row]
+                let unfavoriteEvent : SingleEvent = self.filteredEvents[indexPath.row]
                 if(!FavoritesTableViewController().containsEvent(unfavoriteEvent)){
                     FavoritesTableViewController().removeFavorite(unfavoriteEvent)
                 }
@@ -255,7 +302,7 @@ class EventTableViewController: UITableViewController {
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
-                let favoriteEvent : SingleEvent = self.events[indexPath.row]
+                let favoriteEvent : SingleEvent = self.filteredEvents[indexPath.row]
                 if (!FavoritesTableViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
                     tableView.setEditing(false, animated: true)
@@ -276,5 +323,12 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
+    }
+}
+
+extension EventTableViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+            filterContentForSearchText(searchController.searchBar.text!)
+    
     }
 }

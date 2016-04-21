@@ -50,43 +50,7 @@ class FavoritesTableViewController: UITableViewController{
     func loadFavorites() {
      //load favorites
         
-        let cond = AWSDynamoDBCondition()
-        let v1 = AWSDynamoDBAttributeValue()
-        v1.S = "String"
-        cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
-        cond.attributeValueList = [ v1 ]
-        
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
-        let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 20
-        queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
-        queryExpression.expressionAttributeValues = [":event_name": "D"]
-        
-        dynamoDBObjectMapper.scan(SingleEvent.self, expression: queryExpression).continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock: { (task:AWSTask!) -> AnyObject! in
-            
-            if task.result != nil {
-                let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
-                for item in paginatedOutput.items as! [SingleEvent] {
-                    
-                    //self.favorites.append(item)
-                    
-                    
-                }
                 
-                
-            }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.tableView.reloadData()
-                
-            })
-            
-            if ((task.error) != nil) {
-                print("Error: \(task.error)")
-            }
-            return nil
-        })
-        
     }
     
     func loadEvents(){
