@@ -17,6 +17,7 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
     var filteredEvents = [SingleEvent]()
+    var loaded = false;
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -24,7 +25,10 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadEvents()
+        if (loaded == false){
+            loadEvents()
+        }
+        //loadEvents()
         initSwipes()
         
         searchController.searchResultsUpdater = self
@@ -87,10 +91,9 @@ class EventTableViewController: UITableViewController {
                     }
             }
             
-            
-
             dispatch_async(dispatch_get_main_queue(), {
                 self.tableView.reloadData()
+                self.loaded = true
                 
             })
             
@@ -222,7 +225,10 @@ class EventTableViewController: UITableViewController {
                 print("download Finished")
                 
                 self.events[count].Event_Picture = UIImage(data: data)
-                self.filteredEvents[count].Event_Picture = UIImage(data: data)
+                if(count < self.filteredEvents.count){
+                    self.filteredEvents[count].Event_Picture = UIImage(data: data)
+                }
+                
                 completion(result: true)
             }
 
