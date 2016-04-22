@@ -95,10 +95,11 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         calEvent.URL = NSURL(string:self.currentEvent.Event_Link!)
         calEvent.timeZone = NSTimeZone.localTimeZone()
         calEvent.calendar = self.eventStore.defaultCalendarForNewEvents
-        //event.startDate = NSDate. Set after figuring how to use nsdate class
+        calEvent.startDate = self.currentEvent.Event_NSDate!
+        calEvent.endDate = self.currentEvent.Event_NSDate!.dateByAddingTimeInterval(60*60)
         do{
             try self.eventStore.saveEvent(calEvent, span: EKSpan.ThisEvent, commit: true)
-            let alertController = UIAlertController(title: "Success!", message: currentEvent.Event_Name! + "added to calendar.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+            let alertController = UIAlertController(title: "Success!", message: currentEvent.Event_Name! + " added to calendar.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
             alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
             self.presentViewController(alertController, animated: true, completion: nil)
             
@@ -145,8 +146,13 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     func loadEvent() -> Int{
         eventName.setTitle(currentEvent.Event_Name, forState: .Normal)
         //eventImage.image = currentEvent?.eventPhoto!
-        eventDate.text = "FILL IN LATER"
-        eventTime.text = "FILL IN LATER"
+        let formatDate = NSDateFormatter()
+        formatDate.dateFormat = "EEEE, MMMM dd, yyyy"
+        let formatDate2 = NSDateFormatter()
+        formatDate2.dateFormat = "hh:mm a"
+        formatDate2.timeZone = NSTimeZone(abbreviation: "CST")
+        eventDate.text = formatDate.stringFromDate(currentEvent.Event_NSDate!)
+        eventTime.text = formatDate2.stringFromDate(currentEvent.Event_NSDate!)
         eventLocation.text = currentEvent.Event_Location
         eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
