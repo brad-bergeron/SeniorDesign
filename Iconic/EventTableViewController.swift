@@ -95,6 +95,8 @@ class EventTableViewController: UITableViewController {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
+                self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                 self.tableView.reloadData()
                 self.loaded = true
                 
@@ -139,7 +141,9 @@ class EventTableViewController: UITableViewController {
         }
 
         //dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
+        self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.tableView.reloadData()
         //})
         
     }

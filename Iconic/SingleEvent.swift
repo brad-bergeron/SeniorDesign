@@ -2,7 +2,7 @@
 //  SingleEvent.swift
 //  Iconic
 //
-//  Created by admin on 3/23/16.
+//  Created by Brad Bergeron on 3/23/16.
 //  Copyright © 2016 Sam Johnson. All rights reserved.
 //
 
