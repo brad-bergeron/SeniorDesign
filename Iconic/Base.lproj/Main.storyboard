@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Filter View Controller-->
@@ -20,37 +19,45 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cTo-R8-4EY">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cTo-R8-4EY">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PMJ-mz-H7H">
+                                        <rect key="frame" x="0.0" y="448" width="600" height="44"/>
+                                        <items>
+                                            <barButtonItem title="Item" id="8L8-71-8Qd"/>
+                                        </items>
+                                    </toolbar>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwc-IA-RgF">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="448"/>
+                                        <color key="backgroundColor" red="0.18823529410000001" green="0.70588235290000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="PMJ-mz-H7H" firstAttribute="top" secondItem="lwc-IA-RgF" secondAttribute="bottom" id="BkN-do-xQT"/>
+                                    <constraint firstItem="lwc-IA-RgF" firstAttribute="top" secondItem="cTo-R8-4EY" secondAttribute="top" id="KLc-iO-Zgx"/>
+                                    <constraint firstAttribute="trailing" secondItem="lwc-IA-RgF" secondAttribute="trailing" id="dwL-k9-mg8"/>
+                                    <constraint firstItem="lwc-IA-RgF" firstAttribute="leading" secondItem="cTo-R8-4EY" secondAttribute="leading" id="pbb-VS-7G8"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" red="0.18823529411764706" green="0.70588235294117641" blue="0.29019607843137252" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Filter Data" id="dYL-CN-rzO">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="bu5-OH-QCB">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jdc-uh-1cv">
-                                <rect key="frame" x="20" y="7" width="133" height="30"/>
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="nZe-k3-zVp">
+                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Q7Y-FL-5Ov">
+                                <rect key="frame" x="20" y="6" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
+                            </switch>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="bu5-OH-QCB">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jdc-uh-1cv">
+                                <rect key="frame" x="447" y="7" width="133" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="All Events"/>
                             </button>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem style="plain" id="nZe-k3-zVp">
-                                <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Q7Y-FL-5Ov">
-                                    <rect key="frame" x="531" y="6" width="51" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </switch>
-                            </barButtonItem>
-                            <barButtonItem style="plain" id="FDS-03-kif">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dBb-2O-O8p">
-                                    <rect key="frame" x="390" y="7" width="133" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" title="Button"/>
-                                </button>
-                            </barButtonItem>
-                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -586,6 +593,23 @@
                 <exit id="2xy-eT-8FC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2960" y="1469"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="mRQ-du-7So">
+            <objects>
+                <viewController id="Zfr-mF-LIS" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NX6-Iq-Y0D"/>
+                        <viewControllerLayoutGuide type="bottom" id="gcs-1n-V8l"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GAr-SV-g2n">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VeZ-jr-48a" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
