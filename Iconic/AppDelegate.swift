@@ -31,60 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
         
-        /*let AccessKeyId = FileRead.readAccessKey()
-        let SecertKey = FileRead.readSecretKey()
-        
-        
-        let cp = AWSStaticCredentialsProvider(accessKey: AccessKeyId, secretKey: SecertKey)
-        
-        let configuration = AWSServiceConfiguration(region: AWSRegionType.USWest2, credentialsProvider: cp)
-        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration*/
-        
-        /*let dynamoDB = AWSDynamoDB.defaultDynamoDB()
-        let listTableInput = AWSDynamoDBListTablesInput()
-        dynamoDB.listTables(listTableInput).continueWithBlock{ (task: AWSTask!) -> AnyObject! in
-            if let error = task.error {
-                print("Error occurred: \(error)")
-                return nil
-            }
-        
-            
-            let listTablesOutput = task.result as! AWSDynamoDBListTablesOutput
-            
-            for tableName : AnyObject in listTablesOutput.tableNames! {
-                print("\(tableName)")
-
-            }
-            
-            return nil
-        }*/
-        
-        //code to get all the objects from the database
-        /*let cond = AWSDynamoDBCondition()
-        let v1 = AWSDynamoDBAttributeValue()
-        v1.S = "String"
-        cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
-        cond.attributeValueList = [ v1 ]
-        
-        let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
-        let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 20
-        //queryExpression.filterExpression = [ "Name" : cond ]
-        
-        dynamoDBObjectMapper.scan(SingleEvent.self, expression: queryExpression).continueWithExecutor(AWSExecutor.mainThreadExecutor(), withBlock: { (task:AWSTask!) -> AnyObject! in
-        
-            if task.result != nil {
-                let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
-                for item in paginatedOutput.items as! [SingleEvent] {
-                    print(item)
-                }
-            }
-            
-            if ((task.error) != nil) {
-                print("Error: \(task.error)")
-            }
-            return nil
-        })*/
         return true
     }
 
