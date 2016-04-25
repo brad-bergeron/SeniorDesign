@@ -87,11 +87,16 @@ class EventTableViewController: UITableViewController {
                             }
                             
                         }
+                       let dat = self.stringToDate(self.events[count].Event_Date_Formatted!, time: self.events[count].Event_Time!)
+                         self.events[count].Event_NSDate = dat
+                        
                         count = count + 1
                     }
             }
             
             dispatch_async(dispatch_get_main_queue(), {
+                self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                 self.tableView.reloadData()
                 self.loaded = true
                 
@@ -136,7 +141,9 @@ class EventTableViewController: UITableViewController {
         }
 
         //dispatch_async(dispatch_get_main_queue(), {
-            self.tableView.reloadData()
+        self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.tableView.reloadData()
         //})
         
     }
@@ -201,9 +208,20 @@ class EventTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
         cell.event = filteredEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
-        cell.eventDateLabel.text = "Today"
+        let format = NSDateFormatter()
+        format.dateFormat = "MM-dd-yyyy"
+        let today = NSDate()
+        if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
+            cell.eventDateLabel.text = "Today"
+        } else if (format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!.dateByAddingTimeInterval(60*60*24))) {
+            cell.eventDateLabel.text = "Tomorrow"
+        } else {
+            cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
+        }
+        //cell.eventDateLabel.text = "Today"
         cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.eventImage.image = cell.event?.Event_Picture
+        //print(filteredEvents[indexPath.row].Event_Time!)
         
         
         // Configure the cell...
@@ -231,12 +249,7 @@ class EventTableViewController: UITableViewController {
                 
                 completion(result: true)
             }
-
-            
         }
-        
-
-        
         
     }
     
@@ -257,42 +270,40 @@ class EventTableViewController: UITableViewController {
             
         }
     }
-
+    // MARK: NSDate Function
+    func stringToDate(date: String, time: String) -> NSDate?{
+        var dateReturn = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMddyyHHmm"
+        dateFormatter.timeZone = NSTimeZone(abbreviation: "CST")
+        print("Time:" + time)
+        var tme : String
+        //print("Start char:" + String(time![time!.startIndex]) + "&")
+        if(time[time.startIndex] == " "){
+            let adv = time.startIndex.advancedBy(1)
+            tme = time.substringFromIndex(adv)
+        } else {
+            tme = time
+        }
+        let temp = tme.characters.split{$0 == ":"}
+        var hours = String(temp[0])
+        if(tme.containsString("pm") || tme.containsString("PM")){
+            hours = String(Int(hours)! + 12)
+        }
+        if(hours.characters.count == 1){
+            let temp2 = hours
+            hours = "0"
+            hours.appendContentsOf(temp2)
+        }
+        let minutes = String(String(temp[1]).characters.split{$0 == " "}[0])
+        var dateVal = date
+        dateVal.appendContentsOf(hours)
+        dateVal.appendContentsOf(minutes)
+        dateReturn = dateFormatter.dateFromString(dateVal) as NSDate! 
+        return dateReturn
+    }
     
-    /*
-     // Override to support conditional editing of the table view.
-     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the specified item to be editable.
-     return true
-     }
-     */
-    
-    /*
-     // Override to support editing the table view.
-     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-     if editingStyle == .Delete {
-     // Delete the row from the data source
-     tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-     } else if editingStyle == .Insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
-    
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
+    //help and settings
     //NEED TO SEGUE BETWEEN VIEWS
     
     

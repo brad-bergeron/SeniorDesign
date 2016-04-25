@@ -2,7 +2,7 @@
 //  SingleEvent.swift
 //  Iconic
 //
-//  Created by admin on 3/23/16.
+//  Created by Brad Bergeron on 3/23/16.
 //  Copyright © 2016 Sam Johnson. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import UIKit
 
 class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Name : String?
-    var Event_Date : String?
+    var Event_Date_Formatted : String?
     var Event_Type : String?
     var Event_Organization : String?
     var Event_Filters: [String]?
@@ -21,6 +21,7 @@ class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Link:String?
     var Event_Picture_Link : String?
     var Event_Picture : UIImage?
+    var Event_NSDate : NSDate?
     
     
     class func dynamoDBTableName() -> String! {
@@ -42,6 +43,5 @@ class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override func `self`() -> Self {
         return self
     }
-    
     
 }
