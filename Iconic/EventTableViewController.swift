@@ -100,13 +100,6 @@ class EventTableViewController: UITableViewController {
                     }
             }
             
-            /*dispatch_async(dispatch_get_main_queue(), {
-                /*self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })*/
-                self.tableView.reloadData()
-                self.loaded = true
-                
-            })*/
-            
             
             if ((task.error) != nil) {
                 print("Error: \(task.error)")
@@ -115,20 +108,7 @@ class EventTableViewController: UITableViewController {
         })
         
     }
-    
-    //Code for inline NSURL download, save just in case
-    // let url = NSURL(string: (self.events[count].Event_Picture_Link)!)
-    // NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
-    //dispatch_async(dispatch_get_main_queue()) { () -> Void in
-    //guard let data = data where error == nil else { return }
-    //print(response?.suggestedFilename ?? "")
-    //print("download Finished")
-   
-    //self.filteredEvents[count].Event_Picture = UIImage(data: data)
-    //self.events[count].Event_Picture = UIImage(data: data)
-    
-    //}
-    // }.resume()
+
 
     
     func scan (expression : AWSDynamoDBScanExpression) -> AWSTask! {
@@ -145,11 +125,11 @@ class EventTableViewController: UITableViewController {
             }
         }
 
-        //dispatch_async(dispatch_get_main_queue(), {
+
         self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.tableView.reloadData()
-        //})
+
         
     }
     
