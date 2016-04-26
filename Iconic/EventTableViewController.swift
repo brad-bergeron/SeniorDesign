@@ -37,6 +37,9 @@ class EventTableViewController: UITableViewController {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.triggerDeepLinkIfPresent()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -79,7 +82,8 @@ class EventTableViewController: UITableViewController {
                     for item in paginatedOutput.items as! [SingleEvent] {
                         self.filteredEvents.append(item)
                         self.events.append(item)
-                        if(count < self.filteredEvents.count){
+                        print(self.events[count].Event_Picture_Link!)
+                        if((count < self.events.count) && (self.events[count].Event_Picture_Link! != " ")){
                             self.downloadImage(NSURL( string: self.events[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
                                     self.tableView.reloadData()
@@ -95,7 +99,6 @@ class EventTableViewController: UITableViewController {
             }
             
             dispatch_async(dispatch_get_main_queue(), {
-                self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                 self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                 self.tableView.reloadData()
                 self.loaded = true

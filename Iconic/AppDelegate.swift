@@ -14,6 +14,64 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate{
 
     var window: UIWindow?
+    var loadedEnoughToDeepLink : Bool = false
+    var deepLink : RemoteNotificationDeepLink?
+    
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
+                                                                identityPoolId:"us-east-1:0e17af50-c1bb-4dac-8aed-70298f97a008")
+        
+        let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
+        
+        AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+        
+        if url.host == nil{
+            
+            return true;
+        }
+        
+        let urlString = url.absoluteString
+        let queryArray = urlString.componentsSeparatedByString("/")
+        let query = queryArray[2]
+        
+        if query.rangeOfString("event") != nil{
+            
+            let data = urlString.componentsSeparatedByString("/")
+            if data.count >= 3 {
+                let parameter = data[3]
+                let userInfo = [RemoteNotificationDeepLinkApp : parameter]
+                self.applicationHandleRemoteNotification(application, didReceiveRemoteNotification: userInfo)
+            }
+        }
+        
+        
+        return true
+    }
+    
+    func applicationHandleRemoteNotification(application: UIApplication, didReceiveRemoteNotification userInfo : [NSObject : AnyObject]){
+     
+     
+        if application.applicationState == UIApplicationState.Background || application.applicationState == UIApplicationState.Inactive{
+     
+            let canDoNow = loadedEnoughToDeepLink
+     
+            self.deepLink = RemoteNotificationDeepLink.create(userInfo)
+     
+            if canDoNow {
+                    self.triggerDeepLinkIfPresent()
+            }
+        }
+     }
+     
+     func triggerDeepLinkIfPresent() -> Bool{
+        self.loadedEnoughToDeepLink = true
+        let ret = (self.deepLink?.trigger() != nil)
+        self.deepLink = nil
+        return ret
+     }
+
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -30,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
         
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+    
         
         return true
     }
