@@ -19,8 +19,6 @@ class FavoritesTableViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //loadFavorites()
-        loadEvents()
         initSwipes()
         //self.searchDisplayController
        // favoriteSearch.searchResultsUpdater = self
@@ -47,15 +45,6 @@ class FavoritesTableViewController: UITableViewController{
         view.addGestureRecognizer(rightswipe)
     }
     
-    func loadFavorites() {
-     //load favorites
-        
-                
-    }
-    
-    func loadEvents(){
-        
-    }
     
     func handleSwipe(sender: UIPanGestureRecognizer) {
         if let edge = sender as? UIScreenEdgePanGestureRecognizer{

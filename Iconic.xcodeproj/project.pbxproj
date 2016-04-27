@@ -18,16 +18,12 @@
 		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
-		84118A5F1CB6F44D00E6E496 /* FileRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8456C73C1CB5F37A0034F275 /* FileRead.swift */; };
-		845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845FD72A1C8790B50047A57F /* EventInfo.swift */; };
+		842AB9411CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
 		846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC21C7C11A7006477E3 /* AppDelegate.swift */; };
 		846BB2C21C877556000BF5C0 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2C11C877556000BF5C0 /* libsqlite3.dylib */; };
-		84949DD31C91CA2A00027C2E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84949DD21C91CA2A00027C2E /* Constants.swift */; };
 		849921E41C8F896400ECA681 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 849921E31C8F896400ECA681 /* Default-568h@2x.png */; };
-		84AF6AC11C87CCB7006D5687 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC01C87CCB7006D5687 /* Util.swift */; };
 		84AF6AC71C87D0EC006D5687 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AF6AC61C87D0EC006D5687 /* ModelManager.swift */; };
-		84AF6AC91C87D175006D5687 /* Events.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 84AF6AC81C87D16C006D5687 /* Events.sqlite */; };
 		AD707FC51C7C11A7006477E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC41C7C11A7006477E3 /* ViewController.swift */; };
 		AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD707FC61C7C11A7006477E3 /* Main.storyboard */; };
 		AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC91C7C11A7006477E3 /* Iconic.xcdatamodeld */; };
@@ -63,16 +59,12 @@
 		7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
-		8456C73C1CB5F37A0034F275 /* FileRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileRead.swift; sourceTree = "<group>"; };
-		845FD72A1C8790B50047A57F /* EventInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInfo.swift; sourceTree = "<group>"; };
+		842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDeepLink.swift; sourceTree = "<group>"; };
 		846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		846BB2C11C877556000BF5C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
-		84949DD21C91CA2A00027C2E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		849921E31C8F896400ECA681 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		849921E71C8F8BD400ECA681 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84AF6AC01C87CCB7006D5687 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		84AF6AC61C87D0EC006D5687 /* ModelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
-		84AF6AC81C87D16C006D5687 /* Events.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Events.sqlite; sourceTree = "<group>"; };
 		84B6EDF11CA37A6000435856 /* SingleEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleEvent.swift; sourceTree = "<group>"; };
 		84D468081C87566600CD5482 /* Iconic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Iconic-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		986A5802E086E3742B4E0D26 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,17 +150,13 @@
 		AD707FC11C7C11A7006477E3 /* Iconic */ = {
 			isa = PBXGroup;
 			children = (
-				8456C73C1CB5F37A0034F275 /* FileRead.swift */,
 				7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */,
 				7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */,
 				AD707FC41C7C11A7006477E3 /* ViewController.swift */,
-				84AF6AC81C87D16C006D5687 /* Events.sqlite */,
 				84AF6AC61C87D0EC006D5687 /* ModelManager.swift */,
 				AD707FC21C7C11A7006477E3 /* AppDelegate.swift */,
+				842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */,
 				84B6EDF11CA37A6000435856 /* SingleEvent.swift */,
-				84949DD21C91CA2A00027C2E /* Constants.swift */,
-				845FD72A1C8790B50047A57F /* EventInfo.swift */,
-				84AF6AC01C87CCB7006D5687 /* Util.swift */,
 				849921E71C8F8BD400ECA681 /* Info.plist */,
 				AD707FC61C7C11A7006477E3 /* Main.storyboard */,
 				7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */,
@@ -319,7 +307,6 @@
 			files = (
 				AD707FD01C7C11A7006477E3 /* LaunchScreen.storyboard in Resources */,
 				AD707FCD1C7C11A7006477E3 /* Assets.xcassets in Resources */,
-				84AF6AC91C87D175006D5687 /* Events.sqlite in Resources */,
 				AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */,
 				849921E41C8F896400ECA681 /* Default-568h@2x.png in Resources */,
 			);
@@ -402,14 +389,11 @@
 				7B5B5C2D1C9895F8001452B9 /* EventPageViewController.swift in Sources */,
 				7B3D41181C8B7ECC000CD2AF /* EventTableViewCell.swift in Sources */,
 				7B3D411A1C8BA41A000CD2AF /* EventTableViewController.swift in Sources */,
-				845FD72B1C8790B50047A57F /* EventInfo.swift in Sources */,
 				7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */,
-				84118A5F1CB6F44D00E6E496 /* FileRead.swift in Sources */,
+				842AB9411CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift in Sources */,
 				846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */,
 				AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */,
-				84949DD31C91CA2A00027C2E /* Constants.swift in Sources */,
 				84AF6AC71C87D0EC006D5687 /* ModelManager.swift in Sources */,
-				84AF6AC11C87CCB7006D5687 /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

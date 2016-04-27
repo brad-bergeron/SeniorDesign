@@ -37,6 +37,9 @@ class EventTableViewController: UITableViewController {
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.triggerDeepLinkIfPresent()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -77,30 +80,25 @@ class EventTableViewController: UITableViewController {
                     let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
                     var count = 0
                     for item in paginatedOutput.items as! [SingleEvent] {
-                        self.filteredEvents.append(item)
                         self.events.append(item)
-                        if(count < self.filteredEvents.count){
+                        
+                        if((count < self.events.count) && (self.events[count].Event_Picture_Link! != " ")){
                             self.downloadImage(NSURL( string: self.events[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
+                                    self.filteredEvents = self.events
+                                    self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                                     self.tableView.reloadData()
                                 }
                             }
                             
                         }
-                       let dat = self.stringToDate(self.events[count].Event_Date_Formatted!, time: self.events[count].Event_Time!)
-                         self.events[count].Event_NSDate = dat
+                        let dat = self.stringToDate(self.events[count].Event_Date_Formatted!, time: self.events[count].Event_Time!)
+                        self.events[count].Event_NSDate = dat
+                       
                         
                         count = count + 1
                     }
             }
-            
-            dispatch_async(dispatch_get_main_queue(), {
-                self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
-                self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
-                self.tableView.reloadData()
-                self.loaded = true
-                
-            })
             
             
             if ((task.error) != nil) {
@@ -110,20 +108,7 @@ class EventTableViewController: UITableViewController {
         })
         
     }
-    
-    //Code for inline NSURL download, save just in case
-    // let url = NSURL(string: (self.events[count].Event_Picture_Link)!)
-    // NSURLSession.sharedSession().dataTaskWithURL(url!) { (data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void in
-    //dispatch_async(dispatch_get_main_queue()) { () -> Void in
-    //guard let data = data where error == nil else { return }
-    //print(response?.suggestedFilename ?? "")
-    //print("download Finished")
-   
-    //self.filteredEvents[count].Event_Picture = UIImage(data: data)
-    //self.events[count].Event_Picture = UIImage(data: data)
-    
-    //}
-    // }.resume()
+
 
     
     func scan (expression : AWSDynamoDBScanExpression) -> AWSTask! {
@@ -140,11 +125,11 @@ class EventTableViewController: UITableViewController {
             }
         }
 
-        //dispatch_async(dispatch_get_main_queue(), {
+
         self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.tableView.reloadData()
-        //})
+
         
     }
     
@@ -243,9 +228,6 @@ class EventTableViewController: UITableViewController {
                 print("download Finished")
                 
                 self.events[count].Event_Picture = UIImage(data: data)
-                if(count < self.filteredEvents.count){
-                    self.filteredEvents[count].Event_Picture = UIImage(data: data)
-                }
                 
                 completion(result: true)
             }
