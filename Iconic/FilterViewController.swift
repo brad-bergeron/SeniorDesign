@@ -11,10 +11,46 @@ import UIKit
 class FilterViewController: UIViewController {
     var filters: [(filterName : String, filterOptions : [String])] = [("All Events",["All Options"]), ("Event Type",["Music", "Comedy", "Education"])] //potentially string of button for filter options
 
+    @IBOutlet weak var movieButton: UIButton!
+    @IBOutlet weak var musicButton: UIButton!
+    @IBOutlet weak var comedyButton: UIButton!
     
     @IBOutlet weak var eventFilterType: UILabel!
     @IBAction func dropDownButton(sender: UIButton){
         //ADD CODE FOR CHANGING FILTER
+    }
+    
+    @IBAction func movieButton(sender: UIButton) {
+        
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
+        }else {
+            movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
+        }
+    }
+    
+    @IBAction func musicButton(sender: UIButton) {
+        
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
+        }else {
+            musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
+        }
+    }
+    
+    @IBAction func comedyButton(sender: UIButton) {
+        
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
+        }else {
+            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
+        }
     }
     @IBAction func filterToggle(sender: UISwitch, forEvent event: UIEvent) {
         //ADD CODE FOR TURNING FILTERS ON AND OFF 
