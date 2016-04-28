@@ -12,12 +12,14 @@ import UIKit
 class EventTableViewController: UITableViewController {
     
     // MARK: Event List
-    var events = [SingleEvent]() //this will be pulled from the database
+    var events = [SingleEvent]() //this will be pulled from the database always constant
     var sendEvent : SingleEvent?
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
-    var filteredEvents = [SingleEvent]()
-    var loaded = false;
+    var searchedEvents = [SingleEvent]() //The events that show up on page always
+    var constantFilteredEvents = [SingleEvent]() //Holds the events that were filtered
+    var loaded = false //Only want to load things from the Databse once
+    var filtered = false //If it is filtered use the constantFilteredEvents instead of the events
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -61,18 +63,14 @@ class EventTableViewController: UITableViewController {
     }
     
     func loadEvents() {
-        //let photo = UIImage(named: "KevinHart")!
         let cond = AWSDynamoDBCondition()
         let v1 = AWSDynamoDBAttributeValue()
         v1.S = "String"
         cond.comparisonOperator = AWSDynamoDBComparisonOperator.EQ
         cond.attributeValueList = [ v1 ]
         
-        //let dynamoDBObjectMapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
+
         let queryExpression = AWSDynamoDBScanExpression()
-        //queryExpression.limit = 20
-        //queryExpression.filterExpression = "(contains(Event_Name, :event_name))"
-        //queryExpression.expressionAttributeValues = [":event_name": "Train"]
         
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
@@ -81,12 +79,11 @@ class EventTableViewController: UITableViewController {
                     var count = 0
                     for item in paginatedOutput.items as! [SingleEvent] {
                         self.events.append(item)
-                        
                         if((count < self.events.count) && (self.events[count].Event_Picture_Link! != " ")){
                             self.downloadImage(NSURL( string: self.events[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
-                                    self.filteredEvents = self.events
-                                    self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                                    self.searchedEvents = self.events
+                                    self.searchedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                                     self.tableView.reloadData()
                                 }
                             }
@@ -117,17 +114,20 @@ class EventTableViewController: UITableViewController {
     }
     
     func filterContentForSearchText(searchText: String, scope: String = "All"){
-        if(searchText.isEmpty){
-            filteredEvents = events;
+        if(searchText.isEmpty && filtered){
+            searchedEvents = constantFilteredEvents
+            
+        } else if(searchText.isEmpty) {
+            searchedEvents = events;
         } else {
-            filteredEvents = events.filter { SingleEvent in
+            searchedEvents = events.filter { SingleEvent in
                 return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
             }
         }
 
 
         self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
-        self.filteredEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.searchedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.tableView.reloadData()
 
         
@@ -153,7 +153,8 @@ class EventTableViewController: UITableViewController {
         } else if segue.identifier == "LeftSwipe" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? FilterViewController{
-                    // send some data
+                    // Brad trying to right code to send the events array to Filter VIew Controller
+                   dvc.unfilteredEvents = self.searchedEvents
                 }
             }
         } else if segue.identifier == "RightSwipe" {
@@ -176,13 +177,13 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return filteredEvents.count
+        return searchedEvents.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //insert code to transition to event page
 
-        self.sendEvent = filteredEvents[indexPath.row]
+        self.sendEvent = searchedEvents[indexPath.row]
         //let dvc = EventPageViewController()
         //dvc.currentEvent = sendEvent
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
@@ -191,7 +192,7 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
-        cell.event = filteredEvents[indexPath.row]
+        cell.event = searchedEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         let format = NSDateFormatter()
         format.dateFormat = "MM-dd-yyyy"
@@ -224,6 +225,7 @@ class EventTableViewController: UITableViewController {
         getDataFromUrl(url) { (data, response, error) in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 guard let data = data where error == nil else { return }
+                //DO NOT REMOVE THESE PRINTS
                 print(response?.suggestedFilename ?? "")
                 print("download Finished")
                 
@@ -290,9 +292,9 @@ class EventTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if(favorites.contains(self.filteredEvents[indexPath.row])){
+        if(favorites.contains(self.searchedEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
-                let unfavoriteEvent : SingleEvent = self.filteredEvents[indexPath.row]
+                let unfavoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
                 if(!FavoritesTableViewController().containsEvent(unfavoriteEvent)){
                     FavoritesTableViewController().removeFavorite(unfavoriteEvent)
                 }
@@ -301,7 +303,7 @@ class EventTableViewController: UITableViewController {
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
-                let favoriteEvent : SingleEvent = self.filteredEvents[indexPath.row]
+                let favoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
                 if (!FavoritesTableViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
                     tableView.setEditing(false, animated: true)
