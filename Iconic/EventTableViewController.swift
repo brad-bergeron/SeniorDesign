@@ -118,7 +118,7 @@ class EventTableViewController: UITableViewController {
             searchedEvents = constantFilteredEvents
             
         } else if(searchText.isEmpty) {
-            searchedEvents = events;
+            searchedEvents = events
         } else {
             searchedEvents = events.filter { SingleEvent in
                 return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
