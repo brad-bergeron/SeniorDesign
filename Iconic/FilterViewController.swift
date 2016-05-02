@@ -14,6 +14,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var movieButton: UIButton!
     @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var comedyButton: UIButton!
+    @IBOutlet weak var ageButton: UIButton!
     
     @IBOutlet weak var eventFilterType: UILabel!
     @IBAction func dropDownButton(sender: UIButton){
@@ -61,6 +62,20 @@ class FilterViewController: UIViewController {
             self.removeComedy()
         }
     }
+    
+    @IBAction func ageButton(sender: UIButton) {
+        
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+            self.addComedy()
+        }else {
+            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
+            self.removeComedy()
+        }
+    }
+    
     @IBAction func filterToggle(sender: UISwitch, forEvent event: UIEvent) {
         //ADD CODE FOR TURNING FILTERS ON AND OFF 
         //HAVE FILTERS AUTO TURN ON THE FIRST TIME
@@ -71,6 +86,7 @@ class FilterViewController: UIViewController {
             comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
             musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
             movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
+            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
         }
     }
     
@@ -199,7 +215,7 @@ class FilterViewController: UIViewController {
         }
     }
     
-    func addMoive() {
+    func addMovie() {
         for event in unfilteredEvents {
             var added = false
             for filter in event.Event_Filters! as [String]{

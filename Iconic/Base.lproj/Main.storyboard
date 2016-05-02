@@ -40,7 +40,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-qg-sZI">
-                                                <rect key="frame" x="57" y="210" width="100" height="100"/>
+                                                <rect key="frame" x="50" y="210" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="fMf-2r-90K"/>
                                                     <constraint firstAttribute="width" constant="100" id="t0X-5h-I3n"/>
@@ -50,13 +50,16 @@
                                                     <action selector="comedyButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="bbc-IL-alr"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJ4-Nb-ShN">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJ4-Nb-ShN">
                                                 <rect key="frame" x="450" y="200" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="VwK-Ep-Y3T"/>
                                                     <constraint firstAttribute="height" constant="100" id="hYd-KJ-MWv"/>
                                                 </constraints>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal" image="21_Icon"/>
+                                                <connections>
+                                                    <action selector="ageButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="lOh-4o-1cZ"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.70588235290000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
@@ -64,7 +67,7 @@
                                             <constraint firstItem="t7j-U8-WV2" firstAttribute="top" secondItem="lwc-IA-RgF" secondAttribute="top" constant="50" id="74V-no-A8l"/>
                                             <constraint firstAttribute="height" constant="1000" id="A0P-ud-4ei"/>
                                             <constraint firstItem="4be-qW-pEg" firstAttribute="top" secondItem="lwc-IA-RgF" secondAttribute="top" constant="60" id="AWe-ie-OLS"/>
-                                            <constraint firstItem="Urs-qg-sZI" firstAttribute="leading" secondItem="lwc-IA-RgF" secondAttribute="leading" constant="57" id="CdD-KA-44z"/>
+                                            <constraint firstItem="Urs-qg-sZI" firstAttribute="leading" secondItem="lwc-IA-RgF" secondAttribute="leading" constant="50" id="CdD-KA-44z"/>
                                             <constraint firstItem="Urs-qg-sZI" firstAttribute="top" secondItem="4be-qW-pEg" secondAttribute="bottom" constant="50" id="Lps-bF-AjV"/>
                                             <constraint firstAttribute="trailing" secondItem="t7j-U8-WV2" secondAttribute="trailing" constant="50" id="NNc-8R-6dC"/>
                                             <constraint firstAttribute="trailing" secondItem="TJ4-Nb-ShN" secondAttribute="trailing" constant="50" id="NXu-tw-5Ey"/>
@@ -121,6 +124,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="ageButton" destination="TJ4-Nb-ShN" id="CMp-7L-Gyn"/>
                         <outlet property="comedyButton" destination="Urs-qg-sZI" id="x0b-tz-RzN"/>
                         <outlet property="movieButton" destination="t7j-U8-WV2" id="hS6-YT-0zf"/>
                         <outlet property="musicButton" destination="4be-qW-pEg" id="8gL-f4-aW1"/>
@@ -676,6 +680,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="21_Icon" width="100" height="100"/>
         <image name="Comedy_Icon" width="100" height="100"/>
         <image name="Movie_Icon" width="100" height="100"/>
         <image name="Music_Icon" width="100" height="100"/>
