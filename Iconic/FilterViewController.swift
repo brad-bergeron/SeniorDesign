@@ -30,8 +30,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
+            self.addMovie()
         }else {
             movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
+            self.removeMovie()
         }
     }
     
@@ -101,7 +103,7 @@ class FilterViewController: UIViewController {
             dismissViewControllerAnimated(true, completion: nil)
         }
         //BREAKS AIF UNCOMMENTED
-        //self.performSegueWithIdentifier("LeftSwipe", sender: self)
+        self.performSegueWithIdentifier("LeftSwipe", sender: self)
     }
     
     override func viewDidLoad() {
@@ -126,7 +128,7 @@ class FilterViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        //Brad trying to send Filtered events back
+        //Brad trying to send Filtered events back and breaks
         if segue.identifier == "LeftSwipe" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventTableViewController{
