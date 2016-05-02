@@ -30,7 +30,7 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
-            self.addMoive()
+            self.addMovie()
         }else {
             movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
             self.removeMovie()
