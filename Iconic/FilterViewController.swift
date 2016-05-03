@@ -103,12 +103,10 @@ class FilterViewController: UIViewController {
             musicButton.selected = false
             comedyButton.selected = false
             ageButton.selected = false
-            /*self.addMusic()
-            self.addMovie()
-            self.addComedy()*/
+            self.addFiltersAll()
+            
+        }else{
 
-        } else {
-            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
             musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
             comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
             ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
