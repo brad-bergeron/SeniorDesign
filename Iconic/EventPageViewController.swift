@@ -32,14 +32,14 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
         let alertController = UIAlertController(title: "More Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        if(!FavoritesCollectionViewController().containsEvent(currentEvent)){
+        if(!favorites.contains(currentEvent)){
             alertController.addAction(UIAlertAction(title:"Favorite", style: UIAlertActionStyle.Default, handler: { action in
-                FavoritesCollectionViewController().favorites.append(self.currentEvent)
+                favorites.append(self.currentEvent)
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }))
         } else {
             alertController.addAction(UIAlertAction(title:"Remove from Favorites", style: UIAlertActionStyle.Default, handler: { action in
-                FavoritesCollectionViewController().removeFavorite(self.currentEvent)
+                favorites.removeAtIndex(favorites.indexOf(self.currentEvent)!)
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }))
         }

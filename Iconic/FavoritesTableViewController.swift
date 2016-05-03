@@ -11,7 +11,6 @@ import UIKit
 class FavoritesTableViewController: UITableViewController{
 
     // MARK: Event Properties
-    var favorites = [SingleEvent]()
     var sendEvent : SingleEvent?
     var center : CGPoint?
     
@@ -107,26 +106,6 @@ class FavoritesTableViewController: UITableViewController{
         self.performSegueWithIdentifier("FavoriteSegue", sender: self)
     }
     
-    func containsEvent(event: SingleEvent) -> Bool {
-        if(favorites.contains(event)){
-            return true
-        }
-        return false
-    }
-    
-    func addFavorite(event: SingleEvent) {
-        if(!containsEvent(event)){
-            self.favorites.append(event)
-        }
-    }
-    
-    func removeFavorite(event: SingleEvent) {
-        if(favorites.contains(event)){
-            if let index = self.favorites.indexOf(event){
-                self.favorites.removeAtIndex(index)
-            }
-        }
-    }
 
     /*
     // Override to support conditional editing of the table view.

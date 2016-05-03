@@ -191,11 +191,8 @@ class EventTableViewController: UITableViewController {
                 }
             }
         } else if segue.identifier == "RightSwipe" {
-            if let nav = segue.destinationViewController as? FavoritesCollectionViewController {
+            if let _ = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
-                for fave in favorites{
-                    nav.favorites.append(fave)
-                }
             }
         }
     }
@@ -329,23 +326,22 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(seenEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
-                    tableView.setEditing(false, animated: true)
-                    favorites.removeAtIndex(favorites.indexOf(seenEvents[indexPath.row])!)
+                if(!favorites.contains(unfavoriteEvent)){
+                    favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
                     self.saveData()
                 }
+                tableView.setEditing(false, animated: true)
             });
             unfavoriteAction.backgroundColor = UIColor.blackColor();
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
                 let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
+                if (!favorites.contains(favoriteEvent)){
                     favorites.append(favoriteEvent)
                     self.saveData()
-                    
-                    tableView.setEditing(false, animated: true)
                 }
+                tableView.setEditing(false, animated: true)
             });
             favoriteAction.backgroundColor = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0);
             return [favoriteAction];
