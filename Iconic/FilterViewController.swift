@@ -91,18 +91,18 @@ class FilterViewController: UIViewController {
     @IBAction func onOffSwitch(sender: UISwitch) {
         
         if (sender.on){
-            movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
-            musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
-            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
-            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
+            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
+            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
+            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
+            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
             movieButton.enabled = true
             musicButton.enabled = true
             comedyButton.enabled = true
             ageButton.enabled = true
-            movieButton.selected = true
-            musicButton.selected = true
-            comedyButton.selected = true
-            ageButton.selected = true
+            movieButton.selected = false
+            musicButton.selected = false
+            comedyButton.selected = false
+            ageButton.selected = false
             /*self.addMusic()
             self.addMovie()
             self.addComedy()*/
