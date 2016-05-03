@@ -158,7 +158,7 @@ class EventTableViewController: UITableViewController {
                 }
             }
         } else if segue.identifier == "RightSwipe" {
-            if let nav = segue.destinationViewController as? FavoritesTableViewController {
+            if let nav = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
                 for fave in self.favorites{
                     nav.favorites.append(fave)
@@ -295,8 +295,9 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(self.searchedEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
-                if(!FavoritesTableViewController().containsEvent(unfavoriteEvent)){
-                    FavoritesTableViewController().removeFavorite(unfavoriteEvent)
+                if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
+                    FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
+                    tableView.setEditing(false, animated: true)
                 }
             });
             unfavoriteAction.backgroundColor = UIColor.redColor();
@@ -304,7 +305,7 @@ class EventTableViewController: UITableViewController {
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
                 let favoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
-                if (!FavoritesTableViewController().containsEvent(favoriteEvent)){
+                if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
                     tableView.setEditing(false, animated: true)
                 }
