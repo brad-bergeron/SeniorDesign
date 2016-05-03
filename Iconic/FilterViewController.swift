@@ -79,10 +79,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
-            //EventTableViewController().addComedy() - need one for 21+
+            self.add21()
         }else {
             ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
-            //EventTableViewController().removeComedy() - need one for 21+
+            self.remove21()
         }
         updateLabel()
     }
@@ -103,10 +103,7 @@ class FilterViewController: UIViewController {
             musicButton.selected = true
             comedyButton.selected = true
             ageButton.selected = true
-            /*self.addMusic()
-            self.addMovie()
-            self.addComedy()*/
-
+            self.addFiltersAll()
         } else {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
             musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
@@ -124,9 +121,7 @@ class FilterViewController: UIViewController {
             musicButton.enabled = false
             comedyButton.enabled = false
             ageButton.enabled = false
-            /*self.removeMusic()
-            self.removeMovie()
-            self.removeComedy()*/
+            self.removeFiltersAll()
 
         }
         updateLabel()
@@ -166,8 +161,10 @@ class FilterViewController: UIViewController {
     func handleSwipe(sender: UIScreenEdgePanGestureRecognizer) {
         if(sender.edges == .Right && sender.state == .Recognized){
             dismissViewControllerAnimated(true, completion: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
             //self.performSegueWithIdentifier("LeftSwipe", sender: self)
         }
+
         //BREAKS AIF UNCOMMENTED
         //self.performSegueWithIdentifier("LeftSwipe", sender: self)
     }
@@ -249,14 +246,7 @@ class FilterViewController: UIViewController {
                 }
             }
         }
-        if filteredEvents.isEmpty{
-            filtered = true
-            seenEvents = filteredEvents
-        }
-        else{
-            filtered = false
-            seenEvents = unfilteredEvents
-        }
+        checkRemove()
         
     }
     
@@ -274,8 +264,7 @@ class FilterViewController: UIViewController {
                 }
             }
         }
-        filtered = true
-        seenEvents = filteredEvents
+        checkAdd()
     }
     
     func removeComedy(){
@@ -294,14 +283,7 @@ class FilterViewController: UIViewController {
                 }
             }
         }
-        if filteredEvents.isEmpty{
-            filtered = true
-            seenEvents = filteredEvents
-        }
-        else{
-            filtered = false
-            seenEvents = unfilteredEvents
-        }
+        checkRemove()
     }
     
     func addMovie() {
@@ -309,7 +291,6 @@ class FilterViewController: UIViewController {
             var added = false
             for filter in event.Event_Filters! as [String]{
                 if added == false{
-                    print(filter)
                     if (filter.lowercaseString.rangeOfString("movie") != nil){
                         
                         added = true
@@ -319,9 +300,7 @@ class FilterViewController: UIViewController {
                 }
             }
         }
-        filtered = true
-        seenEvents = filteredEvents
-        print(seenEvents)
+        checkAdd()
     }
     
     func removeMovie(){
@@ -340,20 +319,74 @@ class FilterViewController: UIViewController {
                 }
             }
         }
-        if filteredEvents.isEmpty{
-            filtered = true
-            seenEvents = filteredEvents
+        checkRemove()
+    }
+    
+    func add21() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("+21") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
         }
-        else{
+        checkAdd()
+    }
+    
+    func remove21(){
+        for event in unfilteredEvents {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("+21") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                        
+                    }
+                    
+                }
+            }
+        }
+        checkRemove()
+    }
+    
+    
+    func checkRemove(){
+        if filteredEvents.isEmpty{
             filtered = false
             seenEvents = unfilteredEvents
         }
+        else{
+            filtered = true
+            seenEvents = filteredEvents
+        }
+    }
+    
+    func checkAdd(){
+        filtered = true
+        seenEvents = filteredEvents
     }
     
     func removeFiltersAll(){
         filteredEvents.removeAll()
-        filtered = false
+        checkRemove()
     }
+    
+    func addFiltersAll(){
+        self.addMusic()
+        self.addMovie()
+        self.addComedy()
+        self.add21()
+    }
+    
     
 
 }
