@@ -208,12 +208,12 @@ class FilterViewController: UIViewController {
                 if let dvc = nav.topViewController as? EventTableViewController{
                     if(self.filteredEvents.isEmpty){
                         dvc.searchedEvents = self.unfilteredEvents
-                        dvc.constantFilteredEvents = self.unfilteredEvents
+                        //dvc.constantFilteredEvents = self.unfilteredEvents
                         dvc.filtered = false
                     }
                     else{
                         dvc.searchedEvents = self.filteredEvents
-                        dvc.constantFilteredEvents = self.filteredEvents
+                        //dvc.constantFilteredEvents = self.filteredEvents
                         dvc.filtered = true
                     }
                 }

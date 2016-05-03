@@ -18,8 +18,8 @@ class EventTableViewController: UITableViewController {
     var favorites = [SingleEvent]()
     var searchedEvents = [SingleEvent]() //The events that show up on page always
     var filteredEvents = [SingleEvent]() //Holds the events that were filtered
-    var loaded = false //Only want to load things from the Databse once
-    var filtered = false //If it is filtered use the constantFilteredEvents instead of the events
+    var loaded : Bool = false //Only want to load things from the Databse once
+    var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
     
     //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
@@ -309,6 +309,7 @@ class EventTableViewController: UITableViewController {
                 if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
                     FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
                     tableView.setEditing(false, animated: true)
+                    self.favorites.removeAtIndex(indexPath.row)
                 }
             });
             unfavoriteAction.backgroundColor = UIColor.blackColor();
