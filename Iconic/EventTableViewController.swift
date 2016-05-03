@@ -225,7 +225,7 @@ class EventTableViewController: UITableViewController {
         cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         let format = NSDateFormatter()
-        format.dateFormat = "MM-dd-yyyy"
+        format.dateFormat = "MM.dd.yyyy"
         let today = NSDate()
         if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
             cell.eventDateLabel.text = "Today"
