@@ -17,11 +17,14 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
     var searchedEvents = [SingleEvent]() //The events that show up on page always
-    var constantFilteredEvents = [SingleEvent]() //Holds the events that were filtered
+    var filteredEvents = [SingleEvent]() //Holds the events that were filtered
     var loaded = false //Only want to load things from the Databse once
     var filtered = false //If it is filtered use the constantFilteredEvents instead of the events
     
+    //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
+    
+    
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -32,6 +35,8 @@ class EventTableViewController: UITableViewController {
         }
         //loadEvents()
         initSwipes()
+        
+        //let searchController = UISearchController(searchResultsController: nil)
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -115,21 +120,25 @@ class EventTableViewController: UITableViewController {
     
     func filterContentForSearchText(searchText: String, scope: String = "All"){
         if(searchText.isEmpty && filtered){
-            searchedEvents = constantFilteredEvents
+            searchedEvents = filteredEvents
             
         } else if(searchText.isEmpty) {
             searchedEvents = events
+        } else if (filtered) {
+            searchedEvents = filteredEvents.filter { SingleEvent in
+                return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
+            }
         } else {
             searchedEvents = events.filter { SingleEvent in
                 return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
             }
         }
-
-
+        
+        
         self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.searchedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.tableView.reloadData()
-
+        
         
     }
     
@@ -155,6 +164,7 @@ class EventTableViewController: UITableViewController {
                 if let dvc = nav.topViewController as? FilterViewController{
                     // Brad trying to right code to send the events array to Filter VIew Controller
                    dvc.unfilteredEvents = self.searchedEvents
+                    
                 }
             }
         } else if segue.identifier == "RightSwipe" {
@@ -253,6 +263,7 @@ class EventTableViewController: UITableViewController {
         if sender.identifier == "LeftSwipe" {
             
         }
+       
     }
     // MARK: NSDate Function
     func stringToDate(date: String, time: String) -> NSDate?{
@@ -307,6 +318,7 @@ class EventTableViewController: UITableViewController {
                 let favoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
                 if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
+                    
                     tableView.setEditing(false, animated: true)
                 }
             });
@@ -325,6 +337,151 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
+    }
+    
+    
+    func addMusic() {
+        for event in events {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                }
+                
+                
+            }
+        }
+        filtered = true
+        searchedEvents = filteredEvents
+    }
+    
+    func removeMusic() {
+        for event in events {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                    }
+                    
+                }
+            }
+        }
+        if filteredEvents.isEmpty{
+            filtered = true
+            searchedEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            searchedEvents = events
+        }
+        
+    }
+    
+    func addComedy() {
+        for event in events {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+        filtered = true
+        searchedEvents = filteredEvents
+    }
+    
+    func removeComedy(){
+        for event in events {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                        
+                    }
+                    
+                }
+            }
+        }
+        if filteredEvents.isEmpty{
+            filtered = true
+            searchedEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            searchedEvents = events
+        }
+    }
+    
+    func addMovie(allEvents: [SingleEvent]) {
+        print(events)
+        print(searchedEvents)
+        print(allEvents[0])
+        for event in allEvents {
+            print(event.Event_Name)
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+        print(filteredEvents)
+        filtered = true
+        searchedEvents = filteredEvents
+        print(searchedEvents)
+    }
+    
+    func removeMovie(){
+        for event in events {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                        
+                    }
+                    
+                }
+            }
+        }
+        if filteredEvents.isEmpty{
+            filtered = true
+            searchedEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            searchedEvents = events
+        }
+    }
+    
+    func removeFiltersAll(){
+        filteredEvents.removeAll()
+        filtered = false
     }
 }
 
