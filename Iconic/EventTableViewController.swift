@@ -8,10 +8,6 @@
 
 import UIKit
 
-var filteredEvents = [SingleEvent]() //Holds the events that were filtered
-var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
-var seenEvents = [SingleEvent]() //The events that show up on page always
-
 
 class EventTableViewController: UITableViewController {
     
@@ -19,7 +15,6 @@ class EventTableViewController: UITableViewController {
     var loadedEvents = [SingleEvent]() //this will be pulled from the database always constant
     var sendEvent : SingleEvent?
     var eventTempImage: UIImage!
-    var favorites = [SingleEvent]()
     var loaded : Bool = false //Only want to load things from the Databse once
     
     //var searchController: UISearchController!
@@ -37,6 +32,7 @@ class EventTableViewController: UITableViewController {
         }
         //loadEvents()
         initSwipes()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
         
         //let searchController = UISearchController(searchResultsController: nil)
         
@@ -56,7 +52,17 @@ class EventTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-
+    func reloadDataFromFilter(notification: NSNotification){
+        seenEvents.sortInPlace({
+            if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+            }
+            else{
+                return false
+            }
+        })
+        tableView.reloadData()
+    }
     
     func initSwipes() {
         let leftswipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(EventTableViewController.handleSwipe(_:)))
@@ -90,7 +96,14 @@ class EventTableViewController: UITableViewController {
                             self.downloadImage(NSURL( string: self.loadedEvents[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
                                     seenEvents = self.loadedEvents
-                                    seenEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                                    seenEvents.sortInPlace({
+                                        if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                                            return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+                                        }
+                                        else{
+                                            return false
+                                        }
+                                    })
                                     self.tableView.reloadData()
                                 }
                             }
@@ -165,6 +178,14 @@ class EventTableViewController: UITableViewController {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? FilterViewController{
                     // Brad trying to right code to send the events array to Filter VIew Controller
+                    self.loadedEvents.sortInPlace({
+                        if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                            return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+                        }
+                        else{
+                            return false
+                        }
+                    })
                    dvc.unfilteredEvents = self.loadedEvents
                     
                 }
@@ -172,7 +193,7 @@ class EventTableViewController: UITableViewController {
         } else if segue.identifier == "RightSwipe" {
             if let nav = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
-                for fave in self.favorites{
+                for fave in favorites{
                     nav.favorites.append(fave)
                 }
             }
@@ -309,9 +330,8 @@ class EventTableViewController: UITableViewController {
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
-                    FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
                     tableView.setEditing(false, animated: true)
-                    self.favorites.removeAtIndex(self.favorites.indexOf(seenEvents[indexPath.row])!)
+                    favorites.removeAtIndex(favorites.indexOf(seenEvents[indexPath.row])!)
                     self.saveData()
                 }
             });
@@ -321,7 +341,7 @@ class EventTableViewController: UITableViewController {
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
                 let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
-                    self.favorites.append(favoriteEvent)
+                    favorites.append(favoriteEvent)
                     self.saveData()
                     
                     tableView.setEditing(false, animated: true)
@@ -347,7 +367,7 @@ class EventTableViewController: UITableViewController {
     
     
     func saveData(){
-        let favoriteArray = self.favorites
+        let favoriteArray = favorites
         let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
         NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
     }
@@ -357,7 +377,7 @@ class EventTableViewController: UITableViewController {
         if favoritesData != nil{
             let favoritesArray = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData!) as? [SingleEvent]
             if favoritesArray != nil{
-                self.favorites = favoritesArray!
+                favorites = favoritesArray!
             }
         }
         
