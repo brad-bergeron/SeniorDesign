@@ -28,7 +28,7 @@ class FilterViewController: UIViewController {
         //ADD CODE FOR CHANGING FILTER
     }
     
-    var filteredEvents = [SingleEvent]()
+    var locFilteredEvents = [SingleEvent]()
     var unfilteredEvents = [SingleEvent]()
     
     @IBAction func movieButton(sender: UIButton) {
@@ -37,10 +37,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
-            EventTableViewController().addMovie(filteredEvents)
+            self.addMovie()
         }else {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
-            EventTableViewController().removeMovie()
+            self.removeMovie()
         }
         updateLabel()
     }
@@ -51,10 +51,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
-            EventTableViewController().addMusic()
+            self.addMusic()
         }else {
             musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
-            EventTableViewController().removeMusic()
+            self.removeMusic()
         }
         updateLabel()
     }
@@ -65,10 +65,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
-            EventTableViewController().addComedy()
+            self.addComedy()
         }else {
             comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
-            EventTableViewController().removeComedy()
+            self.removeComedy()
         }
         updateLabel()
     }
@@ -103,9 +103,9 @@ class FilterViewController: UIViewController {
             musicButton.selected = true
             comedyButton.selected = true
             ageButton.selected = true
-            EventTableViewController().addMusic()
-            EventTableViewController().addMovie(filteredEvents)
-            EventTableViewController().addComedy()
+            /*self.addMusic()
+            self.addMovie()
+            self.addComedy()*/
 
         } else {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
@@ -124,27 +124,14 @@ class FilterViewController: UIViewController {
             musicButton.enabled = false
             comedyButton.enabled = false
             ageButton.enabled = false
-            EventTableViewController().removeMusic()
-            EventTableViewController().removeMovie()
-            EventTableViewController().removeComedy()
+            /*self.removeMusic()
+            self.removeMovie()
+            self.removeComedy()*/
 
         }
         updateLabel()
     }
-    
-    @IBAction func filterToggle(sender: UISwitch, forEvent event: UIEvent) {
-        //ADD CODE FOR TURNING FILTERS ON AND OFF 
-        //HAVE FILTERS AUTO TURN ON THE FIRST TIME
-        //If selected than just have no filtered Events
-        if (sender.selected) {
-            filteredEvents.removeAll()
-            //also turn all buttons to unlicked
-            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
-            musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
-            movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
-            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
-        }
-    }
+
     
     func updateLabel(){
         labelText = String()
@@ -210,7 +197,7 @@ class FilterViewController: UIViewController {
         // Pass the selected object to the new view controller.
         
         //Brad trying to send Filtered events back and breaks
-        if segue.identifier == "LeftSwipe" {
+        /*if segue.identifier == "LeftSwipe" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventTableViewController{
                     if(self.filteredEvents.isEmpty){
@@ -225,10 +212,10 @@ class FilterViewController: UIViewController {
                     }
                 }
             }
-        }
+        }*/
     }
     
-    func addMusic () {
+    func addMusic() {
         for event in unfilteredEvents {
             var added = false
             
@@ -244,6 +231,8 @@ class FilterViewController: UIViewController {
                 
             }
         }
+        filtered = true
+        seenEvents = filteredEvents
     }
     
     func removeMusic() {
@@ -259,6 +248,14 @@ class FilterViewController: UIViewController {
                     
                 }
             }
+        }
+        if filteredEvents.isEmpty{
+            filtered = true
+            seenEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            seenEvents = unfilteredEvents
         }
         
     }
@@ -277,6 +274,8 @@ class FilterViewController: UIViewController {
                 }
             }
         }
+        filtered = true
+        seenEvents = filteredEvents
     }
     
     func removeComedy(){
@@ -289,10 +288,19 @@ class FilterViewController: UIViewController {
                         
                         added = true
                         filteredEvents = filteredEvents.filter { $0 != event }
+                        
                     }
                     
                 }
             }
+        }
+        if filteredEvents.isEmpty{
+            filtered = true
+            seenEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            seenEvents = unfilteredEvents
         }
     }
     
@@ -301,6 +309,7 @@ class FilterViewController: UIViewController {
             var added = false
             for filter in event.Event_Filters! as [String]{
                 if added == false{
+                    print(filter)
                     if (filter.lowercaseString.rangeOfString("movie") != nil){
                         
                         added = true
@@ -310,6 +319,9 @@ class FilterViewController: UIViewController {
                 }
             }
         }
+        filtered = true
+        seenEvents = filteredEvents
+        print(seenEvents)
     }
     
     func removeMovie(){
@@ -322,11 +334,25 @@ class FilterViewController: UIViewController {
                         
                         added = true
                         filteredEvents = filteredEvents.filter { $0 != event }
+                        
                     }
                     
                 }
             }
         }
+        if filteredEvents.isEmpty{
+            filtered = true
+            seenEvents = filteredEvents
+        }
+        else{
+            filtered = false
+            seenEvents = unfilteredEvents
+        }
+    }
+    
+    func removeFiltersAll(){
+        filteredEvents.removeAll()
+        filtered = false
     }
     
 

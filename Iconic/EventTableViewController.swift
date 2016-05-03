@@ -8,18 +8,19 @@
 
 import UIKit
 
+var filteredEvents = [SingleEvent]() //Holds the events that were filtered
+var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
+var seenEvents = [SingleEvent]() //The events that show up on page always
+
 
 class EventTableViewController: UITableViewController {
     
     // MARK: Event List
-    var events = [SingleEvent]() //this will be pulled from the database always constant
+    var loadedEvents = [SingleEvent]() //this will be pulled from the database always constant
     var sendEvent : SingleEvent?
     var eventTempImage: UIImage!
     var favorites = [SingleEvent]()
-    var searchedEvents = [SingleEvent]() //The events that show up on page always
-    var filteredEvents = [SingleEvent]() //Holds the events that were filtered
     var loaded : Bool = false //Only want to load things from the Databse once
-    var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
     
     //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
@@ -84,19 +85,19 @@ class EventTableViewController: UITableViewController {
                     let paginatedOutput = task.result as! AWSDynamoDBPaginatedOutput
                     var count = 0
                     for item in paginatedOutput.items as! [SingleEvent] {
-                        self.events.append(item)
-                        if((count < self.events.count) && (self.events[count].Event_Picture_Link! != " ")){
-                            self.downloadImage(NSURL( string: self.events[count].Event_Picture_Link!)!, count: count) { (result) -> () in
+                        self.loadedEvents.append(item)
+                        if((count < self.loadedEvents.count) && (self.loadedEvents[count].Event_Picture_Link! != " ")){
+                            self.downloadImage(NSURL( string: self.loadedEvents[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
-                                    self.searchedEvents = self.events
-                                    self.searchedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                                    seenEvents = self.loadedEvents
+                                    seenEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
                                     self.tableView.reloadData()
                                 }
                             }
                             
                         }
-                        let dat = self.stringToDate(self.events[count].Event_Date_Formatted!, time: self.events[count].Event_Time!)
-                        self.events[count].Event_NSDate = dat
+                        let dat = self.stringToDate(self.loadedEvents[count].Event_Date_Formatted!, time: self.loadedEvents[count].Event_Time!)
+                        self.loadedEvents[count].Event_NSDate = dat
                        
                         
                         count = count + 1
@@ -121,23 +122,23 @@ class EventTableViewController: UITableViewController {
     
     func filterContentForSearchText(searchText: String, scope: String = "All"){
         if(searchText.isEmpty && filtered){
-            searchedEvents = filteredEvents
+            seenEvents = filteredEvents
             
         } else if(searchText.isEmpty) {
-            searchedEvents = events
+            seenEvents = loadedEvents
         } else if (filtered) {
-            searchedEvents = filteredEvents.filter { SingleEvent in
+            seenEvents = filteredEvents.filter { SingleEvent in
                 return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
             }
         } else {
-            searchedEvents = events.filter { SingleEvent in
+            seenEvents = loadedEvents.filter { SingleEvent in
                 return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
             }
         }
         
         
-        self.events.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
-        self.searchedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.loadedEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        seenEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
         self.tableView.reloadData()
         
         
@@ -164,7 +165,7 @@ class EventTableViewController: UITableViewController {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? FilterViewController{
                     // Brad trying to right code to send the events array to Filter VIew Controller
-                   dvc.unfilteredEvents = self.searchedEvents
+                   dvc.unfilteredEvents = self.loadedEvents
                     
                 }
             }
@@ -188,13 +189,13 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         
-        return searchedEvents.count
+        return seenEvents.count
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //insert code to transition to event page
 
-        self.sendEvent = searchedEvents[indexPath.row]
+        self.sendEvent = seenEvents[indexPath.row]
         //let dvc = EventPageViewController()
         //dvc.currentEvent = sendEvent
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
@@ -203,7 +204,7 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
-        cell.event = searchedEvents[indexPath.row]
+        cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         let format = NSDateFormatter()
         format.dateFormat = "MM-dd-yyyy"
@@ -240,7 +241,7 @@ class EventTableViewController: UITableViewController {
                 print(response?.suggestedFilename ?? "")
                 print("download Finished")
                 
-                self.events[count].Event_Picture = UIImage(data: data)
+                self.loadedEvents[count].Event_Picture = UIImage(data: data)
                 
                 completion(result: true)
             }
@@ -304,13 +305,13 @@ class EventTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if(favorites.contains(self.searchedEvents[indexPath.row])){
+        if(favorites.contains(seenEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
-                let unfavoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
+                let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
                     FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
                     tableView.setEditing(false, animated: true)
-                    self.favorites.removeAtIndex(self.favorites.indexOf(self.searchedEvents[indexPath.row])!)
+                    self.favorites.removeAtIndex(self.favorites.indexOf(seenEvents[indexPath.row])!)
                     self.saveData()
                 }
             });
@@ -318,7 +319,7 @@ class EventTableViewController: UITableViewController {
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
-                let favoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
+                let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
                     self.saveData()
@@ -344,149 +345,6 @@ class EventTableViewController: UITableViewController {
     }
     
     
-    func addMusic() {
-        for event in events {
-            var added = false
-            
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
-                        
-                        added = true
-                        filteredEvents.append(event)
-                    }
-                }
-                
-                
-            }
-        }
-        filtered = true
-        searchedEvents = filteredEvents
-    }
-    
-    func removeMusic() {
-        for event in events {
-            var added = false
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
-                        
-                        added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
-                    }
-                    
-                }
-            }
-        }
-        if filteredEvents.isEmpty{
-            filtered = true
-            searchedEvents = filteredEvents
-        }
-        else{
-            filtered = false
-            searchedEvents = events
-        }
-        
-    }
-    
-    func addComedy() {
-        for event in events {
-            var added = false
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
-                        
-                        added = true
-                        filteredEvents.append(event)
-                    }
-                    
-                }
-            }
-        }
-        filtered = true
-        searchedEvents = filteredEvents
-    }
-    
-    func removeComedy(){
-        for event in events {
-            var added = false
-            
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
-                        
-                        added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
-                        
-                    }
-                    
-                }
-            }
-        }
-        if filteredEvents.isEmpty{
-            filtered = true
-            searchedEvents = filteredEvents
-        }
-        else{
-            filtered = false
-            searchedEvents = events
-        }
-    }
-    
-    func addMovie(allEvents: [SingleEvent]) {
-        print(events)
-        print(searchedEvents)
-        print(allEvents[0])
-        for event in allEvents {
-            print(event.Event_Name)
-            var added = false
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if (filter.lowercaseString.rangeOfString("movie") != nil){
-                        
-                        added = true
-                        filteredEvents.append(event)
-                    }
-                    
-                }
-            }
-        }
-        print(filteredEvents)
-        filtered = true
-        searchedEvents = filteredEvents
-        print(searchedEvents)
-    }
-    
-    func removeMovie(){
-        for event in events {
-            var added = false
-            
-            for filter in event.Event_Filters! as [String]{
-                if added == false{
-                    if (filter.lowercaseString.rangeOfString("movie") != nil){
-                        
-                        added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
-                        
-                    }
-                    
-                }
-            }
-        }
-        if filteredEvents.isEmpty{
-            filtered = true
-            searchedEvents = filteredEvents
-        }
-        else{
-            filtered = false
-            searchedEvents = events
-        }
-    }
-    
-    func removeFiltersAll(){
-        filteredEvents.removeAll()
-        filtered = false
-    }
     
     func saveData(){
         let favoriteArray = self.favorites
