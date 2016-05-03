@@ -32,6 +32,7 @@ class EventTableViewController: UITableViewController {
         super.viewDidLoad()
         if (loaded == false){
             loadEvents()
+            loadFavData()
         }
         //loadEvents()
         initSwipes()
@@ -318,6 +319,7 @@ class EventTableViewController: UITableViewController {
                 let favoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
                 if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
                     self.favorites.append(favoriteEvent)
+                    self.saveData()
                     
                     tableView.setEditing(false, animated: true)
                 }
@@ -482,6 +484,23 @@ class EventTableViewController: UITableViewController {
     func removeFiltersAll(){
         filteredEvents.removeAll()
         filtered = false
+    }
+    
+    func saveData(){
+        let favoriteArray = self.favorites
+        let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
+        NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
+    }
+    
+    func loadFavData(){
+        let favoritesData = NSUserDefaults.standardUserDefaults().objectForKey("fav") as? NSData
+        if favoritesData != nil{
+            let favoritesArray = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData!) as? [SingleEvent]
+            if favoritesArray != nil{
+                self.favorites = favoritesArray!
+            }
+        }
+        
     }
 }
 
