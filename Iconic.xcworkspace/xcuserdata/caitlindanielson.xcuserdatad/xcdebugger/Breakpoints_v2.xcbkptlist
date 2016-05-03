@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
             endingLineNumber = "246"
-            landmarkName = "handleSwipe(_:)"
+            landmarkName = "downloadImage(_:count:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
