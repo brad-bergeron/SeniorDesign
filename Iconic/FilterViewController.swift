@@ -47,7 +47,7 @@ class FilterViewController: UIViewController {
         updateLabel()
     }
     
-    func movieSelected(){  movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal) }
+    func movieSelected(){ movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal) }
     func movieUnselected(){ movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal) }
     
     @IBAction func musicButton(sender: UIButton) {
@@ -55,42 +55,57 @@ class FilterViewController: UIViewController {
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
+            musicSelected()
             self.addMusic()
+            musicFilter = true
         }else {
-            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
+            musicUnselected()
             self.removeMusic()
+            musicFilter = false
         }
         updateLabel()
     }
+    
+    func musicSelected(){ musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal) }
+    func musicUnselected(){ musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal) }
     
     @IBAction func comedyButton(sender: UIButton) {
         
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
+            comedySelected()
             self.addComedy()
+            comedyFilter = true
         }else {
-            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
+            comedyUnselected()
             self.removeComedy()
+            comedyFilter = false
         }
         updateLabel()
     }
+    
+    func comedySelected(){ comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal) }
+    func comedyUnselected(){ comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal) }
     
     @IBAction func ageButton(sender: UIButton) {
         
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
+            twentyOneSelected()
             self.add21()
+            twentyOneFilter = true
         }else {
-            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+            twentyOneUnselected()
             self.remove21()
+            twentyOneFilter = false
         }
         updateLabel()
     }
+    
+    func twentyOneSelected(){ ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal) }
+    func twentyOneUnselected(){ ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal) }
     
     
     @IBAction func onOffSwitch(sender: UISwitch) {
@@ -204,22 +219,23 @@ class FilterViewController: UIViewController {
         }
         //sets state of comedy button
         if(comedyFilter){
-            
+            comedySelected()
         } else {
-            
+            comedyUnselected()
         }
         //sets state of 21 button
         if(twentyOneFilter){
-            
+            twentyOneSelected()
         } else {
-            
+            twentyOneUnselected()
         }
         //sets state of music button
         if(musicFilter){
-            
+            musicSelected()
         } else {
-            
+            musicUnselected()
         }
+        updateLabel()
         Switch.tintColor = UIColor.grayColor()
         // Do any additional setup after loading the view.
     }
