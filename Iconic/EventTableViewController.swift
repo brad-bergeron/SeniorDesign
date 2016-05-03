@@ -37,6 +37,7 @@ class EventTableViewController: UITableViewController {
         }
         //loadEvents()
         initSwipes()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
         
         //let searchController = UISearchController(searchResultsController: nil)
         
@@ -56,7 +57,17 @@ class EventTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-
+    func reloadDataFromFilter(notification: NSNotification){
+        seenEvents.sortInPlace({
+            if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+            }
+            else{
+                return false
+            }
+        })
+        tableView.reloadData()
+    }
     
     func initSwipes() {
         let leftswipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(EventTableViewController.handleSwipe(_:)))
@@ -90,7 +101,14 @@ class EventTableViewController: UITableViewController {
                             self.downloadImage(NSURL( string: self.loadedEvents[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
                                     seenEvents = self.loadedEvents
-                                    seenEvents.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+                                    seenEvents.sortInPlace({
+                                        if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                                            return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+                                        }
+                                        else{
+                                            return false
+                                        }
+                                    })
                                     self.tableView.reloadData()
                                 }
                             }
@@ -165,6 +183,14 @@ class EventTableViewController: UITableViewController {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? FilterViewController{
                     // Brad trying to right code to send the events array to Filter VIew Controller
+                    self.loadedEvents.sortInPlace({
+                        if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
+                            return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
+                        }
+                        else{
+                            return false
+                        }
+                    })
                    dvc.unfilteredEvents = self.loadedEvents
                     
                 }
