@@ -71,7 +71,7 @@ class EventTableViewController: UITableViewController {
         
 
         let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 10
+        //queryExpression.limit = 10
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
