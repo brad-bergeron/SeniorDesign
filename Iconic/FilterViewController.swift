@@ -100,8 +100,8 @@ class FilterViewController: UIViewController {
     
     func handleSwipe(sender: UIScreenEdgePanGestureRecognizer) {
         if(sender.edges == .Right && sender.state == .Recognized){
-            //dismissViewControllerAnimated(true, completion: nil)
-            self.performSegueWithIdentifier("LeftSwipe", sender: self)
+            dismissViewControllerAnimated(true, completion: nil)
+            //self.performSegueWithIdentifier("LeftSwipe", sender: self)
         }
         //BREAKS AIF UNCOMMENTED
         //self.performSegueWithIdentifier("LeftSwipe", sender: self)
