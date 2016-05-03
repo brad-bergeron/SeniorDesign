@@ -30,6 +30,29 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     let eventStore = EKEventStore()
     
     // MARK: Actions
+    @IBAction func moreOptions(sender: UIButton) {
+        let alertController = UIAlertController(title: "More Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        if(!FavoritesCollectionViewController().containsEvent(currentEvent)){
+            alertController.addAction(UIAlertAction(title:"Favorite", style: UIAlertActionStyle.Default, handler: { action in
+                FavoritesCollectionViewController().favorites.append(self.currentEvent)
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }))
+        } else {
+            alertController.addAction(UIAlertAction(title:"Remove from Favorites", style: UIAlertActionStyle.Default, handler: { action in
+                FavoritesCollectionViewController().removeFavorite(self.currentEvent)
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }))
+        }
+        
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+
+    }
  
     @IBAction func backButton(sender: UIBarButtonItem) {
         //let viewControllers = self.navigationController!.viewControllers

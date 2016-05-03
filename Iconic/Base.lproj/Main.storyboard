@@ -123,7 +123,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jdc-uh-1cv">
                                 <rect key="frame" x="510" y="7" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="All Events"/>
+                                <state key="normal" title="Help"/>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -464,12 +464,23 @@
                                                     <constraint firstAttribute="width" constant="250" id="g1S-lC-4fK"/>
                                                 </constraints>
                                             </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-Rp-UQM">
+                                                <rect key="frame" x="249" y="472" width="102" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="102" id="lbr-we-Ays"/>
+                                                </constraints>
+                                                <state key="normal" title="More Options"/>
+                                                <connections>
+                                                    <action selector="moreOptions:" destination="xwY-fU-c4C" eventType="touchUpInside" id="tqF-eU-1IB"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="Content View"/>
                                         <constraints>
                                             <constraint firstItem="OQc-eo-WrH" firstAttribute="top" secondItem="O6a-K6-Typ" secondAttribute="bottom" constant="5" id="05z-on-Ggf"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="top" secondItem="bcx-Gj-JO8" secondAttribute="bottom" constant="-5" id="0gM-Pt-yWO"/>
+                                            <constraint firstItem="6pH-pT-ixY" firstAttribute="top" secondItem="V0F-Rp-UQM" secondAttribute="bottom" constant="8" symbolic="YES" id="170-bv-h9z"/>
                                             <constraint firstItem="bcx-Gj-JO8" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="1Xz-Jj-hsq"/>
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="top" secondItem="8fY-G7-AvJ" secondAttribute="bottom" constant="-10" id="2P1-3D-r49"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="3O9-rw-cUi"/>
@@ -487,6 +498,7 @@
                                             <constraint firstAttribute="trailing" secondItem="6pH-pT-ixY" secondAttribute="trailing" constant="10" id="K1j-uj-Fed"/>
                                             <constraint firstAttribute="trailing" secondItem="gYz-D4-t0s" secondAttribute="trailing" constant="10" id="KZz-wy-xxZ"/>
                                             <constraint firstAttribute="trailing" secondItem="8fY-G7-AvJ" secondAttribute="trailing" constant="10" id="L6M-KM-L6z"/>
+                                            <constraint firstItem="V0F-Rp-UQM" firstAttribute="centerX" secondItem="OQc-eo-WrH" secondAttribute="centerX" id="OuE-Vn-iCO"/>
                                             <constraint firstItem="m54-8D-hw4" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="RBE-oQ-Kfv"/>
                                             <constraint firstItem="8fY-G7-AvJ" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="Xo4-ry-IfT"/>
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="YWi-jT-p5W"/>
@@ -495,6 +507,7 @@
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="m6g-b3-Xvs"/>
                                             <constraint firstItem="8fY-G7-AvJ" firstAttribute="top" secondItem="8DW-Vt-xkz" secondAttribute="bottom" constant="-5" id="qfO-rH-fnR"/>
                                             <constraint firstItem="gYz-D4-t0s" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="qmt-u5-3OF"/>
+                                            <constraint firstItem="V0F-Rp-UQM" firstAttribute="top" secondItem="O6a-K6-Typ" secondAttribute="bottom" constant="32" id="u35-ek-mTf"/>
                                             <constraint firstItem="bcx-Gj-JO8" firstAttribute="top" secondItem="m54-8D-hw4" secondAttribute="bottom" constant="16" id="uLB-up-kyZ"/>
                                             <constraint firstItem="gYz-D4-t0s" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="wed-TX-Z09"/>
                                         </constraints>
