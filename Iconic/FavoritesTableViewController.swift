@@ -114,6 +114,12 @@ class FavoritesTableViewController: UITableViewController{
         return false
     }
     
+    func addFavorite(event: SingleEvent) {
+        if(!containsEvent(event)){
+            self.favorites.append(event)
+        }
+    }
+    
     func removeFavorite(event: SingleEvent) {
         if(favorites.contains(event)){
             if let index = self.favorites.indexOf(event){

@@ -15,13 +15,20 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var comedyButton: UIButton!
     @IBOutlet weak var ageButton: UIButton!
-    
+    @IBOutlet weak var Switch: UISwitch!
+
     @IBOutlet weak var eventFilterType: UILabel!
+    @IBOutlet weak var filtersShown: UIBarButtonItem!
+    @IBOutlet weak var filterSwitch: UIBarButtonItem!
+
+    var labelText = String()
+
+    
     @IBAction func dropDownButton(sender: UIButton){
         //ADD CODE FOR CHANGING FILTER
     }
-
     
+    var filteredEvents = [SingleEvent]()
     var unfilteredEvents = [SingleEvent]()
     
     @IBAction func movieButton(sender: UIButton) {
@@ -29,12 +36,13 @@ class FilterViewController: UIViewController {
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
-            EventTableViewController().addMovie(unfilteredEvents)
-        }else {
             movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
+            EventTableViewController().addMovie(filteredEvents)
+        }else {
+            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
             EventTableViewController().removeMovie()
         }
+        updateLabel()
     }
     
     @IBAction func musicButton(sender: UIButton) {
@@ -42,12 +50,13 @@ class FilterViewController: UIViewController {
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
-           EventTableViewController().addMusic()
-        }else {
             musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
+            EventTableViewController().addMusic()
+        }else {
+            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
             EventTableViewController().removeMusic()
         }
+        updateLabel()
     }
     
     @IBAction func comedyButton(sender: UIButton) {
@@ -55,12 +64,13 @@ class FilterViewController: UIViewController {
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
+            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
             EventTableViewController().addComedy()
         }else {
-            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
+            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
             EventTableViewController().removeComedy()
         }
+        updateLabel()
     }
     
     @IBAction func ageButton(sender: UIButton) {
@@ -68,12 +78,58 @@ class FilterViewController: UIViewController {
         sender.selected  = !sender.selected;
         
         if (sender.selected) {
-            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
-            EventTableViewController().addComedy()
-        }else {
             ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
-            EventTableViewController().removeComedy()
+            //EventTableViewController().addComedy() - need one for 21+
+        }else {
+            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+            //EventTableViewController().removeComedy() - need one for 21+
         }
+        updateLabel()
+    }
+    
+    
+    @IBAction func onOffSwitch(sender: UISwitch) {
+        
+        if (sender.on){
+            movieButton.setImage(UIImage(named: "Movie_Icon.png")!, forState: .Normal)
+            musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
+            comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
+            ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
+            movieButton.enabled = true
+            musicButton.enabled = true
+            comedyButton.enabled = true
+            ageButton.enabled = true
+            movieButton.selected = true
+            musicButton.selected = true
+            comedyButton.selected = true
+            ageButton.selected = true
+            EventTableViewController().addMusic()
+            EventTableViewController().addMovie(filteredEvents)
+            EventTableViewController().addComedy()
+
+        } else {
+            movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
+            musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
+            comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
+            ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+            movieButton.adjustsImageWhenDisabled = false
+            musicButton.adjustsImageWhenDisabled = false
+            comedyButton.adjustsImageWhenDisabled = false
+            ageButton.adjustsImageWhenDisabled = false
+            movieButton.selected = false
+            musicButton.selected = false
+            comedyButton.selected = false
+            ageButton.selected = false
+            movieButton.enabled = false
+            musicButton.enabled = false
+            comedyButton.enabled = false
+            ageButton.enabled = false
+            EventTableViewController().removeMusic()
+            EventTableViewController().removeMovie()
+            EventTableViewController().removeComedy()
+
+        }
+        updateLabel()
     }
     
     @IBAction func filterToggle(sender: UISwitch, forEvent event: UIEvent) {
@@ -81,7 +137,7 @@ class FilterViewController: UIViewController {
         //HAVE FILTERS AUTO TURN ON THE FIRST TIME
         //If selected than just have no filtered Events
         if (sender.selected) {
-            EventTableViewController().removeFiltersAll()
+            filteredEvents.removeAll()
             //also turn all buttons to unlicked
             comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal)
             musicButton.setImage(UIImage(named: "Music_Icon.png")!, forState: .Normal)
@@ -90,6 +146,28 @@ class FilterViewController: UIViewController {
         }
     }
     
+    func updateLabel(){
+        labelText = String()
+        if(movieButton.selected){
+            labelText += "Movies, "
+        }
+        if(musicButton.selected){
+            labelText += "Music, "
+        }
+        if(comedyButton.selected){
+            labelText += "Comedies, "
+        }
+        if(ageButton.selected){
+            labelText += "Over 21, "
+        }
+        filtersShown.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.blackColor()] , forState: .Normal)
+        if(labelText.characters.count > 2) {
+            let text = labelText.substringToIndex(labelText.endIndex.predecessor().predecessor())
+            filtersShown.title = text
+        } else {
+            filtersShown.title = String()
+        }
+    }
     
     func initSwipes(){
         let leftSwipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(FilterViewController.handleSwipe(_:)))
@@ -104,14 +182,16 @@ class FilterViewController: UIViewController {
             //self.performSegueWithIdentifier("LeftSwipe", sender: self)
         }
         //BREAKS AIF UNCOMMENTED
-        //self.performSegueWithIdentifier("unwindToEventTable", sender: self)
+        //self.performSegueWithIdentifier("LeftSwipe", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initSwipes()
         //eventFilterType.text = filters[0].filterName
-
+        //Switch.onTintColor = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0)
+        
+        Switch.tintColor = UIColor.grayColor()
         // Do any additional setup after loading the view.
     }
 
@@ -126,29 +206,128 @@ class FilterViewController: UIViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // /*Get the new view controller using segue.destinationViewController.
+        // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
         //Brad trying to send Filtered events back and breaks
-        if segue.identifier == "unwindToEventTable" {
+        if segue.identifier == "LeftSwipe" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventTableViewController{
-                    /*if(self.filteredEvents.isEmpty){
+                    if(self.filteredEvents.isEmpty){
                         dvc.searchedEvents = self.unfilteredEvents
-                        dvc.constantFilteredEvents = self.unfilteredEvents
+                        //dvc.constantFilteredEvents = self.unfilteredEvents
                         dvc.filtered = false
                     }
                     else{
                         dvc.searchedEvents = self.filteredEvents
-                        dvc.constantFilteredEvents = self.filteredEvents
+                        //dvc.constantFilteredEvents = self.filteredEvents
                         dvc.filtered = true
-                    }*/
+                    }
                 }
             }
         }
     }
     
+    func addMusic () {
+        for event in unfilteredEvents {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                }
+                
+                
+            }
+        }
+    }
     
+    func removeMusic() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                    }
+                    
+                }
+            }
+        }
+        
+    }
+    
+    func addComedy() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func removeComedy(){
+        for event in unfilteredEvents {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func addMovie() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+    }
+    
+    func removeMovie(){
+        for event in unfilteredEvents {
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                    }
+                    
+                }
+            }
+        }
+    }
     
 
 }

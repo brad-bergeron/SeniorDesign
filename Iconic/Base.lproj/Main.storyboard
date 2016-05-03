@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -25,38 +24,38 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lwc-IA-RgF" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="20" width="600" height="1000"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4be-qW-pEg">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4be-qW-pEg">
                                                 <rect key="frame" x="50" y="60" width="100" height="100"/>
-                                                <state key="normal" image="Music_Icon"/>
+                                                <state key="normal" image="Music_Icon2"/>
                                                 <connections>
                                                     <action selector="musicButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="hwL-Hu-D25"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-U8-WV2">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7j-U8-WV2">
                                                 <rect key="frame" x="450" y="50" width="100" height="100"/>
-                                                <state key="normal" image="Movie_Icon"/>
+                                                <state key="normal" image="Movie_Icon2"/>
                                                 <connections>
                                                     <action selector="movieButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="fng-tc-xNI"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-qg-sZI">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Urs-qg-sZI">
                                                 <rect key="frame" x="50" y="210" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="fMf-2r-90K"/>
                                                     <constraint firstAttribute="width" constant="100" id="t0X-5h-I3n"/>
                                                 </constraints>
-                                                <state key="normal" image="Comedy_Icon"/>
+                                                <state key="normal" image="Comedy_Icon2"/>
                                                 <connections>
                                                     <action selector="comedyButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="bbc-IL-alr"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJ4-Nb-ShN">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TJ4-Nb-ShN">
                                                 <rect key="frame" x="450" y="200" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="VwK-Ep-Y3T"/>
                                                     <constraint firstAttribute="height" constant="100" id="hYd-KJ-MWv"/>
                                                 </constraints>
-                                                <state key="normal" image="21_Icon"/>
+                                                <state key="normal" image="21_Icon2"/>
                                                 <connections>
                                                     <action selector="ageButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="lOh-4o-1cZ"/>
                                                 </connections>
@@ -92,7 +91,9 @@
                                     <constraint firstAttribute="height" constant="44" id="PwT-AS-5xc"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="8L8-71-8Qd"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="B55-pr-bkE"/>
+                                    <barButtonItem title="Item" width="292" id="8L8-71-8Qd"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="lZY-GG-SVB"/>
                                 </items>
                             </toolbar>
                         </subviews>
@@ -111,9 +112,12 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Filters" id="dYL-CN-rzO">
                         <barButtonItem key="leftBarButtonItem" title="Filters_OnOff" style="plain" id="nZe-k3-zVp">
-                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="Q7Y-FL-5Ov">
+                            <switch key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Q7Y-FL-5Ov">
                                 <rect key="frame" x="20" y="6" width="51" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="onOffSwitch:" destination="xOR-hn-Slm" eventType="valueChanged" id="fbh-NA-s47"/>
+                                </connections>
                             </switch>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="bu5-OH-QCB">
@@ -126,8 +130,11 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="Switch" destination="Q7Y-FL-5Ov" id="pGf-vg-KCI"/>
                         <outlet property="ageButton" destination="TJ4-Nb-ShN" id="CMp-7L-Gyn"/>
                         <outlet property="comedyButton" destination="Urs-qg-sZI" id="x0b-tz-RzN"/>
+                        <outlet property="filterSwitch" destination="nZe-k3-zVp" id="7fk-h0-cJn"/>
+                        <outlet property="filtersShown" destination="8L8-71-8Qd" id="eTj-L1-2Pd"/>
                         <outlet property="movieButton" destination="t7j-U8-WV2" id="hS6-YT-0zf"/>
                         <outlet property="musicButton" destination="4be-qW-pEg" id="8gL-f4-aW1"/>
                     </connections>
@@ -242,40 +249,48 @@
         <scene sceneID="qfg-lg-kyP">
             <objects>
                 <collectionViewController id="dEu-ik-hfo" customClass="FavoritesCollectionViewController" customModule="Iconic" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="sCY-Hp-MBJ">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="150" verticalHuggingPriority="150" dataMode="prototypes" id="sCY-Hp-MBJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.70588235290000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9R7-Bh-LhA">
-                            <size key="itemSize" width="292" height="184"/>
+                            <size key="itemSize" width="150" height="150"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionCell" id="WOk-X2-FGv" customClass="FavoriteCollectionViewCell" customModule="Iconic" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="292" height="184"/>
+                                <rect key="frame" x="5" y="69" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="292" height="184"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Here is a Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
-                                            <rect key="frame" x="8" y="155" width="284" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is a Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
+                                            <rect key="frame" x="19" y="128" width="113" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-nX-lwm">
-                                            <rect key="frame" x="8" y="0.0" width="284" height="156"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-nX-lwm">
+                                            <rect key="frame" x="13" y="13" width="125" height="125"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="125" id="gg6-5Q-thV"/>
+                                                <constraint firstAttribute="height" constant="125" id="oFh-iS-JJk"/>
+                                            </constraints>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="top" secondItem="WOk-X2-FGv" secondAttribute="topMargin" constant="147" id="lGh-ub-6wB"/>
-                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="leading" secondItem="WOk-X2-FGv" secondAttribute="leadingMargin" id="sKg-eL-hDp"/>
+                                    <constraint firstItem="Xge-nX-lwm" firstAttribute="centerX" secondItem="Rx5-k1-d49" secondAttribute="centerX" id="5MB-3o-Bo9"/>
+                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="top" secondItem="Xge-nX-lwm" secondAttribute="bottom" constant="-10" id="gRF-pZ-hK4"/>
+                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="centerX" secondItem="Xge-nX-lwm" secondAttribute="centerX" id="m1q-IU-QbQ"/>
+                                    <constraint firstItem="Xge-nX-lwm" firstAttribute="centerX" secondItem="WOk-X2-FGv" secondAttribute="centerX" id="mxN-EG-o2c"/>
+                                    <constraint firstItem="Xge-nX-lwm" firstAttribute="centerY" secondItem="WOk-X2-FGv" secondAttribute="centerY" id="xB4-pc-pzH"/>
                                 </constraints>
-                                <size key="customSize" width="292" height="184"/>
+                                <size key="customSize" width="150" height="150"/>
                                 <connections>
                                     <outlet property="EventImage" destination="Xge-nX-lwm" id="JAe-ur-pYE"/>
                                     <outlet property="EventName" destination="Rx5-k1-d49" id="BhT-hk-6ak"/>
@@ -721,10 +736,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="21_Icon" width="100" height="100"/>
-        <image name="Comedy_Icon" width="100" height="100"/>
-        <image name="Movie_Icon" width="100" height="100"/>
-        <image name="Music_Icon" width="100" height="100"/>
+        <image name="21_Icon2" width="100" height="100"/>
+        <image name="Comedy_Icon2" width="100" height="100"/>
+        <image name="Movie_Icon2" width="100" height="100"/>
+        <image name="Music_Icon2" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="IXv-mT-3w9"/>

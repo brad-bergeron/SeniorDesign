@@ -18,8 +18,8 @@ class EventTableViewController: UITableViewController {
     var favorites = [SingleEvent]()
     var searchedEvents = [SingleEvent]() //The events that show up on page always
     var filteredEvents = [SingleEvent]() //Holds the events that were filtered
-    var loaded = false //Only want to load things from the Databse once
-    var filtered = false //If it is filtered use the constantFilteredEvents instead of the events
+    var loaded : Bool = false //Only want to load things from the Databse once
+    var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
     
     //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
@@ -305,14 +305,15 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if(favorites.contains(self.searchedEvents[indexPath.row])){
-            let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove from Favorites", handler: {action, indexpath in
+            let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = self.searchedEvents[indexPath.row]
                 if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
                     FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
                     tableView.setEditing(false, animated: true)
+                    self.favorites.removeAtIndex(indexPath.row)
                 }
             });
-            unfavoriteAction.backgroundColor = UIColor.redColor();
+            unfavoriteAction.backgroundColor = UIColor.blackColor();
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
@@ -324,7 +325,7 @@ class EventTableViewController: UITableViewController {
                     tableView.setEditing(false, animated: true)
                 }
             });
-            favoriteAction.backgroundColor = UIColor.blackColor();
+            favoriteAction.backgroundColor = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0);
             return [favoriteAction];
         }
     }
