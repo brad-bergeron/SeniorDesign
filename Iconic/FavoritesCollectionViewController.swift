@@ -111,6 +111,8 @@ class FavoritesCollectionViewController: UICollectionViewController {
     
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        self.sendEvent = favorites[indexPath.row]
+        self.performSegueWithIdentifier("FavoriteDetailsSegue", sender: self)
         return true
     }
     
