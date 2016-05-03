@@ -310,7 +310,8 @@ class EventTableViewController: UITableViewController {
                 if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
                     FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
                     tableView.setEditing(false, animated: true)
-                    self.favorites.removeAtIndex(indexPath.row)
+                    self.favorites.removeAtIndex(self.favorites.indexOf(self.searchedEvents[indexPath.row])!)
+                    self.saveData()
                 }
             });
             unfavoriteAction.backgroundColor = UIColor.blackColor();
