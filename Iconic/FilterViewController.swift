@@ -79,10 +79,10 @@ class FilterViewController: UIViewController {
         
         if (sender.selected) {
             ageButton.setImage(UIImage(named: "21_Icon.png")!, forState: .Normal)
-            EventTableViewController().addComedy()
+            //EventTableViewController().addComedy() - need one for 21+
         }else {
             ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
-            EventTableViewController().removeComedy()
+            //EventTableViewController().removeComedy() - need one for 21+
         }
         updateLabel()
     }
@@ -103,6 +103,10 @@ class FilterViewController: UIViewController {
             musicButton.selected = true
             comedyButton.selected = true
             ageButton.selected = true
+            EventTableViewController().addMusic()
+            EventTableViewController().addMovie(filteredEvents)
+            EventTableViewController().addComedy()
+
         } else {
             movieButton.setImage(UIImage(named: "Movie_Icon2.png")!, forState: .Normal)
             musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
@@ -120,7 +124,10 @@ class FilterViewController: UIViewController {
             musicButton.enabled = false
             comedyButton.enabled = false
             ageButton.enabled = false
-            
+            EventTableViewController().removeMusic()
+            EventTableViewController().removeMovie()
+            EventTableViewController().removeComedy()
+
         }
         updateLabel()
     }
