@@ -84,7 +84,7 @@ class EventTableViewController: UITableViewController {
         
 
         let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 10
+        //queryExpression.limit = 10
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
@@ -302,7 +302,7 @@ class EventTableViewController: UITableViewController {
         }
         let temp = tme.characters.split{$0 == ":"}
         var hours = String(temp[0])
-        if(tme.containsString("pm") || tme.containsString("PM")){
+        if((tme.containsString("pm") || tme.containsString("PM")) && hours != "12"){
             hours = String(Int(hours)! + 12)
         }
         if(hours.characters.count == 1){
@@ -326,7 +326,7 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(seenEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if(!favorites.contains(unfavoriteEvent)){
+                if(favorites.contains(unfavoriteEvent)){
                     favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
                     self.saveData()
                 }

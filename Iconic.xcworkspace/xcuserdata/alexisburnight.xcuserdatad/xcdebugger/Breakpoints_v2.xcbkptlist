@@ -248,7 +248,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484002592.141657"
+                  timestampString = "484006271.936928"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -263,7 +263,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484002592.141908"
+                  timestampString = "484006271.937601"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -278,7 +278,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484002592.142092"
+                  timestampString = "484006271.937838"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -293,7 +293,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484002592.142301"
+                  timestampString = "484006271.938046"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "32"
@@ -326,7 +326,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484002592.144247"
+                  timestampString = "484006271.94172"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -341,7 +341,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484002592.144408"
+                  timestampString = "484006271.942036"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -356,7 +356,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484002592.144576"
+                  timestampString = "484006271.942319"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -371,7 +371,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484002592.144709"
+                  timestampString = "484006271.942523"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -436,11 +436,11 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventTableViewController.swift"
-                  timestampString = "484002592.147432"
+                  timestampString = "484006271.946941"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "257"
-                  endingLineNumber = "257"
+                  startingLineNumber = "256"
+                  endingLineNumber = "256"
                   offsetFromSymbolStart = "124">
                </Location>
                <Location
@@ -451,11 +451,11 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventTableViewController.swift"
-                  timestampString = "484002592.14758"
+                  timestampString = "484006271.94724"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "258"
-                  endingLineNumber = "258"
+                  startingLineNumber = "257"
+                  endingLineNumber = "257"
                   offsetFromSymbolStart = "43">
                </Location>
             </Locations>
@@ -588,7 +588,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484002592.152047"
+                  timestampString = "484006271.953425"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -603,7 +603,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484002592.152275"
+                  timestampString = "484006271.953683"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -618,7 +618,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484002592.152409"
+                  timestampString = "484006271.953915"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -715,22 +715,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484002652.292413"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "loadEvents()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Iconic/EventTableViewController.swift"
             timestampString = "482966107.053903"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -775,23 +759,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484002652.292413"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "loadEvents()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
