@@ -31,7 +31,6 @@
 		AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD707FC61C7C11A7006477E3 /* Main.storyboard */; };
 		AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AD707FC91C7C11A7006477E3 /* Iconic.xcdatamodeld */; };
 		AD707FCD1C7C11A7006477E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD707FCC1C7C11A7006477E3 /* Assets.xcassets */; };
-		AD707FD01C7C11A7006477E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD707FCE1C7C11A7006477E3 /* LaunchScreen.storyboard */; };
 		AD707FDB1C7C11A7006477E3 /* IconicTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FDA1C7C11A7006477E3 /* IconicTests.swift */; };
 		AD707FE61C7C11A7006477E3 /* IconicUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD707FE51C7C11A7006477E3 /* IconicUITests.swift */; };
 /* End PBXBuildFile section */
@@ -80,7 +79,6 @@
 		AD707FC71C7C11A7006477E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD707FCA1C7C11A7006477E3 /* Iconic.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Iconic.xcdatamodel; sourceTree = "<group>"; };
 		AD707FCC1C7C11A7006477E3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AD707FCF1C7C11A7006477E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD707FD61C7C11A7006477E3 /* IconicTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IconicTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD707FDA1C7C11A7006477E3 /* IconicTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconicTests.swift; sourceTree = "<group>"; };
 		AD707FDC1C7C11A7006477E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -174,7 +172,6 @@
 				7B5B5C2C1C9895F8001452B9 /* EventPageViewController.swift */,
 				7B3D41171C8B7ECC000CD2AF /* EventTableViewCell.swift */,
 				AD707FCC1C7C11A7006477E3 /* Assets.xcassets */,
-				AD707FCE1C7C11A7006477E3 /* LaunchScreen.storyboard */,
 				AD707FC91C7C11A7006477E3 /* Iconic.xcdatamodeld */,
 				84D468081C87566600CD5482 /* Iconic-Bridging-Header.h */,
 			);
@@ -314,7 +311,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD707FD01C7C11A7006477E3 /* LaunchScreen.storyboard in Resources */,
 				AD707FCD1C7C11A7006477E3 /* Assets.xcassets in Resources */,
 				AD707FC81C7C11A7006477E3 /* Main.storyboard in Resources */,
 				849921E41C8F896400ECA681 /* Default-568h@2x.png in Resources */,
@@ -452,14 +448,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		AD707FCE1C7C11A7006477E3 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD707FCF1C7C11A7006477E3 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -551,6 +539,7 @@
 			baseConfigurationReference = D7064EE148C7651ABE5DD39F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Iconic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
@@ -568,6 +557,7 @@
 			baseConfigurationReference = F9D68F99FBC77E00DE7C6636 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Iconic/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;

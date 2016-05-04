@@ -313,8 +313,10 @@ class FilterViewController: UIViewController {
     
     func addComedy() {
         for event in unfilteredEvents {
+            print(event.Event_Name)
             var added = false
             for filter in event.Event_Filters! as [String]{
+                print(filter)
                 if added == false{
                     if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
                         
