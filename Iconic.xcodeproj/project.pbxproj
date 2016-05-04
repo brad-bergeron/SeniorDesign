@@ -18,7 +18,6 @@
 		7B62E3301CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62E32F1CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift */; };
 		7B62E3321CD8009200F07EF5 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62E3311CD8009200F07EF5 /* FavoriteCollectionViewCell.swift */; };
 		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
-		7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
 		842AB9411CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
@@ -409,7 +408,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BCFCFE01CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */,
 				7B5D85A11CA5FF1A00FB05A9 /* PaginationViewController.swift in Sources */,
 				AD707FDB1C7C11A7006477E3 /* IconicTests.swift in Sources */,
 			);
