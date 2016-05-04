@@ -14,6 +14,7 @@ class EventTableViewController: UITableViewController {
     // MARK: Event List
     var loadedEvents = [SingleEvent]() //this will be pulled from the database always constant
     var sendEvent : SingleEvent?
+    var linkSendEvent : SingleEvent?
     var eventTempImage: UIImage!
     var loaded : Bool = false //Only want to load things from the Databse once
     
@@ -33,6 +34,7 @@ class EventTableViewController: UITableViewController {
         //loadEvents()
         initSwipes()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.goToEventPage(_:)), name: "link", object: nil)
         
         //let searchController = UISearchController(searchResultsController: nil)
         
@@ -51,6 +53,40 @@ class EventTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func goToEventPage(notification: NSNotification){
+    
+        
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        
+        for event in loadedEvents{
+            if(!EventLinked.isEmpty){
+                //sepeartes the String into arrays after removing any punctioan
+                //Than cojoin with nothing so It is only sapaces
+                //Example Hail, Caesar! => Hail Caesar
+                let tokens = event.Event_Name!.componentsSeparatedByCharactersInSet(punctuation)
+                let compare = tokens.joinWithSeparator("")
+                //takes in the spaced event Name and adds _  where there is " "
+                //Example: Hail Caesar => Hail_Caesar
+                
+                //For sharing link do opposite of this function
+                let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                
+                print(lowerString)
+                print(event.Event_Name)
+                print(EventLinked)
+                
+                //compares the two string to sent the link to send
+                if(lowerString == EventLinked){
+                    self.linkSendEvent = event
+                    self.performSegueWithIdentifier("EventViewSegue", sender: self)
+                }
+                //else {} Send ALlrt saying the event already happen?
+            }
+        }
+        
+    }
+    
     
     func reloadDataFromFilter(notification: NSNotification){
         seenEvents.sortInPlace({
@@ -170,7 +206,13 @@ class EventTableViewController: UITableViewController {
         if segue.identifier == "EventViewSegue" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventPageViewController{
-                    dvc.currentEvent = self.sendEvent
+                    if(linkedIntoEvent){
+                       linkedIntoEvent = false
+                        dvc.currentEvent = self.linkSendEvent
+                    }else{
+                        dvc.currentEvent = self.sendEvent
+                    }
+                    
                     
                 }
             }
@@ -227,13 +269,17 @@ class EventTableViewController: UITableViewController {
         let format = NSDateFormatter()
         format.dateFormat = "MM.dd.yyyy"
         let today = NSDate()
-        if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
-            cell.eventDateLabel.text = "Today"
-        } else if (format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!.dateByAddingTimeInterval(60*60*24))) {
-            cell.eventDateLabel.text = "Tomorrow"
-        } else {
-            cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
+        if(cell.event.Event_NSDate != nil){
+            
+            if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
+                cell.eventDateLabel.text = "Today"
+            } else if (format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!.dateByAddingTimeInterval(60*60*24))) {
+                cell.eventDateLabel.text = "Tomorrow"
+            } else {
+                cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
+            }
         }
+        
         //cell.eventDateLabel.text = "Today"
         cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.eventImage.image = cell.event?.Event_Picture
