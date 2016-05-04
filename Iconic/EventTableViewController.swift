@@ -71,17 +71,21 @@ class EventTableViewController: UITableViewController {
                 
                 //For sharing link do opposite of this function
                 let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                
-                print(lowerString)
-                print(event.Event_Name)
-                print(EventLinked)
+            
                 
                 //compares the two string to sent the link to send
                 if(lowerString == EventLinked){
                     self.linkSendEvent = event
                     self.performSegueWithIdentifier("EventViewSegue", sender: self)
                 }
-                //else {} Send ALlrt saying the event already happen?
+                else {
+                    let alertController = UIAlertController(title: "Event Not Found", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+                    alertController.addAction(UIAlertAction(title:"Close", style: UIAlertActionStyle.Default, handler: {action in
+                       alertController.dismissViewControllerAnimated(true, completion: nil)
+                    }))
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                }
             }
         }
         

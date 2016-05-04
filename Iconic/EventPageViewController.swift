@@ -59,6 +59,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     @IBAction func externalLink(sender: AnyObject) {
+        //Code for going to a URL starts Here
         let alertController = UIAlertController(title: "Open Link in Safari", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Open", style: UIAlertActionStyle.Default, handler: {action in
             UIApplication.sharedApplication().openURL(NSURL(string: self.currentEvent.Event_Link!)!)
@@ -67,7 +68,39 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))
         self.presentViewController(alertController, animated: true, completion: nil)
+        //Code for going to a URL end Here
+        
+        
     }
+    
+    @IBAction func shareEvent(sender: AnyObject){
+        //Code for sharing link starts here
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        
+        let tokens = self.currentEvent.Event_Name!.componentsSeparatedByCharactersInSet(punctuation)
+        let compare = tokens.joinWithSeparator("")
+        
+        
+        let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        
+        let txtToShare = "Hey Check out this event in Iowa City!"
+        
+        let url = "gfIconic://event/"+lowerString
+        
+        print(url)
+        
+        if let myApp = NSURL(string: url) {
+            let objectToShare = [txtToShare,myApp]
+            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+            
+            self.presentViewController(activityVC, animated: true, completion: nil)
+            
+        }
+        //code for sharing link ends here
+    }
+    
+    
     @IBAction func favoriteStar(sender: UIButton) {
         //create favorite capability
     }
