@@ -389,7 +389,7 @@ class EventTableViewController: UITableViewController {
                 }
                 tableView.setEditing(false, animated: true)
             });
-            favoriteAction.backgroundColor = UIColor(red: 243/255.0, green: 114/225.0, blue: 50/225.0, alpha: 1.0);
+            favoriteAction.backgroundColor = UIColor(red: 243/255.0, green: 114/255.0, blue: 50/255.0, alpha: 1.0);
             return [favoriteAction];
         }
     }
