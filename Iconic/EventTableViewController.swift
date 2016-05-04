@@ -378,7 +378,7 @@ class EventTableViewController: UITableViewController {
                 }
                 tableView.setEditing(false, animated: true)
             });
-            unfavoriteAction.backgroundColor = UIColor.blackColor();
+            unfavoriteAction.backgroundColor = UIColor.grayColor();
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in

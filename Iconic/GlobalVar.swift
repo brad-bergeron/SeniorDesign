@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 
 var filteredEvents = [SingleEvent]() //Holds the events that were filtered
@@ -20,3 +22,6 @@ var musicFilter : Bool = false // the music filter should start off
 var favorites = [SingleEvent]() //Holds the favorited events
 var linkedIntoEvent : Bool = false //If the User links in from a shared Event we want to go to the event page  right away
 var EventLinked = String() //Name of event Linking in from ur;
+
+let ourGreen = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0)
+let ourOrange = UIColor(red: 243/255.0, green: 114/225.0, blue: 50/225.0, alpha: 1.0)
