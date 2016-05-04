@@ -8,18 +8,14 @@
 
 import UIKit
 
-var filteredEvents = [SingleEvent]() //Holds the events that were filtered
-var filtered : Bool = false //If it is filtered use the constantFilteredEvents instead of the events
-var seenEvents = [SingleEvent]() //The events that show up on page always
-
 
 class EventTableViewController: UITableViewController {
     
     // MARK: Event List
     var loadedEvents = [SingleEvent]() //this will be pulled from the database always constant
     var sendEvent : SingleEvent?
+    var linkSendEvent : SingleEvent?
     var eventTempImage: UIImage!
-    var favorites = [SingleEvent]()
     var loaded : Bool = false //Only want to load things from the Databse once
     
     //var searchController: UISearchController!
@@ -38,6 +34,7 @@ class EventTableViewController: UITableViewController {
         //loadEvents()
         initSwipes()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.goToEventPage(_:)), name: "link", object: nil)
         
         //let searchController = UISearchController(searchResultsController: nil)
         
@@ -56,6 +53,40 @@ class EventTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
+    
+    func goToEventPage(notification: NSNotification){
+    
+        
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        
+        for event in loadedEvents{
+            if(!EventLinked.isEmpty){
+                //sepeartes the String into arrays after removing any punctioan
+                //Than cojoin with nothing so It is only sapaces
+                //Example Hail, Caesar! => Hail Caesar
+                let tokens = event.Event_Name!.componentsSeparatedByCharactersInSet(punctuation)
+                let compare = tokens.joinWithSeparator("")
+                //takes in the spaced event Name and adds _  where there is " "
+                //Example: Hail Caesar => Hail_Caesar
+                
+                //For sharing link do opposite of this function
+                let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                
+                print(lowerString)
+                print(event.Event_Name)
+                print(EventLinked)
+                
+                //compares the two string to sent the link to send
+                if(lowerString == EventLinked){
+                    self.linkSendEvent = event
+                    self.performSegueWithIdentifier("EventViewSegue", sender: self)
+                }
+                //else {} Send ALlrt saying the event already happen?
+            }
+        }
+        
+    }
+    
     
     func reloadDataFromFilter(notification: NSNotification){
         seenEvents.sortInPlace({
@@ -89,7 +120,7 @@ class EventTableViewController: UITableViewController {
         
 
         let queryExpression = AWSDynamoDBScanExpression()
-        queryExpression.limit = 10
+        //queryExpression.limit = 10
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
@@ -175,7 +206,13 @@ class EventTableViewController: UITableViewController {
         if segue.identifier == "EventViewSegue" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? EventPageViewController{
-                    dvc.currentEvent = self.sendEvent
+                    if(linkedIntoEvent){
+                       linkedIntoEvent = false
+                        dvc.currentEvent = self.linkSendEvent
+                    }else{
+                        dvc.currentEvent = self.sendEvent
+                    }
+                    
                     
                 }
             }
@@ -196,11 +233,8 @@ class EventTableViewController: UITableViewController {
                 }
             }
         } else if segue.identifier == "RightSwipe" {
-            if let nav = segue.destinationViewController as? FavoritesCollectionViewController {
+            if let _ = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
-                for fave in self.favorites{
-                    nav.favorites.append(fave)
-                }
             }
         }
     }
@@ -233,15 +267,19 @@ class EventTableViewController: UITableViewController {
         cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         let format = NSDateFormatter()
-        format.dateFormat = "MM-dd-yyyy"
+        format.dateFormat = "MM.dd.yyyy"
         let today = NSDate()
-        if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
-            cell.eventDateLabel.text = "Today"
-        } else if (format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!.dateByAddingTimeInterval(60*60*24))) {
-            cell.eventDateLabel.text = "Tomorrow"
-        } else {
-            cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
+        if(cell.event.Event_NSDate != nil){
+            
+            if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
+                cell.eventDateLabel.text = "Today"
+            } else if (format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!.dateByAddingTimeInterval(60*60*24))) {
+                cell.eventDateLabel.text = "Tomorrow"
+            } else {
+                cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
+            }
         }
+        
         //cell.eventDateLabel.text = "Today"
         cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.eventImage.image = cell.event?.Event_Picture
@@ -310,7 +348,7 @@ class EventTableViewController: UITableViewController {
         }
         let temp = tme.characters.split{$0 == ":"}
         var hours = String(temp[0])
-        if(tme.containsString("pm") || tme.containsString("PM")){
+        if((tme.containsString("pm") || tme.containsString("PM")) && hours != "12"){
             hours = String(Int(hours)! + 12)
         }
         if(hours.characters.count == 1){
@@ -334,24 +372,22 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(seenEvents[indexPath.row])){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
                 let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if(!FavoritesCollectionViewController().containsEvent(unfavoriteEvent)){
-                    FavoritesCollectionViewController().removeFavorite(unfavoriteEvent)
-                    tableView.setEditing(false, animated: true)
-                    self.favorites.removeAtIndex(self.favorites.indexOf(seenEvents[indexPath.row])!)
+                if(favorites.contains(unfavoriteEvent)){
+                    favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
                     self.saveData()
                 }
+                tableView.setEditing(false, animated: true)
             });
             unfavoriteAction.backgroundColor = UIColor.blackColor();
             return [unfavoriteAction]
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
                 let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if (!FavoritesCollectionViewController().containsEvent(favoriteEvent)){
-                    self.favorites.append(favoriteEvent)
+                if (!favorites.contains(favoriteEvent)){
+                    favorites.append(favoriteEvent)
                     self.saveData()
-                    
-                    tableView.setEditing(false, animated: true)
                 }
+                tableView.setEditing(false, animated: true)
             });
             favoriteAction.backgroundColor = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0);
             return [favoriteAction];
@@ -373,7 +409,7 @@ class EventTableViewController: UITableViewController {
     
     
     func saveData(){
-        let favoriteArray = self.favorites
+        let favoriteArray = favorites
         let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
         NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
     }
@@ -383,7 +419,7 @@ class EventTableViewController: UITableViewController {
         if favoritesData != nil{
             let favoritesArray = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData!) as? [SingleEvent]
             if favoritesArray != nil{
-                self.favorites = favoritesArray!
+                favorites = favoritesArray!
             }
         }
         

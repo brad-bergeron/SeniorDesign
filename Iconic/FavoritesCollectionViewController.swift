@@ -12,7 +12,6 @@ private let reuseIdentifier = "FavoriteCollectionCell"
 
 class FavoritesCollectionViewController: UICollectionViewController {
     
-    var favorites = [SingleEvent]()
     var sendEvent : SingleEvent?
 
     override func viewDidLoad() {
@@ -23,7 +22,11 @@ class FavoritesCollectionViewController: UICollectionViewController {
 
         // Do any additional setup after loading the view.
     }
-
+    
+    override func viewDidAppear(animated: Bool) {
+        collectionView?.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -126,26 +129,13 @@ class FavoritesCollectionViewController: UICollectionViewController {
     override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
         return true
     }
-
+    
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
         self.sendEvent = favorites[indexPath.row]
         self.performSegueWithIdentifier("FavoriteDetailsSegue", sender: self)
     }
     
-    func containsEvent(event: SingleEvent) -> Bool {
-        if(favorites.contains(event)){
-            return true
-        }
-        return false
-    }
-    
-    func removeFavorite(event: SingleEvent) {
-        if(favorites.contains(event)){
-            if let index = self.favorites.indexOf(event){
-                self.favorites.removeAtIndex(index)
-            }
-        }
-    }
+
     
 
 }

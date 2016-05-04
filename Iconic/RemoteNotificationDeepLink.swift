@@ -71,16 +71,14 @@ class RemoteNotificationDeepLinkEvent : RemoteNotificationDeepLink{
         super.triggerImp(){
             (passedData) in
             
-            let vc = EventPageViewController()
+            //let vc = EventTableViewController()
             //add in code to get the correct View for Event Page
             
-            if self.eventID == "Deadpool"{
-                
-            }
+            linkedIntoEvent = true
+            EventLinked = self.eventID
             
-            
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.window?.addSubview(vc.view)
+            //let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            //appDelegate.window?.addSubview(vc.view)
             
             completion(nil)
         }
