@@ -73,7 +73,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    @IBAction func shareEvent(sender: AnyObject){
+    func shareEvent(){
         //Code for sharing link starts here
         let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
         
