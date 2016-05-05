@@ -60,18 +60,44 @@
                                                     <action selector="ageButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="lOh-4o-1cZ"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtZ-uB-SAD">
+                                                <rect key="frame" x="50" y="360" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Vpx-gO-5yq"/>
+                                                    <constraint firstAttribute="height" constant="100" id="wjQ-4Q-MR7"/>
+                                                </constraints>
+                                                <state key="normal" image="Family_Icon2"/>
+                                                <connections>
+                                                    <action selector="familyButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="nKR-wF-xpC"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ER-RX-mw3">
+                                                <rect key="frame" x="450" y="350" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="Khl-Kt-P22"/>
+                                                    <constraint firstAttribute="height" constant="100" id="KzD-4w-YEK"/>
+                                                </constraints>
+                                                <state key="normal" image="Education_Icon2"/>
+                                                <connections>
+                                                    <action selector="educationButton:" destination="xOR-hn-Slm" eventType="touchUpInside" id="LNN-W6-Kjg"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.18823529410000001" green="0.70588235290000001" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                                         <gestureRecognizers/>
                                         <constraints>
+                                            <constraint firstItem="ZtZ-uB-SAD" firstAttribute="top" secondItem="Urs-qg-sZI" secondAttribute="bottom" constant="50" id="3JM-Re-9JS"/>
                                             <constraint firstItem="t7j-U8-WV2" firstAttribute="top" secondItem="lwc-IA-RgF" secondAttribute="top" constant="50" id="74V-no-A8l"/>
                                             <constraint firstAttribute="height" constant="1000" id="A0P-ud-4ei"/>
                                             <constraint firstItem="4be-qW-pEg" firstAttribute="top" secondItem="lwc-IA-RgF" secondAttribute="top" constant="60" id="AWe-ie-OLS"/>
                                             <constraint firstItem="Urs-qg-sZI" firstAttribute="leading" secondItem="lwc-IA-RgF" secondAttribute="leading" constant="50" id="CdD-KA-44z"/>
+                                            <constraint firstItem="ZtZ-uB-SAD" firstAttribute="leading" secondItem="lwc-IA-RgF" secondAttribute="leading" constant="50" id="Hd9-lh-7za"/>
                                             <constraint firstItem="Urs-qg-sZI" firstAttribute="top" secondItem="4be-qW-pEg" secondAttribute="bottom" constant="50" id="Lps-bF-AjV"/>
                                             <constraint firstAttribute="trailing" secondItem="t7j-U8-WV2" secondAttribute="trailing" constant="50" id="NNc-8R-6dC"/>
                                             <constraint firstAttribute="trailing" secondItem="TJ4-Nb-ShN" secondAttribute="trailing" constant="50" id="NXu-tw-5Ey"/>
                                             <constraint firstItem="4be-qW-pEg" firstAttribute="leading" secondItem="lwc-IA-RgF" secondAttribute="leading" constant="50" id="ddA-Ue-JAI"/>
+                                            <constraint firstAttribute="trailing" secondItem="6ER-RX-mw3" secondAttribute="trailing" constant="50" id="e4O-QG-n7j"/>
+                                            <constraint firstItem="6ER-RX-mw3" firstAttribute="top" secondItem="TJ4-Nb-ShN" secondAttribute="bottom" constant="50" id="lpb-VO-XPZ"/>
                                             <constraint firstItem="TJ4-Nb-ShN" firstAttribute="top" secondItem="t7j-U8-WV2" secondAttribute="bottom" constant="50" id="p7E-fA-Qb3"/>
                                         </constraints>
                                     </view>
@@ -133,6 +159,8 @@
                         <outlet property="Switch" destination="Q7Y-FL-5Ov" id="pGf-vg-KCI"/>
                         <outlet property="ageButton" destination="TJ4-Nb-ShN" id="CMp-7L-Gyn"/>
                         <outlet property="comedyButton" destination="Urs-qg-sZI" id="x0b-tz-RzN"/>
+                        <outlet property="educationButton" destination="6ER-RX-mw3" id="nyB-nh-K8T"/>
+                        <outlet property="familyButton" destination="ZtZ-uB-SAD" id="z4X-zP-8SW"/>
                         <outlet property="filterSwitch" destination="nZe-k3-zVp" id="7fk-h0-cJn"/>
                         <outlet property="filtersShown" destination="8L8-71-8Qd" id="eTj-L1-2Pd"/>
                         <outlet property="movieButton" destination="t7j-U8-WV2" id="hS6-YT-0zf"/>
@@ -174,8 +202,8 @@
                                                 <constraint firstAttribute="height" constant="100" id="xT4-XF-hoU"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="EVENT NAME" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-i2-XDq">
-                                            <rect key="frame" x="120" y="49" width="462" height="22"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EVENT NAME" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uli-i2-XDq">
+                                            <rect key="frame" x="120" y="51" width="462" height="19"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -266,14 +294,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Here is a Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
-                                            <rect key="frame" x="19" y="140" width="113" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is a Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
+                                            <rect key="frame" x="19" y="138" width="113" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-nX-lwm">
-                                            <rect key="frame" x="13" y="15" width="125" height="125"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-nX-lwm">
+                                            <rect key="frame" x="13" y="13" width="125" height="125"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="125" id="gg6-5Q-thV"/>
                                                 <constraint firstAttribute="height" constant="125" id="oFh-iS-JJk"/>
@@ -559,10 +587,12 @@
     <resources>
         <image name="21_Icon2" width="100" height="100"/>
         <image name="Comedy_Icon2" width="100" height="100"/>
+        <image name="Education_Icon2" width="100" height="100"/>
+        <image name="Family_Icon2" width="100" height="100"/>
         <image name="Movie_Icon2" width="100" height="100"/>
         <image name="Music_Icon2" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IXv-mT-3w9"/>
+        <segue reference="QCI-6C-cWG"/>
     </inferredMetricsTieBreakers>
 </document>
