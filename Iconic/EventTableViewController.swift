@@ -18,7 +18,6 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var loaded : Bool = false //Only want to load things from the Databse once
     
-    //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
     
     
@@ -31,12 +30,11 @@ class EventTableViewController: UITableViewController {
             loadEvents()
             loadFavData()
         }
-        //loadEvents()
+
         initSwipes()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.goToEventPage(_:)), name: "link", object: nil)
         
-        //let searchController = UISearchController(searchResultsController: nil)
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -68,8 +66,6 @@ class EventTableViewController: UITableViewController {
                 let compare = tokens.joinWithSeparator("")
                 //takes in the spaced event Name and adds _  where there is " "
                 //Example: Hail Caesar => Hail_Caesar
-                
-                //For sharing link do opposite of this function
                 let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
                 
@@ -124,7 +120,6 @@ class EventTableViewController: UITableViewController {
         
 
         let queryExpression = AWSDynamoDBScanExpression()
-        //queryExpression.limit = 10
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
@@ -260,8 +255,6 @@ class EventTableViewController: UITableViewController {
         //insert code to transition to event page
 
         self.sendEvent = seenEvents[indexPath.row]
-        //let dvc = EventPageViewController()
-        //dvc.currentEvent = sendEvent
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
     }
     
@@ -284,10 +277,8 @@ class EventTableViewController: UITableViewController {
             }
         }
         
-        //cell.eventDateLabel.text = "Today"
         cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.eventImage.image = cell.event?.Event_Picture
-        //print(filteredEvents[indexPath.row].Event_Time!)
         
         
         // Configure the cell...
@@ -295,12 +286,14 @@ class EventTableViewController: UITableViewController {
         return cell
     }
     
+    //Get Data from a URl
     func getDataFromUrl( url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(url) { ( data, response, error) in
             completion(data: data, response: response, error: error)
             }.resume()
     }
     
+    //takes the image data and puts it equal to an image
     func downloadImage(url: NSURL, count: Int, completion: (result: Bool) -> ()) {
         getDataFromUrl(url) { (data, response, error) in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -411,13 +404,14 @@ class EventTableViewController: UITableViewController {
     }
     
     
-    
+    //Saves data to the app for favorites
     func saveData(){
         let favoriteArray = favorites
         let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
         NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
     }
     
+    //loads the favoreites that was saved in the app
     func loadFavData(){
         let favoritesData = NSUserDefaults.standardUserDefaults().objectForKey("fav") as? NSData
         if favoritesData != nil{

@@ -9,7 +9,7 @@
 import UIKit
 
 class FilterViewController: UIViewController {
-    var filters: [(filterName : String, filterOptions : [String])] = [("All Events",["All Options"]), ("Event Type",["Music", "Comedy", "Education"])] //potentially string of button for filter options
+    
 
     @IBOutlet weak var movieButton: UIButton!
     @IBOutlet weak var musicButton: UIButton!
@@ -28,7 +28,7 @@ class FilterViewController: UIViewController {
         //ADD CODE FOR CHANGING FILTER
     }
     
-    var locFilteredEvents = [SingleEvent]()
+
     var unfilteredEvents = [SingleEvent]()
     
     @IBAction func movieButton(sender: UIButton) {
@@ -254,23 +254,7 @@ class FilterViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        //Brad trying to send Filtered events back and breaks
-        /*if segue.identifier == "LeftSwipe" {
-            if let nav = segue.destinationViewController as? UINavigationController{
-                if let dvc = nav.topViewController as? EventTableViewController{
-                    if(self.filteredEvents.isEmpty){
-                        dvc.searchedEvents = self.unfilteredEvents
-                        //dvc.constantFilteredEvents = self.unfilteredEvents
-                        dvc.filtered = false
-                    }
-                    else{
-                        dvc.searchedEvents = self.filteredEvents
-                        //dvc.constantFilteredEvents = self.filteredEvents
-                        dvc.filtered = true
-                    }
-                }
-            }
-        }*/
+        
     }
     
     func addMusic() {
