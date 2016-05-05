@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -218,21 +218,18 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.97063489638518474" green="0.97983941040127431" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="I3b-HE-N9g" firstAttribute="centerY" secondItem="kpf-vx-0rn" secondAttribute="centerY" id="7Z0-wa-hlr"/>
-                                        <constraint firstItem="bap-lW-GKU" firstAttribute="trailing" secondItem="kpf-vx-0rn" secondAttribute="trailingMargin" id="SHR-x3-dad"/>
-                                        <constraint firstItem="I3b-HE-N9g" firstAttribute="leading" secondItem="kpf-vx-0rn" secondAttribute="leadingMargin" constant="2" id="nhU-K8-n0N"/>
-                                        <constraint firstItem="I3b-HE-N9g" firstAttribute="centerY" secondItem="Uli-i2-XDq" secondAttribute="centerY" id="p17-w0-Mr5"/>
-                                        <constraint firstItem="bap-lW-GKU" firstAttribute="bottom" secondItem="I3b-HE-N9g" secondAttribute="bottom" id="r6U-QL-l9u"/>
-                                        <constraint firstItem="Uli-i2-XDq" firstAttribute="leading" secondItem="I3b-HE-N9g" secondAttribute="trailing" constant="10" id="riw-7O-Wg2"/>
-                                        <constraint firstItem="Uli-i2-XDq" firstAttribute="trailing" secondItem="kpf-vx-0rn" secondAttribute="trailingMargin" constant="-10" id="rvR-GK-9gK"/>
+                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="trailing" secondItem="kpf-vx-0rn" secondAttribute="trailingMargin" id="a3r-tQ-wwH"/>
+                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="top" secondItem="kpf-vx-0rn" secondAttribute="topMargin" id="kSm-b6-yil"/>
+                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="bottom" secondItem="kpf-vx-0rn" secondAttribute="bottomMargin" id="pa1-9x-qNK"/>
+                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="leading" secondItem="kpf-vx-0rn" secondAttribute="leadingMargin" id="wOq-lm-kQr"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="eventDateLabel" destination="bap-lW-GKU" id="zDX-LP-lus"/>
-                                    <outlet property="eventImage" destination="I3b-HE-N9g" id="GPP-KU-Djp"/>
-                                    <outlet property="eventNameLabel" destination="Uli-i2-XDq" id="AzJ-93-VoT"/>
+                                    <outlet property="eventDateLabel" destination="cB3-Q9-5kg" id="9OY-PO-lCs"/>
+                                    <outlet property="eventImage" destination="iN1-OZ-poh" id="cGh-Hy-yMH"/>
+                                    <outlet property="eventNameLabel" destination="6K4-NX-1aO" id="8fB-O1-lsc"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
