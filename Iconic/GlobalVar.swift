@@ -30,3 +30,10 @@ var EventLinked = String() //Name of event Linking in from ur;
 let ourGreen = UIColor(red: 48/255.0, green: 180/255.0, blue: 74/255.0, alpha: 1.0)
 let ourOrange = UIColor(red: 243/255.0, green: 114/255.0, blue: 50/255.0, alpha: 1.0)
 let lightBlueColor = UIColor(colorLiteralRed: 84/255.0, green: 199/255.0, blue: 252/255.0, alpha: 1.0)
+
+let englertLat = 41.659739
+let englertLong = -91.532263
+let blueMooseLat = 41.660991
+let blueMooseLong = -91.532574
+let cabLat = 41.663034
+let cabLong = -91.538435

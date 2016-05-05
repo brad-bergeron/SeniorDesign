@@ -263,6 +263,7 @@ class FilterViewController: UIViewController {
         initSwipes()
         //Switch.onTintColor = UIColor(red: 48/255.0, green: 180/225.0, blue: 74/225.0, alpha: 1.0)
         
+        
         //Used to determine if the Switch was on the alst time the user was on this page
         if(toggleFilter){
             toggleOn()
