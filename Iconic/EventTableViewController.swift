@@ -280,7 +280,8 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(seenEvents[indexPath.row])){
             cell.borderView.backgroundColor = ourOrange
         } else {
-            cell.borderView.backgroundColor = UIColor.blueColor()
+            cell.borderView.backgroundColor = lightBlueColor
+            
         }
         cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
@@ -300,7 +301,7 @@ class EventTableViewController: UITableViewController {
         if(favorites.contains(seenEvents[indexPath.row])){
             cell.borderView.backgroundColor = ourOrange
         } else {
-            cell.borderView.backgroundColor = UIColor.blueColor()
+            cell.borderView.backgroundColor = lightBlueColor
         }
         
         //cell.eventDateLabel.text = "Today"
@@ -398,7 +399,7 @@ class EventTableViewController: UITableViewController {
                 if(favorites.contains(unfavoriteEvent)){
                     favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
                     let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
-                    cell.borderView.backgroundColor = UIColor.blueColor()
+                    cell.borderView.backgroundColor = lightBlueColor
                     self.saveData()
                 }
                 tableView.setEditing(false, animated: true)
