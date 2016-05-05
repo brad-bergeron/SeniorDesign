@@ -88,6 +88,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         let configuration = AWSServiceConfiguration(region:.USEast1, credentialsProvider:credentialsProvider)
         
         AWSServiceManager.defaultServiceManager().defaultServiceConfiguration = configuration
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: [UIUserNotificationType.Sound,UIUserNotificationType.Alert,UIUserNotificationType.Badge], categories: nil))
+        
     
         
         return true

@@ -8,16 +8,18 @@
 
 import UIKit
 import EventKit
+import MapKit
 
 
-class EventPageViewController: UIViewController, UIScrollViewDelegate {
+class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapViewDelegate{
     
     // MARK: Outlets
 
-    @IBOutlet weak var eventName: UIButton!
+    @IBOutlet weak var eventName: UILabel!
     
     @IBOutlet weak var eventImage: UIImageView!
     
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var eventDetails: UITextView!
     @IBOutlet var scrollView: UIScrollView!
@@ -29,9 +31,15 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     var currentEvent : SingleEvent!
     let eventStore = EKEventStore()
     
+    let defaultLat = 41.661922
+    let defaultLong = -91.535682
+    
+    
+    let regionRadius : CLLocationDistance = 1000
+    
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
-        let alertController = UIAlertController(title: "More Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         if(!favorites.contains(currentEvent)){
             alertController.addAction(UIAlertAction(title:"Favorite", style: UIAlertActionStyle.Default, handler: { action in
                 favorites.append(self.currentEvent)
@@ -43,6 +51,24 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }))
         }
+        alertController.addAction(UIAlertAction(title:"Notify me!", style: UIAlertActionStyle.Default, handler: { action in
+            self.scheduleNotification()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title:"Open Link in Safari", style: UIAlertActionStyle.Default, handler: { action in
+            self.externalLink()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alertController.addAction(UIAlertAction(title:"Add to Calendar", style: UIAlertActionStyle.Default, handler: { action in
+            self.addCalendar()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alertController.addAction(UIAlertAction(title:"Share", style: UIAlertActionStyle.Default, handler: { action in
+            self.shareEvent()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+
         
         alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -58,7 +84,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //let viewControllers = self.navigationController!.viewControllers
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    @IBAction func externalLink(sender: AnyObject) {
+    func externalLink() {
         //Code for going to a URL starts Here
         let alertController = UIAlertController(title: "Open Link in Safari", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Open", style: UIAlertActionStyle.Default, handler: {action in
@@ -106,17 +132,19 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //create favorite capability
     }
     
-    @IBAction func addCalendar(sender: UIButton) {
+    func addCalendar() {
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
         switch (status) {
         case EKAuthorizationStatus.NotDetermined:
             requestAccessToCalendar()
+            if(EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) == EKAuthorizationStatus.Authorized){
+                self.addToCalendar()
+            }
         case EKAuthorizationStatus.Authorized:
             self.addToCalendar()
         case EKAuthorizationStatus.Denied, EKAuthorizationStatus.Restricted:
             print("Access Denied")
-            requestAccessToCalendar()
-            //self.needPermissionView.fadeIn()
+            deniedPermission()            //self.needPermissionView.fadeIn()
         }
         
     }
@@ -136,6 +164,22 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     func requestAccessToCalendar(){
         eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {(granted: Bool, error: NSError?) in print(granted)})
+    }
+    
+    func deniedPermission(){
+        let alertController = UIAlertController(title: "Access to Calendar Denied", message: "The event cannot be added because access to Calendar is disabled. Change the settings for ICONIC to add the event", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"Go to Settings", style: UIAlertActionStyle.Default, handler: {action in
+            //add later
+            if let settingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.sharedApplication().openURL(settingsURL)
+            } else {
+                print("error")
+            }
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
    /* @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
@@ -169,11 +213,36 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
+    
+    
+    // MARK: Notification 
+    
+    func scheduleNotification(){
+        let notification = UILocalNotification()
+        notification.fireDate = currentEvent.Event_NSDate!.dateByAddingTimeInterval(-1*24*60*60)
+        //notification.fireDate = NSDate().dateByAddingTimeInterval(60)
+        notification.alertBody = currentEvent.Event_Name! + " is tomorrow!"
+        notification.alertAction = "See you there"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["CustomField1": "w00t"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let alertController = UIAlertController(title: "Success!", message: "Notification for " + currentEvent.Event_Name! + " will occur one day before.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvent()
         //checkAuthorization()
         
+        let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
+        
+        centerMap(defaultLocation)
+        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: defaultLat, longitude: defaultLong), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
+        mapView.addAnnotation(annotation)
         let scrollViewBounds = scrollView.bounds
 
         
@@ -188,6 +257,12 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentInset = scrollViewInsets
         contentView.backgroundColor = UIColor.whiteColor()
         scrollView.backgroundColor = contentView.backgroundColor
+        
+        
+        // MARK: Maps
+        
+        
+        
         //self.eventDetails.scrollEnabled = false
         //self.scrollView.backgroundColor = UIColor.whiteColor()
         //self.scrollView.showsVerticalScrollIndicator = true
@@ -200,8 +275,15 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: LAT
+    func centerMap(location: CLLocation){
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, self.regionRadius*2.0, self.regionRadius*2.0)
+            self.mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
     func loadEvent() -> Int{
-        eventName.setTitle(currentEvent.Event_Name, forState: .Normal)
+        
+        eventName.text = currentEvent.Event_Name
         //eventImage.image = currentEvent?.eventPhoto!
         let formatDate = NSDateFormatter()
         formatDate.dateFormat = "EEEE, MMMM dd, yyyy"
@@ -211,7 +293,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         eventDate.text = formatDate.stringFromDate(currentEvent.Event_NSDate!)
         eventTime.text = formatDate2.stringFromDate(currentEvent.Event_NSDate!)
         eventLocation.text = currentEvent.Event_Location
-        eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        //eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
         //add event details
@@ -219,6 +301,25 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         return 1;
     }
     
+    func mapView(mapView: MKMapView!, annotationView: MKAnnotation!) -> MKAnnotationView! {
+        let identifier = "pin"
+        var view : MKPinAnnotationView
+        if let dequeView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+            dequeView.annotation = annotationView
+            view = dequeView
+        }
+        else {
+            // 3
+            view = MKPinAnnotationView(annotation: annotationView, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+        }
+        return view
+    }
+}
+
+
 
     /*
     // MARK: - Navigation
@@ -231,4 +332,4 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     }
     */
 
-}
+

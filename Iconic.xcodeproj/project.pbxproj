@@ -8,16 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		343F9ABE27E2438DA7C1224C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 986A5802E086E3742B4E0D26 /* libPods.a */; };
+		7B11BCD61CDB4731000C77AD /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B11BCD51CDB4731000C77AD /* MapPin.swift */; };
 		7B3D41181C8B7ECC000CD2AF /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D41171C8B7ECC000CD2AF /* EventTableViewCell.swift */; };
 		7B3D411A1C8BA41A000CD2AF /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3D41191C8BA41A000CD2AF /* EventTableViewController.swift */; };
 		7B5B5C291C97C5B5001452B9 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B5C281C97C5B5001452B9 /* FilterViewController.swift */; };
 		7B5B5C2D1C9895F8001452B9 /* EventPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B5C2C1C9895F8001452B9 /* EventPageViewController.swift */; };
-		7B5B5C311C98AF31001452B9 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */; };
-		7B5D85A01CA5FF1A00FB05A9 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */; };
-		7B5D85A11CA5FF1A00FB05A9 /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */; };
 		7B62E3301CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62E32F1CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift */; };
 		7B62E3321CD8009200F07EF5 /* FavoriteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B62E3311CD8009200F07EF5 /* FavoriteCollectionViewCell.swift */; };
-		7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */; };
 		7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B6EDF11CA37A6000435856 /* SingleEvent.swift */; };
 		842AB9411CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */; };
 		846BB2BC1C876D6C000BF5C0 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */; };
@@ -52,16 +49,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B11BCD51CDB4731000C77AD /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
 		7B3D41171C8B7ECC000CD2AF /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		7B3D41191C8BA41A000CD2AF /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		7B5B5C271C8F67B3001452B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		7B5B5C281C97C5B5001452B9 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		7B5B5C2C1C9895F8001452B9 /* EventPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageViewController.swift; sourceTree = "<group>"; };
-		7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
-		7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
 		7B62E32F1CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewController.swift; sourceTree = "<group>"; };
 		7B62E3311CD8009200F07EF5 /* FavoriteCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteCollectionViewCell.swift; sourceTree = "<group>"; };
-		7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteTableViewCell.swift; sourceTree = "<group>"; };
 		842AB9401CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteNotificationDeepLink.swift; sourceTree = "<group>"; };
 		846BB2BB1C876D6C000BF5C0 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		846BB2C11C877556000BF5C0 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = ../../../../usr/lib/libsqlite3.dylib; sourceTree = "<group>"; };
@@ -153,8 +148,7 @@
 		AD707FC11C7C11A7006477E3 /* Iconic */ = {
 			isa = PBXGroup;
 			children = (
-				7B5B5C301C98AF31001452B9 /* FavoritesTableViewController.swift */,
-				7BCFCFDE1CA25FE600F26F2F /* FavoriteTableViewCell.swift */,
+				7B11BCD51CDB4731000C77AD /* MapPin.swift */,
 				AD707FC41C7C11A7006477E3 /* ViewController.swift */,
 				84AF6AC61C87D0EC006D5687 /* ModelManager.swift */,
 				AD707FC21C7C11A7006477E3 /* AppDelegate.swift */,
@@ -164,7 +158,6 @@
 				AD707FC61C7C11A7006477E3 /* Main.storyboard */,
 				7B62E3311CD8009200F07EF5 /* FavoriteCollectionViewCell.swift */,
 				7B62E32F1CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift */,
-				7B5D859F1CA5FF1900FB05A9 /* PaginationViewController.swift */,
 				7B3D41191C8BA41A000CD2AF /* EventTableViewController.swift */,
 				84D93D001CD936A700A52510 /* GlobalVar.swift */,
 				7B5B5C281C97C5B5001452B9 /* FilterViewController.swift */,
@@ -387,16 +380,14 @@
 			files = (
 				7B62E3301CD7FECD00F07EF5 /* FavoritesCollectionViewController.swift in Sources */,
 				7BCFCFE11CA46C7000F26F2F /* SingleEvent.swift in Sources */,
+				7B11BCD61CDB4731000C77AD /* MapPin.swift in Sources */,
 				7B5B5C291C97C5B5001452B9 /* FilterViewController.swift in Sources */,
-				7B5D85A01CA5FF1A00FB05A9 /* PaginationViewController.swift in Sources */,
 				84D93D011CD936A700A52510 /* GlobalVar.swift in Sources */,
 				7B62E3321CD8009200F07EF5 /* FavoriteCollectionViewCell.swift in Sources */,
-				7B5B5C311C98AF31001452B9 /* FavoritesTableViewController.swift in Sources */,
 				AD707FC51C7C11A7006477E3 /* ViewController.swift in Sources */,
 				7B5B5C2D1C9895F8001452B9 /* EventPageViewController.swift in Sources */,
 				7B3D41181C8B7ECC000CD2AF /* EventTableViewCell.swift in Sources */,
 				7B3D411A1C8BA41A000CD2AF /* EventTableViewController.swift in Sources */,
-				7BCFCFDF1CA25FE600F26F2F /* FavoriteTableViewCell.swift in Sources */,
 				842AB9411CCF9CC400F7C62C /* RemoteNotificationDeepLink.swift in Sources */,
 				846BB2BF1C876FCA000BF5C0 /* AppDelegate.swift in Sources */,
 				AD707FCB1C7C11A7006477E3 /* Iconic.xcdatamodeld in Sources */,
@@ -408,7 +399,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B5D85A11CA5FF1A00FB05A9 /* PaginationViewController.swift in Sources */,
 				AD707FDB1C7C11A7006477E3 /* IconicTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
