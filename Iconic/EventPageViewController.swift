@@ -66,7 +66,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     func starUnselected(){ favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal) }
     
     @IBAction func helpMe(sender: AnyObject) {
-        let alertController = UIAlertController(title: "Help", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Help", message: helpPage, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))
@@ -147,7 +147,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         
-        let txtToShare = "Hey Check out this event in Iowa City!"
+        let txtToShare = "Hey! Check out this event in Iowa City!"
         
         let url = "gfIconic://event/"+lowerString
         
@@ -301,7 +301,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         let defaultLocation = CLLocation(latitude: lat, longitude: long)
         
         centerMap(defaultLocation)
-        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
+        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: defaultLat, longitude: defaultLong), title: self.currentEvent.Event_Name!, subtitle: eventLocation.text!)
         mapView.addAnnotation(annotation)
         let scrollViewBounds = scrollView.bounds
 
@@ -382,6 +382,15 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
             view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
         }
         return view
+    }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let alertController = UIAlertController(title: "Help", message: helpPage, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
 }
 

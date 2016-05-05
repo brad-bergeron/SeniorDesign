@@ -37,7 +37,7 @@ class FavoritesCollectionViewController: UICollectionViewController {
         if(favorites.isEmpty){
             let alertController = UIAlertController(title: "Oops!", message: "You have no favorites.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title:"Dismiss", style: UIAlertActionStyle.Default, handler: { action in
-                alertController.dismissViewControllerAnimated(true, completion: nil)
+                alertController.navigationController?.popViewControllerAnimated(true)
             }))
             
             self.presentViewController(alertController, animated: true, completion: nil)
