@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Iconic/MapPin.swift">
-   </FileRef>
-   <FileRef
       location = "group:Iconic.xcodeproj">
    </FileRef>
    <FileRef

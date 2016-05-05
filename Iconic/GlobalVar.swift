@@ -31,7 +31,12 @@ let ourGreen = UIColor(red: 48/255.0, green: 180/255.0, blue: 74/255.0, alpha: 1
 let ourOrange = UIColor(red: 243/255.0, green: 114/255.0, blue: 50/255.0, alpha: 1.0)
 let lightBlueColor = UIColor(colorLiteralRed: 84/255.0, green: 199/255.0, blue: 252/255.0, alpha: 1.0)
 
-
+let englertLat = 41.659739
+let englertLong = -91.532263
+let blueMooseLat = 41.660991
+let blueMooseLong = -91.532574
+let cabLat = 41.663034
+let cabLong = -91.538435
 let poorString = "to be implemented"
 
 let helpHome = "Swipe left for filters \n Swipe right for favorites \n Swipe right in a cell to favorite or unfavorite an event, favorited events are outlined in Iconic orange\n Click on a cell to view more details about the event"

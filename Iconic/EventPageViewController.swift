@@ -260,7 +260,21 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         loadEvent()
         //checkAuthorization()
         
-        let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
+        var lat = defaultLat
+        var long = defaultLong
+
+        if(self.currentEvent.Event_Location! == "Blue Moose"){
+            lat = blueMooseLat
+            long = blueMooseLong
+        } else if(self.currentEvent.Event_Location! == "Englert Theatre"){
+            lat = englertLat
+            long = englertLong
+        } else if(self.currentEvent.Event_Location! == "to be implemented"){
+            lat = cabLat
+            long = cabLong
+        }
+        
+        let defaultLocation = CLLocation(latitude: lat, longitude: long)
         
         centerMap(defaultLocation)
         let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: defaultLat, longitude: defaultLong), title: self.currentEvent.Event_Name!, subtitle: eventLocation.text!)

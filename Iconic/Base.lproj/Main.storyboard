@@ -292,7 +292,7 @@
             </objects>
             <point key="canvasLocation" x="1119" y="251"/>
         </scene>
-        <!--Favorites Collection View Controller-->
+        <!--Favorites-->
         <scene sceneID="qfg-lg-kyP">
             <objects>
                 <collectionViewController id="dEu-ik-hfo" customClass="FavoritesCollectionViewController" customModule="Iconic" customModuleProvider="target" sceneMemberID="viewController">
@@ -363,6 +363,7 @@
                             <outlet property="delegate" destination="dEu-ik-hfo" id="w8a-Hz-l0T"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" title="Favorites" id="zKD-y1-46R"/>
                     <connections>
                         <segue destination="fOt-09-gee" kind="show" identifier="FavoriteDetailsSegue" id="IXv-mT-3w9"/>
                     </connections>
@@ -371,12 +372,11 @@
             </objects>
             <point key="canvasLocation" x="1937" y="-105"/>
         </scene>
-        <!--Favorites-->
+        <!--Navigation Controller-->
         <scene sceneID="jwC-hw-UrF">
             <objects>
                 <navigationController storyboardIdentifier="TableDetailsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fOt-09-gee" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Favorites" id="zKD-y1-46R"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tnc-Z3-u9L">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
