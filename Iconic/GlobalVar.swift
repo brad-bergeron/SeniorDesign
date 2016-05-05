@@ -39,3 +39,5 @@ let helpHome = "Swipe left for filters \n Swipe right for favorites \n Swipe rig
 let helpFav = "Once an event is favorited, it will appear here \n Click on the image to view more details about the event \n Favorite or unfavorite an event by dragging within a cell on the home page or by clicking the star in the in the event details page \n Favorited events appear Iconic orange"
 
 let helpFilt = "Enable filters by clicking the switch \n Activate a filter by tapping on them, filter icon will appear white and filter name will appear on the bottom bar \n Turn a filter off by tapping the active filter, filter icon will appear gray \n "
+
+let helpPage = "Share the event, open the website link in safari, and more click the ... at the bottom \n Return to the previous page by pressing back \n Scroll down to view a map of the event location"
