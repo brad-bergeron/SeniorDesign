@@ -51,6 +51,11 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }))
         }
+        alertController.addAction(UIAlertAction(title:"Notify me!", style: UIAlertActionStyle.Default, handler: { action in
+            self.scheduleNotification()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
         alertController.addAction(UIAlertAction(title:"Open Link in Safari", style: UIAlertActionStyle.Default, handler: { action in
             self.externalLink()
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -63,6 +68,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
             self.shareEvent()
             alertController.dismissViewControllerAnimated(true, completion: nil)
         }))
+
         
         alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -206,6 +212,26 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         }
     }
     
+    
+    
+    // MARK: Notification 
+    
+    func scheduleNotification(){
+        let notification = UILocalNotification()
+        notification.fireDate = currentEvent.Event_NSDate!.dateByAddingTimeInterval(-1*24*60*60)
+        //notification.fireDate = NSDate().dateByAddingTimeInterval(60)
+        notification.alertBody = currentEvent.Event_Name! + " is tomorrow!"
+        notification.alertAction = "See you there"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["CustomField1": "w00t"]
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+        let alertController = UIAlertController(title: "Success!", message: "Notification for " + currentEvent.Event_Name! + " will occur one day before.", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"OK", style: UIAlertActionStyle.Default, handler: {action in alertController.dismissViewControllerAnimated(true, completion: nil)}))
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEvent()
@@ -266,7 +292,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         eventDate.text = formatDate.stringFromDate(currentEvent.Event_NSDate!)
         eventTime.text = formatDate2.stringFromDate(currentEvent.Event_NSDate!)
         eventLocation.text = currentEvent.Event_Location
-        eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        //eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
         //add event details
