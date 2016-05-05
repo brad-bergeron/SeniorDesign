@@ -18,7 +18,6 @@ class EventTableViewController: UITableViewController {
     var eventTempImage: UIImage!
     var loaded : Bool = false //Only want to load things from the Databse once
     
-    //var searchController: UISearchController!
     let searchController = UISearchController(searchResultsController: nil)
     
     
@@ -35,12 +34,11 @@ class EventTableViewController: UITableViewController {
             //fixEvents()
             
         }
-        //loadEvents()
+
         initSwipes()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.reloadDataFromFilter(_:)), name: "reload", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EventTableViewController.goToEventPage(_:)), name: "link", object: nil)
         
-        //let searchController = UISearchController(searchResultsController: nil)
         
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -66,7 +64,8 @@ class EventTableViewController: UITableViewController {
     func goToEventPage(notification: NSNotification){
     
         
-        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:–")
+        var found = false
         
         for event in loadedEvents{
             if(!EventLinked.isEmpty){
@@ -77,25 +76,23 @@ class EventTableViewController: UITableViewController {
                 let compare = tokens.joinWithSeparator("")
                 //takes in the spaced event Name and adds _  where there is " "
                 //Example: Hail Caesar => Hail_Caesar
-                
-                //For sharing link do opposite of this function
                 let lowerString = compare.stringByReplacingOccurrencesOfString(" ", withString: "_", options: NSStringCompareOptions.LiteralSearch, range: nil)
             
                 
                 //compares the two string to sent the link to send
                 if(lowerString == EventLinked){
+                    found = true
                     self.linkSendEvent = event
                     self.performSegueWithIdentifier("EventViewSegue", sender: self)
                 }
-                else {
-                    let alertController = UIAlertController(title: "Event Not Found", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title:"Close", style: UIAlertActionStyle.Default, handler: {action in
-                       alertController.dismissViewControllerAnimated(true, completion: nil)
-                    }))
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    
-                }
             }
+        }
+        if(found == false){
+            let alertController = UIAlertController(title: "Event Not Found", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title:"Close", style: UIAlertActionStyle.Default, handler: {action in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
     }
@@ -133,7 +130,6 @@ class EventTableViewController: UITableViewController {
         
 
         let queryExpression = AWSDynamoDBScanExpression()
-        //queryExpression.limit = 10
         
         self.scan(queryExpression).continueWithBlock({ (task: AWSTask!) -> AWSTask! in
             if task.result != nil {
@@ -270,8 +266,6 @@ class EventTableViewController: UITableViewController {
         //insert code to transition to event page
 
         self.sendEvent = seenEvents[indexPath.row]
-        //let dvc = EventPageViewController()
-        //dvc.currentEvent = sendEvent
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
     }
     
@@ -308,8 +302,44 @@ class EventTableViewController: UITableViewController {
         
         //cell.eventDateLabel.text = "Today"
         //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        if( cell.event?.Event_Picture == nil){
+            if (cell.event?.Event_Filters?.isEmpty != nil){
+                //add another default image
+                cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+            } else {
+                for filter in (cell.event?.Event_Filters)! as [String] {
+                    if (filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil){
+                        
+                        cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+                    
+                    }
+                    else if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Comedy.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Movie.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("+21") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_21.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Family.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Education.png")
+                    }
+                    else{
+                        //add default general image Here
+                        cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+                    }
+                    
+                    
+                }
+            }
+             cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+        }
+        
         cell.eventImage.image = cell.event?.Event_Picture
-        //print(filteredEvents[indexPath.row].Event_Time!)
         
         
         // Configure the cell...
@@ -317,12 +347,14 @@ class EventTableViewController: UITableViewController {
         return cell
     }
     
+    //Get Data from a URl
     func getDataFromUrl( url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(url) { ( data, response, error) in
             completion(data: data, response: response, error: error)
             }.resume()
     }
     
+    //takes the image data and puts it equal to an image
     func downloadImage(url: NSURL, count: Int, completion: (result: Bool) -> ()) {
         getDataFromUrl(url) { (data, response, error) in
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
@@ -438,13 +470,14 @@ class EventTableViewController: UITableViewController {
     }
     
     
-    
+    //Saves data to the app for favorites
     func saveData(){
         let favoriteArray = favorites
         let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
         NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
     }
     
+    //loads the favoreites that was saved in the app
     func loadFavData(){
         let favoritesData = NSUserDefaults.standardUserDefaults().objectForKey("fav") as? NSData
         if favoritesData != nil{

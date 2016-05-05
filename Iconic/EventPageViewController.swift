@@ -31,11 +31,24 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     var currentEvent : SingleEvent!
     let eventStore = EKEventStore()
     
+    @IBOutlet weak var favoritesButton: UIButton!
     let defaultLat = 41.661922
     let defaultLong = -91.535682
     
     
     let regionRadius : CLLocationDistance = 1000
+    
+    
+    @IBAction func favButtonSwitch(sender: UIButton) {
+        sender.selected = !sender.selected;
+        
+        if(sender.selected) {
+            favoritesButton.setImage(UIImage(named: "StarFilled.png")!, forState: .Normal)
+        } else {
+            favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal)
+        }
+    }
+    
     
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
@@ -101,7 +114,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     
     func shareEvent(){
         //Code for sharing link starts here
-        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:–")
         
         let tokens = self.currentEvent.Event_Name!.componentsSeparatedByCharactersInSet(punctuation)
         let compare = tokens.joinWithSeparator("")
