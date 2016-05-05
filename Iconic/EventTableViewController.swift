@@ -26,9 +26,13 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UINavigationBar.appearance().tintColor = UIColor.blackColor()
+        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
+        searchBar.backgroundColor = UIColor.grayColor()
         if (loaded == false){
             loadEvents()
             loadFavData()
+            
         }
 
         initSwipes()
@@ -50,6 +54,10 @@ class EventTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
     }
     
     func goToEventPage(notification: NSNotification){
@@ -261,6 +269,11 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
+        if(favorites.contains(seenEvents[indexPath.row])){
+            cell.borderView.backgroundColor = ourOrange
+        } else {
+            cell.borderView.backgroundColor = UIColor.blueColor()
+        }
         cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
         let format = NSDateFormatter()
@@ -371,6 +384,8 @@ class EventTableViewController: UITableViewController {
                 let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if(favorites.contains(unfavoriteEvent)){
                     favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
+                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
+                    cell.borderView.backgroundColor = UIColor.blueColor()
                     self.saveData()
                 }
                 tableView.setEditing(false, animated: true)
@@ -382,6 +397,9 @@ class EventTableViewController: UITableViewController {
                 let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
                 if (!favorites.contains(favoriteEvent)){
                     favorites.append(favoriteEvent)
+                    tableView.cellForRowAtIndexPath(indexPath)
+                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
+                    cell.borderView.backgroundColor = ourOrange
                     self.saveData()
                 }
                 tableView.setEditing(false, animated: true)
