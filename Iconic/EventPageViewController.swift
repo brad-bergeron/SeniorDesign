@@ -14,7 +14,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Outlets
 
-    @IBOutlet weak var eventName: UIButton!
+    @IBOutlet weak var eventName: UILabel!
     
     @IBOutlet weak var eventImage: UIImageView!
     
@@ -230,7 +230,8 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func loadEvent() -> Int{
-        eventName.setTitle(currentEvent.Event_Name, forState: .Normal)
+        
+        eventName.text = currentEvent.Event_Name
         //eventImage.image = currentEvent?.eventPhoto!
         let formatDate = NSDateFormatter()
         formatDate.dateFormat = "EEEE, MMMM dd, yyyy"
