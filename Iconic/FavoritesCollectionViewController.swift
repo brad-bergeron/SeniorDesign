@@ -13,12 +13,21 @@ private let reuseIdentifier = "FavoriteCollectionCell"
 class FavoritesCollectionViewController: UICollectionViewController {
     
     var sendEvent : SingleEvent?
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initSwipes()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        definesPresentationContext = true
+        //collectionView.
+        //tableView.tableHeaderView = searchController.searchBar Sent Search bar
 
         // Do any additional setup after loading the view.
     }
@@ -31,6 +40,16 @@ class FavoritesCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    /*
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        var reusableview:UICollectionReusableView!
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView:SearchBarCollectionReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "SearchBar", forIndexPath: indexPath) as! SearchBarCollectionReusableView
+            reusableview = headerView
+        }
+        return reusableview
+    } */
     
     func initSwipes() {
         //let leftswipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipe:"))
@@ -90,10 +109,10 @@ class FavoritesCollectionViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! FavoriteCollectionViewCell
-        cell.EventName.text = favorites[indexPath.row].Event_Name!
+        cell.EventName.text = searchedFavorites[indexPath.row].Event_Name!
         // Configure the cell
         if(favorites[indexPath.row].Event_Picture != nil){
-            cell.EventImage.image = favorites[indexPath.row].Event_Picture!
+            cell.EventImage.image = searchedFavorites[indexPath.row].Event_Picture!
         }
         cell.backgroundColor = UIColor.whiteColor()
     
@@ -114,7 +133,7 @@ class FavoritesCollectionViewController: UICollectionViewController {
     
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        self.sendEvent = favorites[indexPath.row]
+        self.sendEvent = searchedFavorites[indexPath.row]
         self.performSegueWithIdentifier("FavoriteDetailsSegue", sender: self)
         return true
     }
@@ -131,11 +150,33 @@ class FavoritesCollectionViewController: UICollectionViewController {
     }
     
     override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-        self.sendEvent = favorites[indexPath.row]
+        self.sendEvent = searchedFavorites[indexPath.row]
         self.performSegueWithIdentifier("FavoriteDetailsSegue", sender: self)
     }
     
+    func filterContentForSearchText(searchText: String, scope: String = "All"){
+        if(searchText.isEmpty) {
+            searchedFavorites = favorites
+        } else {
+            searchedFavorites = favorites.filter { SingleEvent in
+                return SingleEvent.Event_Name!.lowercaseString.containsString(searchText.lowercaseString)
+            }
+        }
+        
+        
+        searchedFavorites.sortInPlace({ $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending })
+        self.collectionView?.reloadData()
+        
+        
+    }
 
     
 
+}
+
+extension FavoritesCollectionViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+        
+    }
 }

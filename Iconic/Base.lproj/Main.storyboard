@@ -219,16 +219,17 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="trailing" secondItem="kpf-vx-0rn" secondAttribute="trailingMargin" id="a3r-tQ-wwH"/>
-                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="top" secondItem="kpf-vx-0rn" secondAttribute="topMargin" id="kSm-b6-yil"/>
-                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="bottom" secondItem="kpf-vx-0rn" secondAttribute="bottomMargin" id="pa1-9x-qNK"/>
-                                        <constraint firstItem="Knl-sP-zgR" firstAttribute="leading" secondItem="kpf-vx-0rn" secondAttribute="leadingMargin" id="wOq-lm-kQr"/>
+                                        <constraint firstItem="bmp-y9-9rJ" firstAttribute="top" secondItem="kpf-vx-0rn" secondAttribute="topMargin" id="1xm-QD-JI1"/>
+                                        <constraint firstItem="bmp-y9-9rJ" firstAttribute="trailing" secondItem="kpf-vx-0rn" secondAttribute="trailingMargin" id="WEE-RP-eW0"/>
+                                        <constraint firstItem="bmp-y9-9rJ" firstAttribute="leading" secondItem="kpf-vx-0rn" secondAttribute="leadingMargin" id="hHp-2I-FxQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="bmp-y9-9rJ" secondAttribute="bottom" id="wll-JQ-ZK2"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="eventDateLabel" destination="cB3-Q9-5kg" id="9OY-PO-lCs"/>
-                                    <outlet property="eventImage" destination="iN1-OZ-poh" id="cGh-Hy-yMH"/>
-                                    <outlet property="eventNameLabel" destination="6K4-NX-1aO" id="8fB-O1-lsc"/>
+                                    <outlet property="borderView" destination="kpf-vx-0rn" id="UAr-0F-aEg"/>
+                                    <outlet property="eventDateLabel" destination="EmE-9Q-hoV" id="GpN-1f-gzZ"/>
+                                    <outlet property="eventImage" destination="XhI-ZO-azH" id="qmf-oW-NU4"/>
+                                    <outlet property="eventNameLabel" destination="pMh-Iu-fa1" id="ZRe-yt-oiX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -278,13 +279,13 @@
                         <color key="backgroundColor" red="0.95294117647058818" green="0.44705882352941173" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9R7-Bh-LhA">
                             <size key="itemSize" width="150" height="170"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="44"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="5" minY="5" maxX="5" maxY="5"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FavoriteCollectionCell" id="WOk-X2-FGv" customClass="FavoriteCollectionViewCell" customModule="Iconic" customModuleProvider="target">
-                                <rect key="frame" x="5" y="69" width="150" height="170"/>
+                                <rect key="frame" x="5" y="113" width="150" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="170"/>
@@ -320,6 +321,19 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="bOn-Ph-tkI" customClass="SearchBarCollectionReusableView" customModule="Iconic" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sr5-Ft-J1Q">
+                                    <rect key="frame" x="-28" y="0.0" width="600" height="44"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
+                            </subviews>
+                            <connections>
+                                <outlet property="searchBar" destination="Sr5-Ft-J1Q" id="gPh-LU-6FI"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="dEu-ik-hfo" id="uqm-Sz-xRq"/>
                             <outlet property="delegate" destination="dEu-ik-hfo" id="w8a-Hz-l0T"/>
@@ -589,6 +603,6 @@
         <image name="Music_Icon2" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QCI-6C-cWG"/>
+        <segue reference="IXv-mT-3w9"/>
     </inferredMetricsTieBreakers>
 </document>

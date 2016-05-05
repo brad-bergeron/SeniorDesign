@@ -14,6 +14,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var eventDateLabel: UILabel!
     var event : SingleEvent!
     
+    @IBOutlet weak var borderView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
