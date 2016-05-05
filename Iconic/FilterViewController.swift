@@ -239,6 +239,14 @@ class FilterViewController: UIViewController {
             filtersShown.title = String()
         }
     }
+    @IBAction func helpMe(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Help", message: helpFilt, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
     
     func initSwipes(){
         let leftSwipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(FilterViewController.handleSwipe(_:)))
