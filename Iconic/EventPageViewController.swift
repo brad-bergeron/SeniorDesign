@@ -114,7 +114,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     
     func shareEvent(){
         //Code for sharing link starts here
-        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:–")
         
         let tokens = self.currentEvent.Event_Name!.componentsSeparatedByCharactersInSet(punctuation)
         let compare = tokens.joinWithSeparator("")
