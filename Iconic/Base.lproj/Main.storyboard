@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -445,14 +445,14 @@
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="gYz-D4-t0s">
                                                 <rect key="frame" x="10" y="40" width="580" height="51"/>
+                                                <accessibility key="accessibilityConfiguration">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="51" id="CeL-aC-RsJ"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="22"/>
                                                 <state key="normal" title="EVENT NAME"/>
-                                                <connections>
-                                                    <action selector="externalLink:" destination="xwY-fU-c4C" eventType="touchUpInside" id="9A4-bQ-kpf"/>
-                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mm.dd.yyyy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bcx-Gj-JO8">
                                                 <rect key="frame" x="10" y="357" width="580" height="23"/>
@@ -481,35 +481,6 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQc-eo-WrH">
-                                                <rect key="frame" x="238" y="445" width="125" height="29"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="125" id="74k-GI-UG2"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <state key="normal" title="Add to Calendar"/>
-                                                <connections>
-                                                    <action selector="addCalendar:" destination="xwY-fU-c4C" eventType="touchUpInside" id="drI-fd-tQW"/>
-                                                </connections>
-                                            </button>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="450" placeholderIntrinsicHeight="164" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6pH-pT-ixY">
-                                                <rect key="frame" x="10" y="514" width="580" height="164"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <accessibility key="accessibilityConfiguration">
-                                                    <accessibilityTraits key="traits" notEnabled="YES"/>
-                                                </accessibility>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="61" id="Yvb-Sb-c3f"/>
-                                                </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="Yvb-Sb-c3f"/>
-                                                    </mask>
-                                                </variation>
-                                            </textView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m54-8D-hw4">
                                                 <rect key="frame" x="175" y="91" width="250" height="250"/>
                                                 <constraints>
@@ -517,7 +488,7 @@
                                                     <constraint firstAttribute="width" constant="250" id="g1S-lC-4fK"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-Rp-UQM">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V0F-Rp-UQM">
                                                 <rect key="frame" x="249" y="472" width="102" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="102" id="lbr-we-Ays"/>
@@ -531,27 +502,19 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="Content View"/>
                                         <constraints>
-                                            <constraint firstItem="OQc-eo-WrH" firstAttribute="top" secondItem="O6a-K6-Typ" secondAttribute="bottom" constant="5" id="05z-on-Ggf"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="top" secondItem="bcx-Gj-JO8" secondAttribute="bottom" constant="-5" id="0gM-Pt-yWO"/>
-                                            <constraint firstItem="6pH-pT-ixY" firstAttribute="top" secondItem="V0F-Rp-UQM" secondAttribute="bottom" constant="8" symbolic="YES" id="170-bv-h9z"/>
                                             <constraint firstItem="bcx-Gj-JO8" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="1Xz-Jj-hsq"/>
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="top" secondItem="8fY-G7-AvJ" secondAttribute="bottom" constant="-10" id="2P1-3D-r49"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="3O9-rw-cUi"/>
-                                            <constraint firstItem="6pH-pT-ixY" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="5wU-L5-1Ir"/>
                                             <constraint firstAttribute="trailing" secondItem="O6a-K6-Typ" secondAttribute="trailing" constant="10" id="6oc-27-wh2"/>
-                                            <constraint firstItem="OQc-eo-WrH" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="7Xr-Cv-Vbm"/>
                                             <constraint firstItem="gYz-D4-t0s" firstAttribute="top" secondItem="KGY-Lb-17Q" secondAttribute="top" constant="40" id="8Ri-Yr-eaN"/>
-                                            <constraint firstItem="6pH-pT-ixY" firstAttribute="top" secondItem="OQc-eo-WrH" secondAttribute="bottom" constant="40" id="9jp-U0-w16"/>
                                             <constraint firstAttribute="height" constant="1200" id="A1v-to-cgJ"/>
                                             <constraint firstItem="bcx-Gj-JO8" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="A4R-M2-AhH"/>
                                             <constraint firstItem="m54-8D-hw4" firstAttribute="top" secondItem="gYz-D4-t0s" secondAttribute="bottom" id="EWq-dB-Kbx"/>
-                                            <constraint firstItem="6pH-pT-ixY" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="Fgm-aa-yz1"/>
                                             <constraint firstAttribute="trailing" secondItem="bcx-Gj-JO8" secondAttribute="trailing" constant="10" id="JEx-Pf-vSG"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="JUr-qB-F0H"/>
-                                            <constraint firstAttribute="trailing" secondItem="6pH-pT-ixY" secondAttribute="trailing" constant="10" id="K1j-uj-Fed"/>
                                             <constraint firstAttribute="trailing" secondItem="gYz-D4-t0s" secondAttribute="trailing" constant="10" id="KZz-wy-xxZ"/>
                                             <constraint firstAttribute="trailing" secondItem="8fY-G7-AvJ" secondAttribute="trailing" constant="10" id="L6M-KM-L6z"/>
-                                            <constraint firstItem="V0F-Rp-UQM" firstAttribute="centerX" secondItem="OQc-eo-WrH" secondAttribute="centerX" id="OuE-Vn-iCO"/>
                                             <constraint firstItem="m54-8D-hw4" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="RBE-oQ-Kfv"/>
                                             <constraint firstItem="8fY-G7-AvJ" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="Xo4-ry-IfT"/>
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="YWi-jT-p5W"/>
@@ -595,10 +558,8 @@
                         <outlet property="contentView" destination="KGY-Lb-17Q" id="e3v-nf-tCW"/>
                         <outlet property="eventCost" destination="O6a-K6-Typ" id="zne-5j-8zr"/>
                         <outlet property="eventDate" destination="bcx-Gj-JO8" id="kg9-Tk-kYF"/>
-                        <outlet property="eventDetails" destination="6pH-pT-ixY" id="kYa-91-dvH"/>
                         <outlet property="eventImage" destination="m54-8D-hw4" id="F7Q-zQ-5LP"/>
                         <outlet property="eventLocation" destination="8fY-G7-AvJ" id="u5t-TP-Hab"/>
-                        <outlet property="eventName" destination="gYz-D4-t0s" id="l64-Fg-2ib"/>
                         <outlet property="eventTime" destination="8DW-Vt-xkz" id="SXL-wW-miE"/>
                         <outlet property="scrollView" destination="O6D-qc-vdj" id="ltL-3L-1FR"/>
                     </connections>
@@ -617,6 +578,6 @@
         <image name="Music_Icon2" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QCI-6C-cWG"/>
+        <segue reference="IXv-mT-3w9"/>
     </inferredMetricsTieBreakers>
 </document>

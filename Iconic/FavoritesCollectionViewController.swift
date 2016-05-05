@@ -26,6 +26,9 @@ class FavoritesCollectionViewController: UICollectionViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
+        
+        //UINavigationBar.appearance().backgroundColor = UIColor.redColor()
+        //UINavigationBar.appearance().tintColor = ourOrange
         //collectionView.
         //tableView.tableHeaderView = searchController.searchBar Sent Search bar
 
@@ -114,7 +117,7 @@ class FavoritesCollectionViewController: UICollectionViewController {
         if(favorites[indexPath.row].Event_Picture != nil){
             cell.EventImage.image = searchedFavorites[indexPath.row].Event_Picture!
         }
-        cell.backgroundColor = UIColor.whiteColor()
+        //cell.backgroundColor = UIColor.whiteColor()
     
         return cell
     }

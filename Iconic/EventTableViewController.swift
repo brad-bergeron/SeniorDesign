@@ -27,9 +27,6 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UINavigationBar.appearance().tintColor = UIColor.blackColor()
-        UINavigationBar.appearance().barTintColor = UIColor.whiteColor()
-        searchBar.backgroundColor = UIColor.grayColor()
         if (loaded == false){
             loadEvents()
             loadFavData()

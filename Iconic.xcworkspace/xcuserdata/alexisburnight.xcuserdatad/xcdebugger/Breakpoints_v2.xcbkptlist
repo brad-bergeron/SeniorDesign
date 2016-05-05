@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "externalLink()"
             landmarkType = "5">
          </BreakpointContent>
@@ -56,13 +56,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "shareEvent()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.shareEvent () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.741303"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1795">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.shareEvent () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.741469"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1881">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -72,13 +104,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "externalLink()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.externalLink () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.74235"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "712">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.(externalLink () -&gt; ()).(closure #2)"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.742521"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "328">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -248,7 +312,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.273736"
+                  timestampString = "484127616.750514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -263,7 +327,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.273867"
+                  timestampString = "484127616.750662"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -278,7 +342,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.274012"
+                  timestampString = "484127616.750797"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -293,7 +357,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.274153"
+                  timestampString = "484127616.750929"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "33"
@@ -326,7 +390,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484124630.276031"
+                  timestampString = "484127616.752456"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -341,7 +405,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484124630.276322"
+                  timestampString = "484127616.752616"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -356,7 +420,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484124630.276526"
+                  timestampString = "484127616.752747"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -371,7 +435,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoriteTableViewCell.swift"
-                  timestampString = "484124630.276737"
+                  timestampString = "484127616.752876"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "20"
@@ -416,15 +480,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484118897.116653"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "265"
-            endingLineNumber = "265"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -478,11 +542,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "addEvent()"
             landmarkType = "5">
          </BreakpointContent>
@@ -494,11 +558,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
             landmarkName = "addEvent()"
             landmarkType = "5">
          </BreakpointContent>
@@ -510,13 +574,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "shareEvent()"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.shareEvent () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.757929"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1795">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.shareEvent () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.758069"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "105"
+                  endingLineNumber = "105"
+                  offsetFromSymbolStart = "1881">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -526,11 +622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "addCalendar()"
             landmarkType = "5">
          </BreakpointContent>
@@ -556,7 +652,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484124630.284376"
+                  timestampString = "484127616.759576"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -571,7 +667,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484124630.284505"
+                  timestampString = "484127616.759755"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -586,7 +682,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
-                  timestampString = "484124630.284633"
+                  timestampString = "484127616.75993"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -603,11 +699,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "addToCalendar()"
             landmarkType = "5">
          </BreakpointContent>
@@ -619,11 +715,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "addToCalendar()"
             landmarkType = "5">
          </BreakpointContent>
@@ -635,13 +731,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484123571.420478"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "shareEvent()"
-            landmarkType = "5">
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "EventPageViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -651,11 +747,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
             landmarkName = "EventPageViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -683,7 +779,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.289443"
+                  timestampString = "484127616.764131"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -698,7 +794,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.289592"
+                  timestampString = "484127616.764269"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -713,7 +809,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.289727"
+                  timestampString = "484127616.764396"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -728,7 +824,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FilterViewController.swift"
-                  timestampString = "484124630.289863"
+                  timestampString = "484127616.764527"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "26"
@@ -757,33 +853,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "EventTableViewController"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -793,12 +873,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "316"
             endingLineNumber = "316"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "getDataFromUrl(_:completion:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventTableViewController.swift"
+            timestampString = "484128957.364556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "315"
+            endingLineNumber = "315"
+            landmarkName = "getDataFromUrl(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -809,11 +905,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/FavoritesCollectionViewController.swift"
-            timestampString = "484122418.347479"
+            timestampString = "484128342.784613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "collectionView(_:cellForItemAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -841,11 +937,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/FavoritesCollectionViewController.swift"
-            timestampString = "484122418.347479"
+            timestampString = "484128342.784613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "collectionView(_:cellForItemAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -921,11 +1017,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "465"
-            endingLineNumber = "465">
+            startingLineNumber = "464"
+            endingLineNumber = "464">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -935,11 +1031,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "468"
-            endingLineNumber = "468">
+            startingLineNumber = "467"
+            endingLineNumber = "467">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -949,45 +1045,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "408"
+            endingLineNumber = "408"
             landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Iconic.EventTableViewController.tableView (__ObjC.UITableView, editActionsForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; Swift.Optional&lt;Swift.Array&lt;__ObjC.UITableViewRowAction&gt;&gt;"
-                  moduleName = "Iconic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventTableViewController.swift"
-                  timestampString = "484124630.301678"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "409"
-                  endingLineNumber = "409"
-                  offsetFromSymbolStart = "941">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Iconic.EventTableViewController.(tableView (__ObjC.UITableView, editActionsForRowAtIndexPath : __ObjC.NSIndexPath) -&gt; Swift.Optional&lt;Swift.Array&lt;__ObjC.UITableViewRowAction&gt;&gt;).(closure #2)"
-                  moduleName = "Iconic"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventTableViewController.swift"
-                  timestampString = "484124630.301836"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "410"
-                  endingLineNumber = "410"
-                  offsetFromSymbolStart = "31">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -997,11 +1061,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "414"
-            endingLineNumber = "414"
+            startingLineNumber = "413"
+            endingLineNumber = "413"
             landmarkName = "tableView(_:editActionsForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1013,11 +1077,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/FavoritesCollectionViewController.swift"
-            timestampString = "484122418.347479"
+            timestampString = "484128342.784613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
             landmarkName = "collectionView(_:performAction:forItemAtIndexPath:withSender:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1029,11 +1093,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/FavoritesCollectionViewController.swift"
-            timestampString = "484122418.347479"
+            timestampString = "484128342.784613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "FavoritesCollectionViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1045,11 +1109,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/FavoritesCollectionViewController.swift"
-            timestampString = "484122418.347479"
+            timestampString = "484128342.784613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
             landmarkName = "collectionView(_:shouldSelectItemAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1061,7 +1125,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "483998727.402183"
+            timestampString = "484127303.940222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "moreOptions(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventPageViewController.swift"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -1077,27 +1157,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "483998794.722501"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "moreOptions(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "483999057.154504"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "moreOptions(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1109,28 +1173,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484124922.969781"
+            timestampString = "484128957.364556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Iconic/EventTableViewController.swift"
-            timestampString = "484109954.276447"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "viewDidLoad()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1157,7 +1205,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoritesCollectionViewController.swift"
-                  timestampString = "484124630.308295"
+                  timestampString = "484127616.776562"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -1172,7 +1220,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoritesCollectionViewController.swift"
-                  timestampString = "484124630.308422"
+                  timestampString = "484127616.776696"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -1187,7 +1235,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoritesCollectionViewController.swift"
-                  timestampString = "484124630.308549"
+                  timestampString = "484127616.776821"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -1202,7 +1250,7 @@
                   moduleName = "Iconic"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/FavoritesCollectionViewController.swift"
-                  timestampString = "484124630.308673"
+                  timestampString = "484127616.776945"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "17"
@@ -1219,12 +1267,108 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Iconic/EventPageViewController.swift"
-            timestampString = "484124616.510391"
+            timestampString = "484127303.940222"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "requestAccessToCalendar()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.requestAccessToCalendar () -&gt; ()"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.77821"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Iconic.EventPageViewController.(requestAccessToCalendar () -&gt; ()).(closure #1)"
+                  moduleName = "Iconic"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alexisburnight/SeniorDesign/Iconic/EventPageViewController.swift"
+                  timestampString = "484127616.778348"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventPageViewController.swift"
+            timestampString = "484127303.940222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
+            landmarkName = "loadEvent()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventPageViewController.swift"
+            timestampString = "484127303.940222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
+            landmarkName = "EventPageViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventPageViewController.swift"
+            timestampString = "484127303.940222"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "254"
+            endingLineNumber = "254"
+            landmarkName = "EventPageViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Iconic/EventPageViewController.swift"
+            timestampString = "484127445.077821"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "loadEvent()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
