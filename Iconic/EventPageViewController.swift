@@ -358,6 +358,15 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         }
         return view
     }
+    
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+        let alertController = UIAlertController(title: "Help", message: helpPage, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
 }
 
 
