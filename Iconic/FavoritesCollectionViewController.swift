@@ -33,6 +33,15 @@ class FavoritesCollectionViewController: UICollectionViewController {
         //tableView.tableHeaderView = searchController.searchBar Sent Search bar
 
         // Do any additional setup after loading the view.
+        
+        if(favorites.isEmpty){
+            let alertController = UIAlertController(title: "Oops!", message: "You have no favorites.", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title:"Dismiss", style: UIAlertActionStyle.Default, handler: { action in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
