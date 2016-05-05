@@ -15,6 +15,8 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var comedyButton: UIButton!
     @IBOutlet weak var ageButton: UIButton!
+    @IBOutlet weak var familyButton: UIButton!
+    @IBOutlet weak var educationButton: UIButton!
     @IBOutlet weak var Switch: UISwitch!
 
     @IBOutlet weak var eventFilterType: UILabel!
@@ -88,6 +90,44 @@ class FilterViewController: UIViewController {
     func comedySelected(){ comedyButton.setImage(UIImage(named: "Comedy_Icon.png")!, forState: .Normal) }
     func comedyUnselected(){ comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal) }
     
+    @IBAction func familyButton(sender: UIButton) {
+    
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            familySelected()
+            self.addFamily()
+            familyFilter = true
+        }else {
+            familyUnselected()
+            self.removeFamily()
+            familyFilter = false
+        }
+        updateLabel()
+    }
+    
+    func familySelected(){ familyButton.setImage(UIImage(named: "Family_Icon.png")!, forState: .Normal) }
+    func familyUnselected(){ familyButton.setImage(UIImage(named: "Family_Icon2.png")!, forState: .Normal) }
+    
+    @IBAction func educationButton(sender: UIButton) {
+    
+        sender.selected  = !sender.selected;
+        
+        if (sender.selected) {
+            educationSelected()
+            self.addEducation()
+            educationFilter = true
+        }else {
+            educationUnselected()
+            self.removeEducation()
+            educationFilter = false
+        }
+        updateLabel()
+    }
+    
+    func educationSelected(){ educationButton.setImage(UIImage(named: "Education_Icon.png")!, forState: .Normal) }
+    func educationUnselected(){ educationButton.setImage(UIImage(named: "Education_Icon2.png")!, forState: .Normal) }
+    
     @IBAction func ageButton(sender: UIButton) {
         
         sender.selected  = !sender.selected;
@@ -126,14 +166,20 @@ class FilterViewController: UIViewController {
         musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
         comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
         ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+        familyButton.setImage(UIImage(named: "Family_Icon2.png")!, forState: .Normal)
+        educationButton.setImage(UIImage(named: "Education_Icon2.png")!, forState: .Normal)
         movieButton.enabled = true
         musicButton.enabled = true
         comedyButton.enabled = true
         ageButton.enabled = true
+        familyButton.enabled = true
+        educationButton.enabled = true
         movieButton.selected = false
         musicButton.selected = false
         comedyButton.selected = false
         ageButton.selected = false
+        familyButton.selected = false
+        educationButton.selected = false
     }
     
     func toggleOff(){
@@ -141,18 +187,26 @@ class FilterViewController: UIViewController {
         musicButton.setImage(UIImage(named: "Music_Icon2.png")!, forState: .Normal)
         comedyButton.setImage(UIImage(named: "Comedy_Icon2.png")!, forState: .Normal)
         ageButton.setImage(UIImage(named: "21_Icon2.png")!, forState: .Normal)
+        familyButton.setImage(UIImage(named: "Family_Icon2.png")!, forState: .Normal)
+        educationButton.setImage(UIImage(named: "Education_Icon2.png")!, forState: .Normal)
         movieButton.adjustsImageWhenDisabled = false
         musicButton.adjustsImageWhenDisabled = false
         comedyButton.adjustsImageWhenDisabled = false
         ageButton.adjustsImageWhenDisabled = false
+        familyButton.adjustsImageWhenDisabled = false
+        educationButton.adjustsImageWhenDisabled = false
         movieButton.selected = false
         musicButton.selected = false
         comedyButton.selected = false
         ageButton.selected = false
+        familyButton.selected = false
+        educationButton.selected = false
         movieButton.enabled = false
         musicButton.enabled = false
         comedyButton.enabled = false
         ageButton.enabled = false
+        familyButton.enabled = false
+        educationButton.enabled = false
         self.removeFiltersAll()
     }
 
@@ -170,6 +224,12 @@ class FilterViewController: UIViewController {
         }
         if(ageButton.selected){
             labelText += "Over 21, "
+        }
+        if(familyButton.selected){
+            labelText += "Family Friendly, "
+        }
+        if(educationButton.selected){
+            labelText += "Education, "
         }
         filtersShown.setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.blackColor()] , forState: .Normal)
         if(labelText.characters.count > 2) {
@@ -214,26 +274,45 @@ class FilterViewController: UIViewController {
         //sets state of movie button
         if(movieFilter){
             movieSelected()
+            movieButton.selected = true
         } else {
             movieUnselected()
         }
         //sets state of comedy button
         if(comedyFilter){
             comedySelected()
+            comedyButton.selected = true
         } else {
             comedyUnselected()
         }
         //sets state of 21 button
         if(twentyOneFilter){
             twentyOneSelected()
+            ageButton.selected = true
         } else {
             twentyOneUnselected()
         }
         //sets state of music button
         if(musicFilter){
             musicSelected()
+            musicButton.selected = true
         } else {
             musicUnselected()
+        }
+        
+        //sets state of family button
+        if(familyFilter){
+            familySelected()
+            familyButton.selected = true
+        } else {
+            familyUnselected()
+        }
+        //sets state of education button
+        if(educationFilter){
+            educationSelected()
+            educationButton.selected = true
+        } else {
+            educationUnselected()
         }
         updateLabel()
         Switch.tintColor = UIColor.grayColor()
@@ -297,12 +376,10 @@ class FilterViewController: UIViewController {
     
     func addComedy() {
         for event in unfilteredEvents {
-            print(event.Event_Name)
             var added = false
             for filter in event.Event_Filters! as [String]{
-                print(filter)
                 if added == false{
-                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
                         
                         added = true
                         filteredEvents.append(event)
@@ -320,7 +397,7 @@ class FilterViewController: UIViewController {
             
             for filter in event.Event_Filters! as [String]{
                 if added == false{
-                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil || filter.lowercaseString.rangeOfString("literature") != nil){
+                    if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
                         
                         added = true
                         filteredEvents = filteredEvents.filter { $0 != event }
@@ -405,6 +482,83 @@ class FilterViewController: UIViewController {
         checkRemove()
     }
     
+    func addFamily() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+        checkAdd()
+    }
+    
+    func removeFamily(){
+        for event in unfilteredEvents {
+            print(event.Event_Name!)
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                print(filter)
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                        
+                    }
+                    
+                }
+            }
+        }
+        checkRemove()
+    }
+    
+    func addEducation() {
+        for event in unfilteredEvents {
+            var added = false
+            for filter in event.Event_Filters! as [String]{
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
+                        
+                        added = true
+                        filteredEvents.append(event)
+                    }
+                    
+                }
+            }
+        }
+        checkAdd()
+    }
+
+    func removeEducation(){
+        for event in unfilteredEvents {
+            print(event.Event_Name!)
+            var added = false
+            
+            for filter in event.Event_Filters! as [String]{
+                print(filter)
+                if added == false{
+                    if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
+                        
+                        added = true
+                        filteredEvents = filteredEvents.filter { $0 != event }
+                        
+                    }
+                    
+                }
+            }
+        }
+        checkRemove()
+    }
+    
+    
     
     func checkRemove(){
         if filteredEvents.isEmpty{
@@ -424,6 +578,12 @@ class FilterViewController: UIViewController {
     
     func removeFiltersAll(){
         filteredEvents.removeAll()
+        movieFilter = false
+        musicFilter = false
+        twentyOneFilter = false
+        educationFilter = false
+        comedyFilter = false
+        familyFilter = false
         checkRemove()
     }
     
