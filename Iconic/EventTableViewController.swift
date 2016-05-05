@@ -61,7 +61,8 @@ class EventTableViewController: UITableViewController {
     func goToEventPage(notification: NSNotification){
     
         
-        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
+        let punctuation = NSCharacterSet(charactersInString: "?.,!@-:–")
+        var found = false
         
         for event in loadedEvents{
             if(!EventLinked.isEmpty){
@@ -77,18 +78,18 @@ class EventTableViewController: UITableViewController {
                 
                 //compares the two string to sent the link to send
                 if(lowerString == EventLinked){
+                    found = true
                     self.linkSendEvent = event
                     self.performSegueWithIdentifier("EventViewSegue", sender: self)
                 }
-                else {
-                    let alertController = UIAlertController(title: "Event Not Found", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
-                    alertController.addAction(UIAlertAction(title:"Close", style: UIAlertActionStyle.Default, handler: {action in
-                       alertController.dismissViewControllerAnimated(true, completion: nil)
-                    }))
-                    self.presentViewController(alertController, animated: true, completion: nil)
-                    
-                }
             }
+        }
+        if(found == false){
+            let alertController = UIAlertController(title: "Event Not Found", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title:"Close", style: UIAlertActionStyle.Default, handler: {action in
+                alertController.dismissViewControllerAnimated(true, completion: nil)
+            }))
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
         
     }
