@@ -433,7 +433,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGY-Lb-17Q" userLabel="Content View">
-                                        <rect key="frame" x="2" y="0.0" width="600" height="1020"/>
+                                        <rect key="frame" x="2" y="0.0" width="600" height="1000"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cost" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O6a-K6-Typ">
                                                 <rect key="frame" x="10" y="410" width="580" height="30"/>
@@ -510,7 +510,7 @@
                                             <constraint firstItem="O6a-K6-Typ" firstAttribute="top" secondItem="8fY-G7-AvJ" secondAttribute="bottom" constant="-10" id="2P1-3D-r49"/>
                                             <constraint firstItem="8DW-Vt-xkz" firstAttribute="leading" secondItem="KGY-Lb-17Q" secondAttribute="leading" constant="10" id="3O9-rw-cUi"/>
                                             <constraint firstAttribute="trailing" secondItem="O6a-K6-Typ" secondAttribute="trailing" constant="10" id="6oc-27-wh2"/>
-                                            <constraint firstAttribute="height" constant="1020" id="A1v-to-cgJ"/>
+                                            <constraint firstAttribute="height" constant="1000" id="A1v-to-cgJ"/>
                                             <constraint firstItem="bcx-Gj-JO8" firstAttribute="centerX" secondItem="KGY-Lb-17Q" secondAttribute="centerX" id="A4R-M2-AhH"/>
                                             <constraint firstItem="gpz-Yj-YjQ" firstAttribute="top" secondItem="V0F-Rp-UQM" secondAttribute="bottom" constant="30" id="HIF-t7-E4L"/>
                                             <constraint firstAttribute="trailing" secondItem="bcx-Gj-JO8" secondAttribute="trailing" constant="10" id="JEx-Pf-vSG"/>
