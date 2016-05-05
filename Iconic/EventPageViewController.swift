@@ -30,6 +30,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     @IBOutlet weak var eventDate: UILabel!
     var currentEvent : SingleEvent!
     let eventStore = EKEventStore()
+
     
     @IBOutlet weak var favoritesButton: UIButton!
     let defaultLat = 41.661922
@@ -38,16 +39,30 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     
     let regionRadius : CLLocationDistance = 1000
     
+    func saveData(){
+        let favoriteArray = favorites
+        let favoritesData = NSKeyedArchiver.archivedDataWithRootObject(favoriteArray)
+        NSUserDefaults.standardUserDefaults().setObject(favoritesData, forKey: "fav")
+    }
+    
     
     @IBAction func favButtonSwitch(sender: UIButton) {
         sender.selected = !sender.selected;
         
         if(sender.selected) {
             favoritesButton.setImage(UIImage(named: "StarFilled.png")!, forState: .Normal)
+            favorites.append(self.currentEvent)
+            self.saveData()
+
         } else {
             favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal)
+            favorites = favorites.filter { $0 != self.currentEvent }
+            self.saveData()
         }
     }
+    
+    func starSelected(){ favoritesButton.setImage(UIImage(named: "StarFilled.png")!, forState: .Normal)}
+    func starUnselected(){ favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal) }
     
     
     // MARK: Actions
@@ -250,6 +265,18 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         loadEvent()
         //checkAuthorization()
         
+        for favoriteEvent in  favorites as [SingleEvent]{
+            if(favoriteEvent.Event_Name == currentEvent.Event_Name){
+                self.starSelected()
+                favoritesButton.selected = true
+            }
+            else{
+                self.starUnselected()
+            }
+            
+        }
+
+        
         let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
         
         centerMap(defaultLocation)
@@ -308,6 +335,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         //eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
+
         //add event details
         //add button for link to website*/
         return 1;

@@ -345,7 +345,9 @@ class FilterViewController: UIViewController {
                     if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                 }
                 
@@ -364,7 +366,9 @@ class FilterViewController: UIViewController {
                     if ((filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil)){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                     }
                     
                 }
@@ -382,7 +386,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                     
                 }
@@ -400,7 +406,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                         
                     }
                     
@@ -418,7 +426,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("movie") != nil){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                     
                 }
@@ -436,8 +446,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("movie") != nil){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
-                        
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                     }
                     
                 }
@@ -454,7 +465,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("+21") != nil){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                     
                 }
@@ -472,7 +485,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("+21") != nil){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                         
                     }
                     
@@ -490,7 +505,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                     
                 }
@@ -501,16 +518,17 @@ class FilterViewController: UIViewController {
     
     func removeFamily(){
         for event in unfilteredEvents {
-            print(event.Event_Name!)
+
             var added = false
             
             for filter in event.Event_Filters! as [String]{
-                print(filter)
                 if added == false{
                     if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                         
                     }
                     
@@ -528,7 +546,9 @@ class FilterViewController: UIViewController {
                     if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
                         
                         added = true
-                        filteredEvents.append(event)
+                        if(!filteredEvents.contains(event)){
+                            filteredEvents.append(event)
+                        }
                     }
                     
                 }
@@ -539,17 +559,16 @@ class FilterViewController: UIViewController {
 
     func removeEducation(){
         for event in unfilteredEvents {
-            print(event.Event_Name!)
             var added = false
             
             for filter in event.Event_Filters! as [String]{
-                print(filter)
                 if added == false{
                     if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
                         
                         added = true
-                        filteredEvents = filteredEvents.filter { $0 != event }
-                        
+                        if(filteredEvents.contains(event)){
+                            filteredEvents = filteredEvents.filter { $0 != event }
+                        }
                     }
                     
                 }

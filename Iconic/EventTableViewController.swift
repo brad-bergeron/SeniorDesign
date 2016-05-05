@@ -28,8 +28,8 @@ class EventTableViewController: UITableViewController {
         super.viewDidLoad()
             
         if (loaded == false){
-            loadEvents()
             loadFavData()
+            loadEvents()
             
         }
 
@@ -215,6 +215,7 @@ class EventTableViewController: UITableViewController {
                     if(linkedIntoEvent){
                        linkedIntoEvent = false
                         dvc.currentEvent = self.linkSendEvent
+                       
                     }else{
                         dvc.currentEvent = self.sendEvent
                     }
@@ -242,6 +243,7 @@ class EventTableViewController: UITableViewController {
             if let _ = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
                 searchedFavorites = favorites
+                
             }
         }
     }
@@ -269,11 +271,14 @@ class EventTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
-        if(favorites.contains(seenEvents[indexPath.row])){
-            cell.borderView.backgroundColor = ourOrange
-        } else {
-            cell.borderView.backgroundColor = lightBlueColor
-            
+        
+        for favoriteEvent in  favorites as [SingleEvent]{
+            if(favoriteEvent.Event_Name == seenEvents[indexPath.row].Event_Name){
+                cell.borderView.backgroundColor = ourOrange
+            }
+            else{
+                 cell.borderView.backgroundColor = lightBlueColor
+            }
         }
         cell.event = seenEvents[indexPath.row]
         cell.eventNameLabel.text = cell.event?.Event_Name
@@ -289,11 +294,6 @@ class EventTableViewController: UITableViewController {
             } else {
                 cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
             }
-        }
-        if(favorites.contains(seenEvents[indexPath.row])){
-            cell.borderView.backgroundColor = ourOrange
-        } else {
-            cell.borderView.backgroundColor = lightBlueColor
         }
         
         //cell.eventDateLabel.text = "Today"
@@ -380,6 +380,7 @@ class EventTableViewController: UITableViewController {
     
     @IBAction func unwindFromFilters(sender: UIStoryboardSegue) {
         //insert some data here
+         tableView.reloadData()
         if sender.identifier == "LeftSwipe" {
             
         }
