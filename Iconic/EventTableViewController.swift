@@ -305,7 +305,7 @@ class EventTableViewController: UITableViewController {
         }
         
         //cell.eventDateLabel.text = "Today"
-        cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         cell.eventImage.image = cell.event?.Event_Picture
         //print(filteredEvents[indexPath.row].Event_Time!)
         
