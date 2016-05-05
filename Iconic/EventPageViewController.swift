@@ -99,8 +99,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         
     }
     
-    //Allows a user to share an Event
-    @IBAction func shareEvent(sender: AnyObject){
+    func shareEvent(){
         //Code for sharing link starts here
         let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
         

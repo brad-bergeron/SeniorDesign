@@ -295,7 +295,12 @@ class EventTableViewController: UITableViewController {
             cell.borderView.backgroundColor = lightBlueColor
         }
         
-        cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        //cell.eventDateLabel.text = "Today"
+        //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        if( cell.event?.Event_Picture == nil){
+             cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+        }
+        
         cell.eventImage.image = cell.event?.Event_Picture
         
         
