@@ -23,6 +23,7 @@ var familyFilter : Bool = false // the family filter should start off
 var educationFilter : Bool = false // the education filter should start off
 
 var favorites = [SingleEvent]() //Holds the favorited events
+var searchedFavorites = [SingleEvent]() //Holds the Searched favorited Events
 var linkedIntoEvent : Bool = false //If the User links in from a shared Event we want to go to the event page  right away
 var EventLinked = String() //Name of event Linking in from ur;
 

@@ -247,6 +247,7 @@ class EventTableViewController: UITableViewController {
         } else if segue.identifier == "RightSwipe" {
             if let _ = segue.destinationViewController as? FavoritesCollectionViewController {
                 // do something with nav data
+                searchedFavorites = favorites
             }
         }
     }
@@ -295,6 +296,11 @@ class EventTableViewController: UITableViewController {
             } else {
                 cell.eventDateLabel.text = format.stringFromDate(cell.event.Event_NSDate!)
             }
+        }
+        if(favorites.contains(seenEvents[indexPath.row])){
+            cell.borderView.backgroundColor = ourOrange
+        } else {
+            cell.borderView.backgroundColor = UIColor.blueColor()
         }
         
         //cell.eventDateLabel.text = "Today"
