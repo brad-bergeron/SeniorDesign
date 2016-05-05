@@ -65,7 +65,6 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     func starSelected(){ favoritesButton.setImage(UIImage(named: "StarFilled.png")!, forState: .Normal)}
     func starUnselected(){ favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal) }
     
-    
     @IBAction func helpMe(sender: AnyObject) {
         let alertController = UIAlertController(title: "Help", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
@@ -285,9 +284,21 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
             }
             
         }
+        var lat = defaultLat
+        var long = defaultLong
 
+        if(self.currentEvent.Event_Location! == "Blue Moose"){
+            lat = blueMooseLat
+            long = blueMooseLong
+        } else if(self.currentEvent.Event_Location! == "Englert Theatre"){
+            lat = englertLat
+            long = englertLong
+        } else if(self.currentEvent.Event_Location! == "to be implemented"){
+            lat = cabLat
+            long = cabLong
+        }
         
-        let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
+        let defaultLocation = CLLocation(latitude: lat, longitude: long)
         
         centerMap(defaultLocation)
         let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
