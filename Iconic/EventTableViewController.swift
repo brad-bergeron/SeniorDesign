@@ -22,6 +22,15 @@ class EventTableViewController: UITableViewController {
     
     
     
+    @IBAction func helpMe(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Help", message: helpHome, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
@@ -57,6 +66,7 @@ class EventTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
     }
+    
     
     func goToEventPage(notification: NSNotification){
     

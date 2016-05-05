@@ -9,6 +9,7 @@
 import UIKit
 import EventKit
 import MapKit
+import Foundation
 
 
 class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapViewDelegate{
@@ -65,6 +66,15 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     func starUnselected(){ favoritesButton.setImage(UIImage(named: "Star.png")!, forState: .Normal) }
     
     
+    @IBAction func helpMe(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Help", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
@@ -280,7 +290,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
         
         centerMap(defaultLocation)
-        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: defaultLat, longitude: defaultLong), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
+        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: lat, longitude: long), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
         mapView.addAnnotation(annotation)
         let scrollViewBounds = scrollView.bounds
 
@@ -331,7 +341,12 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         formatDate2.timeZone = NSTimeZone(abbreviation: "CST")
         eventDate.text = formatDate.stringFromDate(currentEvent.Event_NSDate!)
         eventTime.text = formatDate2.stringFromDate(currentEvent.Event_NSDate!)
-        eventLocation.text = currentEvent.Event_Location
+        if(currentEvent.Event_Location == poorString){
+            eventLocation.text = "Iowa Memorial Union (CAB)"
+        } else {
+            eventLocation.text = currentEvent.Event_Location
+        }
+        //print(eventLocation)
         //eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
