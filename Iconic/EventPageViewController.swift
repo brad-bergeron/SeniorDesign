@@ -31,7 +31,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
-        let alertController = UIAlertController(title: "More Options", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         if(!favorites.contains(currentEvent)){
             alertController.addAction(UIAlertAction(title:"Favorite", style: UIAlertActionStyle.Default, handler: { action in
                 favorites.append(self.currentEvent)
@@ -43,6 +43,18 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
                 alertController.dismissViewControllerAnimated(true, completion: nil)
             }))
         }
+        alertController.addAction(UIAlertAction(title:"Open Link in Safari", style: UIAlertActionStyle.Default, handler: { action in
+            self.externalLink()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alertController.addAction(UIAlertAction(title:"Add to Calendar", style: UIAlertActionStyle.Default, handler: { action in
+            self.addCalendar()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        alertController.addAction(UIAlertAction(title:"Share", style: UIAlertActionStyle.Default, handler: { action in
+            self.shareEvent()
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
         
         alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Cancel, handler: { action in
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -58,7 +70,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //let viewControllers = self.navigationController!.viewControllers
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    @IBAction func externalLink(sender: AnyObject) {
+    func externalLink() {
         //Code for going to a URL starts Here
         let alertController = UIAlertController(title: "Open Link in Safari", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Open", style: UIAlertActionStyle.Default, handler: {action in
@@ -73,7 +85,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    @IBAction func shareEvent(sender: AnyObject){
+    func shareEvent(){
         //Code for sharing link starts here
         let punctuation = NSCharacterSet(charactersInString: "?.,!@-:")
         
@@ -105,17 +117,19 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         //create favorite capability
     }
     
-    @IBAction func addCalendar(sender: UIButton) {
+    func addCalendar() {
         let status = EKEventStore.authorizationStatusForEntityType(EKEntityType.Event)
         switch (status) {
         case EKAuthorizationStatus.NotDetermined:
             requestAccessToCalendar()
+            if(EKEventStore.authorizationStatusForEntityType(EKEntityType.Event) == EKAuthorizationStatus.Authorized){
+                self.addToCalendar()
+            }
         case EKAuthorizationStatus.Authorized:
             self.addToCalendar()
         case EKAuthorizationStatus.Denied, EKAuthorizationStatus.Restricted:
             print("Access Denied")
-            requestAccessToCalendar()
-            //self.needPermissionView.fadeIn()
+            deniedPermission()            //self.needPermissionView.fadeIn()
         }
         
     }
@@ -135,6 +149,22 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     func requestAccessToCalendar(){
         eventStore.requestAccessToEntityType(EKEntityType.Event, completion: {(granted: Bool, error: NSError?) in print(granted)})
+    }
+    
+    func deniedPermission(){
+        let alertController = UIAlertController(title: "Access to Calendar Denied", message: "The event cannot be added because access to Calendar is disabled. Change the settings for ICONIC to add the event", preferredStyle: UIAlertControllerStyle.Alert) //add in message
+        alertController.addAction(UIAlertAction(title:"Go to Settings", style: UIAlertActionStyle.Default, handler: {action in
+            //add later
+            if let settingsURL = NSURL(string: UIApplicationOpenSettingsURLString) {
+                UIApplication.sharedApplication().openURL(settingsURL)
+            } else {
+                print("error")
+            }
+        }))
+        alertController.addAction(UIAlertAction(title:"Cancel", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
    /* @IBAction func unwindToViewController(segue: UIStoryboardSegue) {
