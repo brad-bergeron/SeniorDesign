@@ -305,8 +305,8 @@
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="170"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Here is a Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
-                                            <rect key="frame" x="19" y="143" width="113" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Here is a Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx5-k1-d49">
+                                            <rect key="frame" x="28" y="146" width="96" height="17"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -324,7 +324,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="Xge-nX-lwm" firstAttribute="centerX" secondItem="Rx5-k1-d49" secondAttribute="centerX" id="5MB-3o-Bo9"/>
-                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="top" secondItem="Xge-nX-lwm" secondAttribute="bottom" constant="5" id="gRF-pZ-hK4"/>
+                                    <constraint firstItem="Rx5-k1-d49" firstAttribute="top" secondItem="Xge-nX-lwm" secondAttribute="bottom" constant="8" id="gRF-pZ-hK4"/>
                                     <constraint firstItem="Rx5-k1-d49" firstAttribute="centerX" secondItem="Xge-nX-lwm" secondAttribute="centerX" id="m1q-IU-QbQ"/>
                                     <constraint firstItem="Xge-nX-lwm" firstAttribute="centerX" secondItem="WOk-X2-FGv" secondAttribute="centerX" id="mxN-EG-o2c"/>
                                     <constraint firstItem="Xge-nX-lwm" firstAttribute="centerY" secondItem="WOk-X2-FGv" secondAttribute="centerY" constant="-10" id="xB4-pc-pzH"/>
@@ -602,6 +602,6 @@
         <image name="Star" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QCI-6C-cWG"/>
+        <segue reference="IXv-mT-3w9"/>
     </inferredMetricsTieBreakers>
 </document>
