@@ -31,6 +31,8 @@ class EventTableViewController: UITableViewController {
         if (loaded == false){
             loadEvents()
             loadFavData()
+            //create fix "to be implemented"
+            //fixEvents()
             
         }
         //loadEvents()
@@ -59,6 +61,7 @@ class EventTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
     }
+    
     
     func goToEventPage(notification: NSNotification){
     
@@ -301,6 +304,7 @@ class EventTableViewController: UITableViewController {
         } else {
             cell.borderView.backgroundColor = lightBlueColor
         }
+        print(seenEvents[indexPath.row].Event_Location)
         
         //cell.eventDateLabel.text = "Today"
         //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit

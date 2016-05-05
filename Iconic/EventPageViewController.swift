@@ -292,6 +292,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
         eventDate.text = formatDate.stringFromDate(currentEvent.Event_NSDate!)
         eventTime.text = formatDate2.stringFromDate(currentEvent.Event_NSDate!)
         eventLocation.text = currentEvent.Event_Location
+        //print(eventLocation)
         //eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         eventImage.image = currentEvent.Event_Picture
         eventCost.text = currentEvent.Event_Price
