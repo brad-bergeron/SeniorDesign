@@ -8,9 +8,10 @@
 
 import UIKit
 import EventKit
+import MapKit
 
 
-class EventPageViewController: UIViewController, UIScrollViewDelegate {
+class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapViewDelegate{
     
     // MARK: Outlets
 
@@ -18,6 +19,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var eventImage: UIImageView!
     
+    @IBOutlet weak var mapView: MKMapView!
     
     @IBOutlet weak var eventDetails: UITextView!
     @IBOutlet var scrollView: UIScrollView!
@@ -28,6 +30,12 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var eventDate: UILabel!
     var currentEvent : SingleEvent!
     let eventStore = EKEventStore()
+    
+    let defaultLat = 41.661922
+    let defaultLong = -91.535682
+    
+    
+    let regionRadius : CLLocationDistance = 1000
     
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
@@ -203,6 +211,11 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         loadEvent()
         //checkAuthorization()
         
+        let defaultLocation = CLLocation(latitude: defaultLat, longitude: defaultLong)
+        
+        centerMap(defaultLocation)
+        let annotation = MapPin(coordinate: CLLocationCoordinate2D(latitude: defaultLat, longitude: defaultLong), title: self.currentEvent.Event_Name!, subtitle: self.currentEvent.Event_Location!)
+        mapView.addAnnotation(annotation)
         let scrollViewBounds = scrollView.bounds
 
         
@@ -217,6 +230,12 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         scrollView.contentInset = scrollViewInsets
         contentView.backgroundColor = UIColor.whiteColor()
         scrollView.backgroundColor = contentView.backgroundColor
+        
+        
+        // MARK: Maps
+        
+        
+        
         //self.eventDetails.scrollEnabled = false
         //self.scrollView.backgroundColor = UIColor.whiteColor()
         //self.scrollView.showsVerticalScrollIndicator = true
@@ -227,6 +246,12 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: LAT
+    func centerMap(location: CLLocation){
+            let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, self.regionRadius*2.0, self.regionRadius*2.0)
+            self.mapView.setRegion(coordinateRegion, animated: true)
     }
     
     func loadEvent() -> Int{
@@ -249,6 +274,25 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
         return 1;
     }
     
+    func mapView(mapView: MKMapView!, annotationView: MKAnnotation!) -> MKAnnotationView! {
+        let identifier = "pin"
+        var view : MKPinAnnotationView
+        if let dequeView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier) as? MKPinAnnotationView {
+            dequeView.annotation = annotationView
+            view = dequeView
+        }
+        else {
+            // 3
+            view = MKPinAnnotationView(annotation: annotationView, reuseIdentifier: identifier)
+            view.canShowCallout = true
+            view.calloutOffset = CGPoint(x: -5, y: 5)
+            view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure) as UIView
+        }
+        return view
+    }
+}
+
+
 
     /*
     // MARK: - Navigation
@@ -261,4 +305,4 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate {
     }
     */
 
-}
+

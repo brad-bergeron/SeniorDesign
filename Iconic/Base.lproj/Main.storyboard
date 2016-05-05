@@ -493,6 +493,9 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gpz-Yj-YjQ">
+                                                <rect key="frame" x="43" y="536" width="509" height="418"/>
+                                            </mapView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <accessibility key="accessibilityConfiguration" label="Content View"/>
@@ -552,6 +555,7 @@
                         <outlet property="eventLocation" destination="8fY-G7-AvJ" id="u5t-TP-Hab"/>
                         <outlet property="eventName" destination="2qm-GZ-woE" id="AsA-ja-SZx"/>
                         <outlet property="eventTime" destination="8DW-Vt-xkz" id="SXL-wW-miE"/>
+                        <outlet property="mapView" destination="gpz-Yj-YjQ" id="fRq-jS-Rd6"/>
                         <outlet property="scrollView" destination="O6D-qc-vdj" id="ltL-3L-1FR"/>
                     </connections>
                 </viewController>
