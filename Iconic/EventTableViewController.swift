@@ -27,6 +27,7 @@ class EventTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
         if (loaded == false){
             loadEvents()
             loadFavData()
