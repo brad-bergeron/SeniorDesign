@@ -22,6 +22,15 @@ class EventTableViewController: UITableViewController {
     
     
     
+    @IBAction func helpMe(sender: AnyObject) {
+        let alertController = UIAlertController(title: "Help", message: helpHome, preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
+            alertController.dismissViewControllerAnimated(true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
@@ -30,6 +39,8 @@ class EventTableViewController: UITableViewController {
         if (loaded == false){
             loadEvents()
             loadFavData()
+            //create fix "to be implemented"
+            //fixEvents()
             
         }
 
@@ -57,6 +68,7 @@ class EventTableViewController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
     }
+    
     
     func goToEventPage(notification: NSNotification){
     
@@ -295,10 +307,44 @@ class EventTableViewController: UITableViewController {
         } else {
             cell.borderView.backgroundColor = lightBlueColor
         }
+        print(seenEvents[indexPath.row].Event_Location)
         
         //cell.eventDateLabel.text = "Today"
         //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
         if( cell.event?.Event_Picture == nil){
+            if (cell.event?.Event_Filters?.isEmpty != nil){
+                //add another default image
+                cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+            } else {
+                for filter in (cell.event?.Event_Filters)! as [String] {
+                    if (filter.lowercaseString.rangeOfString("dance") != nil) || filter == ("acapella") || (filter.lowercaseString.rangeOfString("music") != nil) || filter == "jazz" || filter == "country" || (filter.lowercaseString.rangeOfString("alternative") != nil) || (filter.lowercaseString.rangeOfString("indie") != nil) || filter == "singer-songwriter" || (filter.lowercaseString.rangeOfString("folk") != nil) || (filter.lowercaseString.rangeOfString("rock") != nil) || (filter.lowercaseString.rangeOfString("blues") != nil){
+                        
+                        cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+                    
+                    }
+                    else if (filter.lowercaseString.rangeOfString("comedy") != nil || filter.lowercaseString.rangeOfString("theatre") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Comedy.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("movie") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Movie.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("+21") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_21.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("community") != nil || filter.lowercaseString.rangeOfString("family") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Family.png")
+                    }
+                    else if (filter.lowercaseString.rangeOfString("educational") != nil || filter.lowercaseString.rangeOfString("literature") != nil || filter.lowercaseString.rangeOfString("reading") != nil){
+                        cell.event?.Event_Picture = UIImage(named: "Default_Education.png")
+                    }
+                    else{
+                        //add default general image Here
+                        cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
+                    }
+                    
+                    
+                }
+            }
              cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
         }
         

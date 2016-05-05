@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9pK-Y0-LVZ">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -146,11 +146,14 @@
                                 </connections>
                             </switch>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="bu5-OH-QCB">
+                        <barButtonItem key="rightBarButtonItem" title="?" style="plain" id="bu5-OH-QCB">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Jdc-uh-1cv">
                                 <rect key="frame" x="510" y="7" width="70" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Help"/>
+                                <state key="normal" title="?"/>
+                                <connections>
+                                    <action selector="helpMe:" destination="xOR-hn-Slm" eventType="touchUpInside" id="kke-9Z-04v"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -253,7 +256,13 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Events" id="x8g-WT-C1D"/>
+                    <navigationItem key="navigationItem" title="Events" id="x8g-WT-C1D">
+                        <barButtonItem key="rightBarButtonItem" title="?" id="yMq-7L-Zoa">
+                            <connections>
+                                <action selector="helpMe:" destination="j9i-V8-UcH" id="ngO-EB-yGe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="b9c-5v-yTV" id="r7r-Bn-vB4"/>
                         <outlet property="searchDisplayController" destination="NO9-RG-aMn" id="170-ys-eJh"/>
@@ -570,6 +579,11 @@
                                 <action selector="backButton:" destination="xwY-fU-c4C" id="PKs-An-DuR"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="?" id="pWu-kE-y99">
+                            <connections>
+                                <action selector="helpMe:" destination="xwY-fU-c4C" id="Wb2-Vf-3df"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
@@ -602,6 +616,6 @@
         <image name="Star" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IXv-mT-3w9"/>
+        <segue reference="QCI-6C-cWG"/>
     </inferredMetricsTieBreakers>
 </document>
