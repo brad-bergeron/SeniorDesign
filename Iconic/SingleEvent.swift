@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+//This is our DataModel it needs to include all the colmuns 
+//from the DynamoDB Dataabse otherwise it wont be 
+//able to pull in data. The foormat of this datamodel is important
+//AWSDyanmoDBModel wont work without it
 class SingleEvent : AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var Event_Name : String?
     var Event_Date_Formatted : String?

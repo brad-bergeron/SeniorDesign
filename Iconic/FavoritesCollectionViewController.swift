@@ -19,21 +19,16 @@ class FavoritesCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initSwipes()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
         
+        //Inlitizes Search bar for favorites. We didnt actually add the search bar to view but 
+        //the logic is here too
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         definesPresentationContext = true
         
-        //UINavigationBar.appearance().backgroundColor = UIColor.redColor()
-        //UINavigationBar.appearance().tintColor = ourOrange
-        //collectionView.
-        //tableView.tableHeaderView = searchController.searchBar Sent Search bar
-
-        // Do any additional setup after loading the view.
         
+        //If teh user doesnt have any favorite  this alerts them of such
         if(favorites.isEmpty){
             let alertController = UIAlertController(title: "Oops!", message: "You have no favorites.", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title:"Dismiss", style: UIAlertActionStyle.Default, handler: { action in
@@ -52,40 +47,27 @@ class FavoritesCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        var reusableview:UICollectionReusableView!
-        
-        if kind == UICollectionElementKindSectionHeader {
-            let headerView:SearchBarCollectionReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "SearchBar", forIndexPath: indexPath) as! SearchBarCollectionReusableView
-            reusableview = headerView
-        }
-        return reusableview
-    } */
     
+    //Intilizes the swipes
     func initSwipes() {
-        //let leftswipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipe:"))
+        
         let rightswipe = UIScreenEdgePanGestureRecognizer(target: self, action: #selector(FavoritesCollectionViewController.handleSwipe(_:)))
-        //leftswipe.direction = .Left
+        
         rightswipe.edges = .Left
-        
-        
-        //view.addGestureRecognizer(leftswipe)
+
         view.addGestureRecognizer(rightswipe)
     }
     
+    //handles when the user swipes to another view
     func handleSwipe(sender: UIPanGestureRecognizer) {
         if let edge = sender as? UIScreenEdgePanGestureRecognizer{
             if (edge.edges == .Left && sender.state == .Recognized){
                 dismissViewControllerAnimated(true, completion: nil)
             }
         }
-        //else if (sender.direction == .Right) {
-        //    performSegueWithIdentifier("RightSwipe", sender: self)
-        
-        //}
     }
     
+    //handles if a user wants to go to ta specifc event page
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "FavoriteDetailsSegue" {
             if let nav = segue.destinationViewController as? UINavigationController{
@@ -95,18 +77,6 @@ class FavoritesCollectionViewController: UICollectionViewController {
             }
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -126,7 +96,6 @@ class FavoritesCollectionViewController: UICollectionViewController {
         if(favorites[indexPath.row].Event_Picture != nil){
             cell.EventImage.image = searchedFavorites[indexPath.row].Event_Picture!
         }
-        //cell.backgroundColor = UIColor.whiteColor()
     
         return cell
     }
@@ -166,6 +135,7 @@ class FavoritesCollectionViewController: UICollectionViewController {
         self.performSegueWithIdentifier("FavoriteDetailsSegue", sender: self)
     }
     
+    //This handles if the user is searching it will filter from the array
     func filterContentForSearchText(searchText: String, scope: String = "All"){
         if(searchText.isEmpty) {
             searchedFavorites = favorites
@@ -186,6 +156,7 @@ class FavoritesCollectionViewController: UICollectionViewController {
 
 }
 
+//An Extension so wheneevr the search abr updates this function is called
 extension FavoritesCollectionViewController: UISearchResultsUpdating {
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)

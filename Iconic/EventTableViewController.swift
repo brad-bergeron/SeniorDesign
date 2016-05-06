@@ -13,15 +13,14 @@ class EventTableViewController: UITableViewController {
     
     // MARK: Event List
     var loadedEvents = [SingleEvent]() //this will be pulled from the database always constant
-    var sendEvent : SingleEvent?
-    var linkSendEvent : SingleEvent?
-    var eventTempImage: UIImage!
+    var sendEvent : SingleEvent? //This is the event we send to the EventPageViewController
+    var linkSendEvent : SingleEvent? //This si the event we send to the EventPAge View Contorller if they come in from a link
     var loaded : Bool = false //Only want to load things from the Databse once
     
-    let searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil) //Search bar ontoller
     
     
-    
+    //Pop up for the help me part of the application
     @IBAction func helpMe(sender: AnyObject) {
         let alertController = UIAlertController(title: "Help", message: helpHome, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title:"Got it!", style: UIAlertActionStyle.Default, handler: { action in
@@ -31,12 +30,14 @@ class EventTableViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    //search bar outlet
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
             
         if (loaded == false){
+            //only want to load the data dn what the user favorited once
             loadFavData()
             loadEvents()
             
@@ -63,11 +64,13 @@ class EventTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
+    
     override func viewDidAppear(animated: Bool) {
         NSNotificationCenter.defaultCenter().postNotificationName("reload", object: nil)
     }
     
-    
+    //This is alled when the user deep links in, it sends them to the vent page 
+    //If the applciation doesnt find the vent Name or page than we infrom the user
     func goToEventPage(notification: NSNotification){
     
         
@@ -104,7 +107,8 @@ class EventTableViewController: UITableViewController {
         
     }
     
-    
+    //We reload the table when returning from filter view to make sure it 
+    //is still in the correct order
     func reloadDataFromFilter(notification: NSNotification){
         seenEvents.sortInPlace({
             if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
@@ -128,6 +132,8 @@ class EventTableViewController: UITableViewController {
         view.addGestureRecognizer(rightswipe)
     }
     
+    //This loads in the vents from the cloud database
+    //This is code you can easily expand on
     func loadEvents() {
         let cond = AWSDynamoDBCondition()
         let v1 = AWSDynamoDBAttributeValue()
@@ -144,6 +150,7 @@ class EventTableViewController: UITableViewController {
                     var count = 0
                     for item in paginatedOutput.items as! [SingleEvent] {
                         self.loadedEvents.append(item)
+                        //we chek to make sure it is loading in correctly and download the image for the specific event
                         if((count < self.loadedEvents.count) && (self.loadedEvents[count].Event_Picture_Link! != " ")){
                             self.downloadImage(NSURL( string: self.loadedEvents[count].Event_Picture_Link!)!, count: count) { (result) -> () in
                                 if(result==true){
@@ -161,6 +168,7 @@ class EventTableViewController: UITableViewController {
                             }
                             
                         }
+                        //Set the NSDate
                         let dat = self.stringToDate(self.loadedEvents[count].Event_Date_Formatted!, time: self.loadedEvents[count].Event_Time!)
                         self.loadedEvents[count].Event_NSDate = dat
                        
@@ -179,12 +187,14 @@ class EventTableViewController: UITableViewController {
     }
 
 
-    
+    //Helper function for loading in data
     func scan (expression : AWSDynamoDBScanExpression) -> AWSTask! {
         let mapper = AWSDynamoDBObjectMapper.defaultDynamoDBObjectMapper()
         return mapper.scan(SingleEvent.self, expression: expression)
     }
     
+    //Funtion that handles seraching. If the filters oare on we want to filter the filtered events 
+    //Otherwise we jsut want to search through all the events loaded in
     func filterContentForSearchText(searchText: String, scope: String = "All"){
         if(searchText.isEmpty && filtered){
             seenEvents = filteredEvents
@@ -236,7 +246,8 @@ class EventTableViewController: UITableViewController {
         } else if segue.identifier == "LeftSwipe" {
             if let nav = segue.destinationViewController as? UINavigationController{
                 if let dvc = nav.topViewController as? FilterViewController{
-                    // Brad trying to right code to send the events array to Filter VIew Controller
+                    //Make sure the loaded Events are in order than let the filter view controller
+                    //use those events to filter
                     self.loadedEvents.sortInPlace({
                         if($0.Event_NSDate != nil && $1.Event_NSDate != nil){
                             return $0.Event_NSDate!.compare($1.Event_NSDate!) == NSComparisonResult.OrderedAscending
@@ -251,7 +262,7 @@ class EventTableViewController: UITableViewController {
             }
         } else if segue.identifier == "RightSwipe" {
             if let _ = segue.destinationViewController as? FavoritesCollectionViewController {
-                // do something with nav data
+                // sett up for allowing a user to search through favorites
                 searchedFavorites = favorites
                 
             }
@@ -278,10 +289,12 @@ class EventTableViewController: UITableViewController {
         self.performSegueWithIdentifier("EventViewSegue", sender: self)
     }
     
+    //This loads in the events into cells for the table
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "EventTableViewCell"
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! EventTableViewCell
         
+        //If the event is in the favorites in should have a different background
         for favoriteEvent in  favorites as [SingleEvent]{
             if(favoriteEvent.Event_Name == seenEvents[indexPath.row].Event_Name){
                 cell.borderView.backgroundColor = ourOrange
@@ -295,6 +308,7 @@ class EventTableViewController: UITableViewController {
         let format = NSDateFormatter()
         format.dateFormat = "MM.dd.yyyy"
         let today = NSDate()
+        
         if(cell.event.Event_NSDate != nil){
             
             if(format.stringFromDate(today)==format.stringFromDate(cell.event.Event_NSDate!)){
@@ -306,11 +320,10 @@ class EventTableViewController: UITableViewController {
             }
         }
         
-        //cell.eventDateLabel.text = "Today"
-        //cell.eventImage.contentMode = UIViewContentMode.ScaleAspectFit
+        //Checks for if there is an Event image and if there is not we set a default
         if( cell.event?.Event_Picture == nil){
             if (cell.event?.Event_Filters?.isEmpty != nil){
-                //add another default image
+                //add another default image later
                 cell.event?.Event_Picture = UIImage(named: "Default_Music.png")
             } else {
                 for filter in (cell.event?.Event_Filters)! as [String] {

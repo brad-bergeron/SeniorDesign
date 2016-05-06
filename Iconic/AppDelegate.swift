@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     var loadedEnoughToDeepLink : Bool = false
     var deepLink : RemoteNotificationDeepLink?
     
-    
+    //This function handles if a user come in from a link
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
         
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
         return true
     }
     
+    //This function handles if a user come in from a link
     func applicationHandleRemoteNotification(application: UIApplication, didReceiveRemoteNotification userInfo : [NSObject : AnyObject]){
      
      
@@ -77,11 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
 
-        /*let pageController = UIPageControl.appearance()
-        pageController.pageIndicatorTintColor = UIColor.lightGrayColor()
-        pageController.currentPageIndicatorTintColor =  UIColor.blackColor()
-        pageController.backgroundColor = UIColor.whiteColor()*/
 
+        //If used by someone else than this needs to be changed to the AWS Databse they use
         let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast1,
             identityPoolId:"us-east-1:0e17af50-c1bb-4dac-8aed-70298f97a008")
         
@@ -112,6 +110,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate{
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        //This is for when a user enters the application from a link
         if(linkedIntoEvent == true){
             NSNotificationCenter.defaultCenter().postNotificationName("link", object: nil)
         }

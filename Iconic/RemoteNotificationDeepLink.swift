@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+//This is for the link so the link should be gfIconic://event/"The name of the vent"
+//This allows us to determine if the user is coming into the app for an event 
+//of just for the home page 
 let RemoteNotificationDeepLinkApp : String = "event"
 
 class RemoteNotificationDeepLink: NSObject {
