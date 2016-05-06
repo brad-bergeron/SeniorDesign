@@ -434,15 +434,22 @@ class EventTableViewController: UITableViewController {
     
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        if(favorites.contains(seenEvents[indexPath.row])){
+        var favorited = false
+        var indexInFavorites = 0
+        for favoriteEvent in favorites as [SingleEvent]{
+            if(favoriteEvent.Event_Name == seenEvents[indexPath.row].Event_Name){
+                favorited = true
+                indexInFavorites = favorites.indexOf(favoriteEvent)!
+            }
+        }
+        if(favorited){
             let unfavoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Remove", handler: {action, indexpath in
-                let unfavoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if(favorites.contains(unfavoriteEvent)){
-                    favorites.removeAtIndex(favorites.indexOf(unfavoriteEvent)!)
-                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
-                    cell.borderView.backgroundColor = lightBlueColor
-                    self.saveData()
-                }
+                
+                favorites.removeAtIndex(indexInFavorites)
+                
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
+                cell.borderView.backgroundColor = lightBlueColor
+                self.saveData()
                 tableView.setEditing(false, animated: true)
             });
             unfavoriteAction.backgroundColor = UIColor.grayColor();
@@ -450,13 +457,13 @@ class EventTableViewController: UITableViewController {
         } else{
         let favoriteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "  Favorite  ", handler: {action, indexpath in
                 let favoriteEvent : SingleEvent = seenEvents[indexPath.row]
-                if (!favorites.contains(favoriteEvent)){
-                    favorites.append(favoriteEvent)
-                    tableView.cellForRowAtIndexPath(indexPath)
-                    let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
-                    cell.borderView.backgroundColor = ourOrange
-                    self.saveData()
-                }
+
+                favorites.append(favoriteEvent)
+                tableView.cellForRowAtIndexPath(indexPath)
+                let cell = tableView.cellForRowAtIndexPath(indexPath) as! EventTableViewCell
+                cell.borderView.backgroundColor = ourOrange
+                self.saveData()
+            
                 tableView.setEditing(false, animated: true)
             });
             favoriteAction.backgroundColor = UIColor(red: 243/255.0, green: 114/255.0, blue: 50/255.0, alpha: 1.0);

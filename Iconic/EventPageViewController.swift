@@ -47,6 +47,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     }
     
     
+    
     @IBAction func favButtonSwitch(sender: UIButton) {
         sender.selected = !sender.selected;
         
@@ -60,6 +61,7 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
             favorites = favorites.filter { $0 != self.currentEvent }
             self.saveData()
         }
+        
     }
     
     func starSelected(){ favoritesButton.setImage(UIImage(named: "StarFilled.png")!, forState: .Normal)}
@@ -77,17 +79,6 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     // MARK: Actions
     @IBAction func moreOptions(sender: UIButton) {
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        if(!favorites.contains(currentEvent)){
-            alertController.addAction(UIAlertAction(title:"Favorite", style: UIAlertActionStyle.Default, handler: { action in
-                favorites.append(self.currentEvent)
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-            }))
-        } else {
-            alertController.addAction(UIAlertAction(title:"Remove from Favorites", style: UIAlertActionStyle.Default, handler: { action in
-                favorites.removeAtIndex(favorites.indexOf(self.currentEvent)!)
-                alertController.dismissViewControllerAnimated(true, completion: nil)
-            }))
-        }
         alertController.addAction(UIAlertAction(title:"Notify me!", style: UIAlertActionStyle.Default, handler: { action in
             self.scheduleNotification()
             alertController.dismissViewControllerAnimated(true, completion: nil)
@@ -255,8 +246,8 @@ class EventPageViewController: UIViewController, UIScrollViewDelegate, MKMapView
     
     func scheduleNotification(){
         let notification = UILocalNotification()
-        notification.fireDate = currentEvent.Event_NSDate!.dateByAddingTimeInterval(-1*24*60*60)
-        //notification.fireDate = NSDate().dateByAddingTimeInterval(60)
+        //notification.fireDate = currentEvent.Event_NSDate!.dateByAddingTimeInterval(-1*24*60*60)
+        notification.fireDate = NSDate().dateByAddingTimeInterval(60)
         notification.alertBody = currentEvent.Event_Name! + " is tomorrow!"
         notification.alertAction = "See you there"
         notification.soundName = UILocalNotificationDefaultSoundName
